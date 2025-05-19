@@ -1,0 +1,17 @@
+@media print {
+  @page {
+    margin: 0cm !important;
+    padding: 0cm !important;
+    size: A4;
+  }
+  html {
+    font-size: 3.8mm;
+  }
+  h1:before,
+  h2:before,
+  h3:before,
+  button,
+  .non-printable {
+    display: none;
+  }
+}
