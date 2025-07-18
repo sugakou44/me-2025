@@ -1,12 +1,19 @@
-import { Spring as SvelteSpring } from 'svelte/motion'
+import { Spring as SvelteSpring, Tween as SvelteTween } from 'svelte/motion'
 
-import type { SpringOptions } from './types'
+import type {
+  ExtendedTween,
+  SpringOptions as SpringConfig,
+  TweenedOptions,
+} from './types'
 
-interface Options extends SpringOptions {
+interface SpringOptions extends SpringConfig {
   clamp?: boolean
 }
 
-export function Spring(initialValue: number, { clamp, ...options }: Options) {
+export function Spring(
+  initialValue: number,
+  { clamp, ...options }: SpringOptions,
+) {
   const spring = new SvelteSpring(initialValue, options)
 
   $effect.pre(() => {
@@ -26,4 +33,36 @@ export function Spring(initialValue: number, { clamp, ...options }: Options) {
   })
 
   return spring
+}
+
+export function ChainTween(
+  initialValue: number,
+  defaultOptions?: TweenedOptions<number>,
+) {
+  const tween = new SvelteTween(
+    initialValue,
+    defaultOptions,
+  ) as ExtendedTween<number>
+
+  tween.setChain = async function (
+    values: number[],
+    options?: TweenedOptions<number>[],
+  ) {
+    let index = 0
+
+    while (index < values.length) {
+      const value = values[index]
+      const option =
+        options &&
+        (values.length !== options.length
+          ? (options[0] ?? defaultOptions)
+          : options[index])
+
+      await tween.set(value, option)
+
+      index++
+    }
+  }
+
+  return tween
 }

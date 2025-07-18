@@ -1,10 +1,9 @@
-export function mountState() {
-  // eslint-disable-next-line svelte/prefer-writable-derived
-  let isMounted = $state(false)
+export function useMounted() {
+  const isMounted = $state({ current: false })
 
   $effect(() => {
-    isMounted = true
+    isMounted.current = true
   })
 
-  return () => isMounted
+  return isMounted
 }

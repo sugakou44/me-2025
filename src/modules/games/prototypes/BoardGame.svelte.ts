@@ -4,6 +4,7 @@ import { SvelteMap } from 'svelte/reactivity'
 
 import { animate } from '@/lib/animations/animejs'
 import { DURATION_NORMAL } from '@/lib/animations/constants'
+import { cn, toggleClass } from '@/lib/utils/className'
 import { roughSvg } from '@/lib/utils/rough'
 
 import type { BoardDimension } from '@/modules/games/types'
@@ -125,11 +126,11 @@ export class BoardGame<T = State> {
     this.svg = svg
     this.roughSvg = roughSvg(this.svg)
 
-    this.reset()
+    untrack(() => this.reset())
   }
 
   reset() {
-    if (untrack(() => this.isComputing)) {
+    if (this.isComputing) {
       return
     }
 
@@ -164,9 +165,7 @@ export class BoardGame<T = State> {
       this.cellOptions,
     )
 
-    path.classList.toggle('origin-center', true)
-    path.classList.toggle('transform-fill', true)
-    path.classList.toggle(className, true)
+    toggleClass(path, cn('origin-top-left transform-fill', className), true)
 
     this.svg?.appendChild(path)
 

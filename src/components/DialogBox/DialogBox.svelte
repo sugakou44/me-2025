@@ -3,7 +3,7 @@
   import { scale } from 'svelte/transition'
 
   import { DURATION_SLOW } from '@/lib/animations/constants'
-  import { mountState } from '@/lib/svelte/mounted.svelte'
+  import { useMounted } from '@/lib/svelte/mounted.svelte'
   import { cn } from '@/lib/utils/className'
   import { centerPointOrigin } from '@/lib/utils/math'
 
@@ -22,8 +22,9 @@
     heightOffset = HEIGHT_OFFSET,
   }: DialogBoxProps = $props()
 
-  let previousQuote = ''
-  let isMounted = mountState()
+  // TODO: change to none state variable
+  let previousQuote = $state('')
+  let isMounted = useMounted()
 
   $effect.pre(() => {
     if (label) {
@@ -36,7 +37,7 @@
   )
 </script>
 
-{#key isMounted() && label}
+{#key isMounted.current && label}
   <div
     in:scale={{
       duration: DURATION_SLOW,
@@ -51,7 +52,7 @@
     class={cn(
       'transform-center absolute z-50 origin-bottom rounded-lg border-1 border-foreground bg-white p-4 whitespace-nowrap opacity-100 shadow-sm select-none',
       {
-        hidden: !isMounted(),
+        hidden: !isMounted.current,
       },
       className,
     )}

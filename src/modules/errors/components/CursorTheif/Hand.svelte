@@ -81,7 +81,7 @@
       if (!gotCursor && shouldGrabCursor) {
         onGrab()
 
-        handOpacitySpring.set(1, { instant: true })
+        handOpacitySpring.set(1, { duration: 0 })
         handSpring.set(
           {
             x: reachX,

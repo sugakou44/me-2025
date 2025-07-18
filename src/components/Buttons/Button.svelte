@@ -16,6 +16,7 @@
     href,
     isLoading = false,
     disabled,
+    class: className,
     ...rest
   }: Props = $props()
 
@@ -27,13 +28,13 @@
           target: '_blank',
           rel: 'noreferrer',
         }
-      : rest
+      : { ...rest, href }
 </script>
 
 <Button.Root
   {...restProps as Props}
   disabled={disabled || isLoading}
-  class={cn(buttonVariants({ variant, size, className: rest.class as string }))}
+  class={cn(buttonVariants({ variant, size, className: className as string }))}
 >
   <LoadingOverlay isLoaded={!isLoading}>
     {@render children?.()}

@@ -1,6 +1,6 @@
 // https://thebookofshaders.com/07
 
-#include "@/lib/glsl/math.glsl"
+#include "@/lib/shaders/math.glsl"
 
 float shape(vec2 uv, float borderWidth, float shapeRatio)
 {
@@ -11,7 +11,7 @@ float shape(vec2 uv, float borderWidth, float shapeRatio)
     st = st * 2. - 1.;
 
     // Angle and radius from the current pixel
-    float angle = atan(st.x, st.y) + M_PI;
+    float angle = atan(st.x, st.y) + PI;
     float radius = M_TWO_PI / 8.0;
 
     // Shaping function that modulate the distance

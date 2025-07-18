@@ -1,5 +1,3 @@
-import { untrack } from 'svelte'
-
 import { processMouseEvent } from '@/lib/svelte/document.svelte'
 import { getSlope, linearExtrapolation } from '@/lib/utils/math'
 import { BoardGame } from '@/modules/games/prototypes/BoardGame.svelte'
@@ -35,9 +33,10 @@ export class TicTacToe extends BoardGame {
   }
 
   reset() {
-    if (untrack(() => this.isComputing)) {
+    if (this.isComputing) {
       return
     }
+
     super.reset()
   }
 

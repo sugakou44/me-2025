@@ -1,5 +1,4 @@
-
-#include "@/lib/glsl/math.glsl"
+#include "@/lib/shaders/math.glsl"
 
 float pattern(vec2 uv, float patternCount, float patternScaleRatio)
 {
@@ -9,7 +8,7 @@ float pattern(vec2 uv, float patternCount, float patternScaleRatio)
     st = vec2(fract(st.x * patternCount), fract(st.y * patternCount)) - 0.5;
 
     // Angle and radius from the current pixel
-    float angle = atan(st.x, st.y) + M_PI;
+    float angle = atan(st.x, st.y) + PI;
     float radius = M_TWO_PI / 3.0;
 
     // Shaping function that modulate the distance

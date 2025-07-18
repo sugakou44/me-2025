@@ -28,11 +28,11 @@ const DEVICES = {
   md: 'desktop',
 } as const
 
-export function getDeviceType() {
-  const getDeviceType = getBreakPointValue(DEVICES)
+export function useDeviceType() {
+  const useDeviceType = getBreakPointValue(DEVICES)
 
   const result = $derived.by(() => {
-    const deviceType = getDeviceType()
+    const deviceType = useDeviceType()
 
     return {
       deviceType,
@@ -40,5 +40,6 @@ export function getDeviceType() {
       isDesktop: deviceType === 'desktop',
     }
   })
+
   return () => result
 }

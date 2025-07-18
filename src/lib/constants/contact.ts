@@ -12,8 +12,8 @@ export const CONTACT = {
     href: 'https://github.com/sugakou44',
   },
   website: {
-    label: 'https://saran.life',
-    href: 'https://saran.life',
+    label: 'paan.dev',
+    href: 'https://paan.dev',
     hiddenInWeb: true,
   },
 }

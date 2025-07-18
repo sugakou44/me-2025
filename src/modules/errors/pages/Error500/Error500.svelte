@@ -8,6 +8,16 @@
   import { ErrorText } from '../../components/ErrorText'
   import { PageContainer } from '../../components/PageContainer'
 
+  interface Props {
+    error?: any
+  }
+
+  const { error }: Props = $props()
+
+  $effect(() => {
+    console.error(error)
+  })
+
   const yMultiplier = getBreakPointValue({
     base: 0.35,
     md: 0.25,

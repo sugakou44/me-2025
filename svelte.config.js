@@ -22,14 +22,14 @@ const config = {
       '@/assets/*': './static/*',
     },
     csp: {
-      directives: {
-        'script-src': ['self'],
-      },
+      // directives: {
+      //   'script-src': ['self'],
+      // },
       // must be specified with either the `report-uri` or `report-to` directives, or both
-      reportOnly: {
-        'script-src': ['self'],
-        'report-uri': ['/'],
-      },
+      // reportOnly: {
+      //   'script-src': ['self'],
+      //   'report-uri': ['/'],
+      // },
     },
   },
 }

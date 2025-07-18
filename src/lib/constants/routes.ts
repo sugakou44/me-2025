@@ -6,6 +6,6 @@ export const ROUTES = {
     pathname: '/documents/resume',
   },
   playground: {
-    pathname: 'https://playground.saran.life',
+    pathname: 'https://playground.paan.dev',
   },
 } as const

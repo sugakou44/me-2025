@@ -2,15 +2,15 @@ import { enhancedImages } from '@sveltejs/enhanced-img'
 import { sveltekit } from '@sveltejs/kit/vite'
 import { defineConfig } from 'vite'
 
-import { IS_DEV } from './src/lib/constants'
 import glsl from './vite_plugins/glsl'
 import svgr from './vite_plugins/svgr'
+
+const IS_DEV = process.env.NODE_ENV !== 'production'
 
 export default defineConfig({
   plugins: [
     enhancedImages(),
     svgr(),
-    sveltekit(),
     glsl({
       include: ['**/*.glsl'],
       removeDuplicatedImports: true,
@@ -19,5 +19,6 @@ export default defineConfig({
       watch: IS_DEV,
       root: '.',
     }),
+    sveltekit(),
   ],
 })

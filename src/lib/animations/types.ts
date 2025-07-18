@@ -1,5 +1,18 @@
+import { Tween as SvelteTween } from 'svelte/motion'
+
 export interface SpringOptions {
   stiffness: number
   damping: number
   precision?: number
+}
+
+export interface TweenedOptions<T> {
+  delay?: number
+  duration?: number | ((from: T, to: T) => number)
+  easing?: (t: number) => number
+  interpolate?: (a: T, b: T) => (t: number) => T
+}
+
+export interface ExtendedTween<T> extends SvelteTween<T> {
+  setChain: (values: T[], options: TweenedOptions<T>[]) => Promise<void>
 }

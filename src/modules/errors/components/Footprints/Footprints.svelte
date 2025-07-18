@@ -14,7 +14,7 @@
   const WALK_SPEED = 500
   const TIME_BEFORE_DISAPPEAR = 2000
 
-  let footprints = $state<Footprint[]>([])
+  let footprints = $state.raw<Footprint[]>([])
   let height = $state(0)
   let width = $state(0)
 

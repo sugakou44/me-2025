@@ -1,3 +1,4 @@
+#include "@/lib/shaders/math.glsl"
 
 vec3 desertGradient(float t) {
     float s = sqrt(clamp(1.0 - (t - 0.4) / 0.6, 0.0, 1.0));

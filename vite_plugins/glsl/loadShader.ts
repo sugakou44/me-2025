@@ -22,9 +22,18 @@ function loadChunks(
   resolvedConfig: ResolvedConfig | null,
 ): string {
   const { warnDuplicatedImports, removeDuplicatedImports } = options
-  const unixPath = path.split(sep).join(posix.sep)
 
   const aliasEntries = resolvedConfig?.resolve.alias
+
+  if (aliasEntries) {
+    const matchedEntry = aliasEntries.find((entry) => matches(entry.find, path))
+
+    if (matchedEntry) {
+      path = path.replace(matchedEntry.find, matchedEntry.replacement)
+    }
+  }
+
+  const unixPath = path.split(sep).join(posix.sep)
 
   const recursion = checkRecursiveImports(
     unixPath,
@@ -47,7 +56,7 @@ function loadChunks(
 
     source = source.replace(options.includePattern, (_, _chunkPath) => {
       let chunkPath = _chunkPath.trim().replace(/^(?:"|')?|(?:"|')?;?$/gi, '')
-      let hasMatchedEntry = false
+      let shader = ''
 
       if (aliasEntries) {
         const matchedEntry = aliasEntries.find((entry) =>
@@ -60,26 +69,27 @@ function loadChunks(
             matchedEntry.replacement,
           )
 
-          hasMatchedEntry = true
+          shader = chunkPath
         }
       }
 
-      if (!chunkPath.indexOf('/')) {
-        const base = cwd().split(sep).join(posix.sep)
-        chunkPath = base + options.root + chunkPath
-      }
+      if (!shader) {
+        if (!chunkPath.indexOf('/')) {
+          const base = cwd().split(sep).join(posix.sep)
+          chunkPath = base + options.root + chunkPath
+        }
 
-      const directoryIndex = chunkPath.lastIndexOf('/')
-      directory = currentDirectory
+        const directoryIndex = chunkPath.lastIndexOf('/')
+        directory = currentDirectory
 
-      if (directoryIndex !== -1) {
-        if (!hasMatchedEntry) {
+        if (directoryIndex !== -1) {
           directory = resolve(directory, chunkPath.slice(0, directoryIndex + 1))
+          chunkPath = chunkPath.slice(directoryIndex + 1, chunkPath.length)
         }
-        chunkPath = chunkPath.slice(directoryIndex + 1, chunkPath.length)
+
+        shader = resolve(directory, chunkPath)
       }
 
-      let shader = resolve(directory, chunkPath)
       if (!extname(shader)) shader = `${shader}.${ext}`
 
       const shaderPath = shader.split(sep).join(posix.sep)

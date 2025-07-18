@@ -1,6 +1,6 @@
 // https://thebookofshaders.com/07
 
-#include "@/lib/glsl/math.glsl"
+#include "@/lib/shaders/math.glsl"
 
 float shape(vec2 uv, float borderWidth, float shapeRatio)
 {

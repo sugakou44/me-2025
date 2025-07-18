@@ -45,7 +45,7 @@ export const buttonVariants = tv({
       ghost: 'hover:bg-primary/20 hover:text-primary-foreground',
       'ghost-secondary':
         'hover:bg-secondary/20 hover:text-secondary-foreground',
-      link: 'text-primary underline-offset-4 hover:underline',
+      link: '!h-fit !p-0 text-primary underline-offset-4 hover:underline',
       puller: cn(
         'bg-primary text-background',
         'hover:translate-y-2 hover:bg-primary/60 hover:text-background',

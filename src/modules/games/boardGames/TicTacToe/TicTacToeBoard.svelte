@@ -6,23 +6,9 @@
 
   import { TicTacToe } from './TicTacToe.svelte'
 
-  let canvas: SVGSVGElement | null = null
-
   const game = new TicTacToe()
 
   const victoryCount = $state({ X: 0, O: 0 })
-
-  $effect(() => {
-    if (!canvas) {
-      return
-    }
-
-    game.init(canvas)
-
-    return () => {
-      game.destroy()
-    }
-  })
 
   $effect(() => {
     const winner = game.winner
@@ -123,5 +109,15 @@
       <svg class="h-6 w-6" viewBox="0 0 24 24" {@attach drawX}></svg>
     </div>
   </div>
-  <svg bind:this={canvas} class="aspect-square w-full"> </svg>
+  <svg
+    class="aspect-square w-full"
+    {@attach (svg: SVGSVGElement) => {
+      game.init(svg)
+
+      return () => {
+        game.destroy()
+      }
+    }}
+  >
+  </svg>
 </div>

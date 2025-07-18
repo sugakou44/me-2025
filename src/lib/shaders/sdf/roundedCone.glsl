@@ -1,4 +1,4 @@
-#include "@/lib/glsl/math.glsl"
+#include "@/lib/shaders/math.glsl"
 
 float roundCone(in vec3 p, in float r1, float r2, float h)
 {

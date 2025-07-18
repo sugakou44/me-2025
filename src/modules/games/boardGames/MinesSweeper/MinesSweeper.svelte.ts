@@ -1,5 +1,4 @@
 import { utils } from 'animejs'
-import { untrack } from 'svelte'
 
 import { processMouseEvent } from '@/lib/svelte/document.svelte'
 import { sleep } from '@/lib/utils/promise'
@@ -26,12 +25,12 @@ export class MinesSweeper extends BoardGame {
   isLost = $state<boolean>(false)
   isRevealed = $state<boolean>(false)
   bombCount = 99
-  bombState = $state<Map<number, boolean>>(new Map())
-  bombMap = $state<Map<number, number>>(new Map())
+  bombState: Map<number, boolean> = new Map()
+  bombMap: Map<number, number> = new Map()
   bombLeft = $derived.by(() => {
     return (
       this.bombCount -
-      this.state.values().reduce((acc, cell) => {
+      Array.from(this.state.values()).reduce((acc, cell) => {
         if (cell === 'X') {
           return acc + 1
         }
@@ -119,7 +118,7 @@ export class MinesSweeper extends BoardGame {
   }
 
   reset() {
-    if (untrack(() => this.isComputing)) {
+    if (this.isComputing) {
       return
     }
 
@@ -133,6 +132,7 @@ export class MinesSweeper extends BoardGame {
     this.drawFrame(true)
     this.generateBomb()
     // this.generateBombMap()
+    // this.debug_revealAllCell()
   }
 
   destroy() {

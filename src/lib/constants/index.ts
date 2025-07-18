@@ -1,4 +1,4 @@
-export const IS_DEV = process.env.NODE_ENV === 'development'
-export const IS_UNDER_MAINTENANCE = process.env.IS_UNDER_MAINTENANCE === 'true'
+import { PUBLIC_IS_UNDER_MAINTENANCE } from '$env/static/public'
 
-export const BASE_URL = 'https://saran.life'
+export const IS_DEV = import.meta.env.DEV
+export const IS_UNDER_MAINTENANCE = PUBLIC_IS_UNDER_MAINTENANCE === 'true'

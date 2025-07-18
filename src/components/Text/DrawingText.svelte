@@ -7,7 +7,7 @@
     DEFAULT_SPRING_CONFIG,
     DURATION_NORMAL,
   } from '@/lib/animations/constants'
-  import { cn } from '@/lib/utils/className'
+  import { cn, toggleClass } from '@/lib/utils/className'
   import { roughSvg } from '@/lib/utils/rough'
 
   import { ALL_CHARACTERS_PATHS } from './constants'
@@ -83,9 +83,7 @@
 
       roughPath.style.transform = `translateX(${index * 0.9}ch) translateX(${0.2}ch) translateY(${0.7}ch) scale(${parseFloat(fontSize) / 20})`
 
-      roughPath.classList.toggle('transform-fill', true)
-      roughPath.classList.toggle('origin-left', true)
-      roughPath.classList.toggle('opacity-0', true)
+      toggleClass(roughPath, 'transform-fill origin-left opacity-0', true)
 
       drawablePaths.push(animeSVG.createDrawable(roughPath))
 

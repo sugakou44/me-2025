@@ -9,3 +9,5 @@ type PartialDeep<T> = {
 }
 
 type Dict<T = any, K = string> = Record<K, T>
+
+type Maybe<T> = T | null | undefined

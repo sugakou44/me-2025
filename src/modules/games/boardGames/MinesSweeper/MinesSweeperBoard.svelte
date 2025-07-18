@@ -1,6 +1,7 @@
 <script lang="ts">
   import Button from '@/components/Buttons/Button.svelte'
   import Spinner from '@/components/Spinners/Spinner.svelte'
+  import { toggleClass } from '@/lib/utils/className'
   import { roughSvg } from '@/lib/utils/rough'
 
   import { BOMB_PATH } from './constants'
@@ -15,8 +16,7 @@
       const roughNumberPath = rough!.path(path, game.player1Options)
 
       node.appendChild(roughNumberPath)
-      roughNumberPath.classList.toggle('transform-fill', true)
-      roughNumberPath.classList.toggle('origin-top-left', true)
+      toggleClass(roughNumberPath, 'transform-fill origin-top-left', true)
     })
 
     return () => {

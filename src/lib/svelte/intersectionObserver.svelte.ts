@@ -15,7 +15,8 @@ export function intersectionObserver(
   } = {},
 ) {
   let hasTriggered = false
-  return (node: HTMLElement) => {
+
+  return (node: Element) => {
     const observer = new IntersectionObserver(
       (entries) => {
         const entry = entries[0]
@@ -42,6 +43,7 @@ export function intersectionObserver(
     observer.observe(node)
 
     return () => {
+      observer.unobserve(node)
       observer.disconnect()
     }
   }
