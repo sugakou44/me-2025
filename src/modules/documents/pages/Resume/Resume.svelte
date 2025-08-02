@@ -41,7 +41,7 @@
     </div>
   </section>
   <section class="space-y-2">
-    <h3>Stack</h3>
+    <h3>Tech Stack</h3>
     <ul class="flex flex-wrap gap-1">
       {#each STACK as { name, Icon, shouldHighlight }, index (name)}
         <li

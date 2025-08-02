@@ -12,7 +12,7 @@
   </div>
 </div>
 
-<HintText class="bg-white/70">You can print this if necessary</HintText>
+<HintText class="bg-white/70">You can print this page if necessary</HintText>
 
 <style>
   :global(

@@ -13,6 +13,7 @@ import type {
 export default class TreeOptions {
   seed: number
   type: TreeTypes
+  scale: number
 
   bark: BarkOptions
   branch: BranchOptions
@@ -22,6 +23,7 @@ export default class TreeOptions {
   constructor() {
     this.seed = 0
     this.type = TREE_TYPE.Deciduous
+    this.scale = 0.2
 
     // Bark parameters
     this.bark = {
@@ -126,7 +128,7 @@ export default class TreeOptions {
     // Leaf parameters
     this.leaves = {
       // Leaf texture to use
-      type: LEAF_TYPE.Quad,
+      type: LEAF_TYPE.Sphere,
 
       side: DoubleSide,
 

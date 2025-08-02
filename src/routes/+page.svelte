@@ -1,5 +1,5 @@
 <script lang="ts">
-  import PageSpinner from '@/components/Spinners/PageSpinner.svelte'
+  import { HomePage } from '@/modules/main/pages/HomePage'
 </script>
 
-<PageSpinner />
+<HomePage />

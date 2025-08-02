@@ -56,6 +56,7 @@ export class Tree extends Group {
     this.add(this.branchesMesh)
     this.add(this.leavesMesh)
     this.options = options
+    this.scale.set(this.options.scale, this.options.scale, this.options.scale)
 
     this.rng = new RNG(this.options.seed)
 

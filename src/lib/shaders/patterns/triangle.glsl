@@ -9,7 +9,7 @@ float pattern(vec2 uv, float patternCount, float patternScaleRatio)
 
     // Angle and radius from the current pixel
     float angle = atan(st.x, st.y) + PI;
-    float radius = M_TWO_PI / 3.0;
+    float radius = TWO_PI / 3.0;
 
     // Shaping function that modulate the distance
     float distance = cos(floor(0.5 + angle / radius) * radius - angle) * length(st);
