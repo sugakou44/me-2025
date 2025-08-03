@@ -11,6 +11,8 @@
   import { CONTACT } from '@/lib/constants/contact'
 
   let { children } = $props()
+
+  const OG_IMAGE = `${CONTACT.website.href}/og.png`
 </script>
 
 <SvelteSeo
@@ -24,7 +26,7 @@
     type: 'website',
     images: [
       {
-        url: `${CONTACT.website.href}/og.png`,
+        url: OG_IMAGE,
       },
     ],
     site_name: DEFAULT_TITLE,
@@ -42,6 +44,7 @@
     href="https://fonts.googleapis.com/css2?family=Cherry+Bomb+One&display=swap"
     rel="stylesheet"
   />
+  <meta property="og:image" content={OG_IMAGE} />
 </svelte:head>
 
 <main>
