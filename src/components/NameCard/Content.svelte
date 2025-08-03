@@ -115,7 +115,6 @@
           class="font-handwritting text-[1.3em] font-bold tracking-wider whitespace-nowrap text-primary-foreground"
         >
           PAAN
-
           <span
             in:scale|global={{
               opacity: 0.01,
