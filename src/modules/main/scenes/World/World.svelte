@@ -4,7 +4,11 @@
   import { eases } from 'animejs'
   import { Tween } from 'svelte/motion'
 
-  import { DURATION_SLOW, DURATION_SLOWEST } from '@/lib/animations/constants'
+  import {
+    DURATION_FASTEST,
+    DURATION_SLOW,
+    DURATION_SLOWEST,
+  } from '@/lib/animations/constants'
 
   import { appState } from '../../contexts/AppState'
   import { Grass } from './objects/Grass'
@@ -44,23 +48,21 @@
       terrainTween.set(
         { opacity: 0 },
         {
-          duration: DURATION_SLOW,
-          delay: DURATION_SLOWEST * 1.5,
+          duration: DURATION_FASTEST,
           easing: eases.inQuad,
         },
       )
       glassTween.set(
         { opacity: 0 },
         {
-          duration: DURATION_SLOWEST,
-          delay: DURATION_SLOWEST,
+          duration: DURATION_FASTEST,
           easing: eases.inQuad,
         },
       )
       treesTween.set(
         { opacity: 0 },
         {
-          duration: DURATION_SLOWEST,
+          duration: DURATION_FASTEST,
           easing: eases.inQuad,
         },
       )

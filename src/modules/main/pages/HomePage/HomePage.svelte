@@ -1,6 +1,6 @@
 <script lang="ts">
   import { NameCard } from '@/components/NameCard'
-  import { DURATION_SLOW, DURATION_SLOWEST } from '@/lib/animations/constants'
+  import { DURATION_SLOWEST } from '@/lib/animations/constants'
   import { fade } from '@/lib/animations/transition'
   import { MinesSweeperBoard } from '@/modules/games/boardGames/MinesSweeper'
   import { Canvas } from '@/modules/main/components/Canvas'
