@@ -26,6 +26,7 @@
   }
 
   let { forceOpen, isOpen = $bindable(false), initialIsIn }: Props = $props()
+  let hasAnimated = false
 
   const defaultDuration = useBreakPointValue({
     base: 0,
@@ -46,11 +47,15 @@
       scale: [0, 1],
       opacity: [0, 1],
       ease: easing,
-      duration: animationDuration,
-      delay: (...args) =>
-        (stagger(animationDuration / 4)(...args) as number) +
-        animationDelay * 5,
+      duration: !hasAnimated ? animationDuration : 0,
+      delay: !hasAnimated
+        ? (...args) =>
+            (stagger(animationDuration / 4)(...args) as number) +
+            animationDelay * 5
+        : 0,
     })
+
+    hasAnimated = true
 
     return () => {
       animation.complete()
@@ -156,7 +161,9 @@
         <br />
         based in Bangkok, Thailand
       </h4>
-      <ButtonGroup {@attach buttonGroupAnimation} />
+      {#if isOpen}
+        <ButtonGroup {@attach buttonGroupAnimation} />
+      {/if}
       <div class="flex-[1]"></div>
     </div>
   {/await}
