@@ -35,8 +35,7 @@ void main() {
     vec3 bladeWorldPos = (modelMatrix * vec4(bladeOffset, 1.0)).xyz;
     vec3 hashVal = hash(bladeWorldPos);
 
-    vec4 terrainTexel = vec4(0.0);
-    float heightFactor = 1.0 - terrainTexel.x - hashVal.y * 0.5;
+    float heightFactor = 1.0 - hashVal.y * 0.5;
 
     // rotation
     float angle = mapRange(hashVal.x, -1.0, 1.0, -PI, PI);

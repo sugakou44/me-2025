@@ -2,7 +2,6 @@ import { eases } from 'animejs'
 import {
   BufferAttribute,
   BufferGeometry,
-  Color,
   Euler,
   Group,
   Mesh,
@@ -86,13 +85,14 @@ export class Tree extends Group {
     }
   }
 
-  update(tick: number) {
+  update(tick: number, opacity = 0) {
     const branchMaterial = Array.isArray(this.branchesMesh.material)
       ? (this.branchesMesh.material[0] as ShaderMaterial)
       : (this.branchesMesh.material as ShaderMaterial)
 
     if (branchMaterial) {
       branchMaterial.uniforms.tick.value = tick
+      branchMaterial.uniforms.opacity.value = opacity
     }
 
     const leaveMaterial = Array.isArray(this.leavesMesh.material)
@@ -101,6 +101,7 @@ export class Tree extends Group {
 
     if (leaveMaterial) {
       leaveMaterial.uniforms.tick.value = tick
+      leaveMaterial.uniforms.opacity.value = opacity
     }
   }
 
@@ -854,7 +855,10 @@ export class Tree extends Group {
         value: 0.5,
       },
       diffuseColor: {
-        value: new Color(0xeeeeee),
+        value: this.options.bark.tint,
+      },
+      opacity: {
+        value: 1,
       },
     }
 
@@ -862,6 +866,7 @@ export class Tree extends Group {
       name: 'branches',
       vertexShader: BranchVertexShader,
       fragmentShader: BranchFragmentShader,
+      transparent: true,
       uniforms,
     })
 
@@ -904,9 +909,12 @@ export class Tree extends Group {
         value: 0,
       },
       diffuseColor: {
-        value: new Color(0x66ff00),
+        value: this.options.leaves.tint,
       },
       swayFactor: {
+        value: 1,
+      },
+      opacity: {
         value: 1,
       },
     }
@@ -915,6 +923,7 @@ export class Tree extends Group {
       name: 'leaves',
       vertexShader: LeafVertexShader,
       fragmentShader: LeafFragmentShader,
+      transparent: true,
       uniforms,
     })
 
@@ -963,10 +972,10 @@ export class Tree extends Group {
         value: 1,
       },
       diffuseColor: {
-        value: new Color(0xff6600),
+        value: this.options.blob.tint,
       },
       tipColor: {
-        value: new Color(0xffffff),
+        value: this.options.blob.tip,
       },
       origin: {
         value: new Vector3(
@@ -975,12 +984,16 @@ export class Tree extends Group {
           this.blobs.verts.at(-4),
         ),
       },
+      opacity: {
+        value: 1,
+      },
     }
 
     const mat = new ShaderMaterial({
       name: 'blobs',
       vertexShader: BranchVertexShader,
       fragmentShader: BlobFragmentShader,
+      transparent: true,
       uniforms,
       // side: DoubleSide,
       side: this.options.blob.side,

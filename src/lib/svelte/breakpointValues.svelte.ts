@@ -4,7 +4,7 @@ import { getCurrentBreakPoint } from '../utils/styles'
 
 import type { BreakPointKey } from '../utils/styles'
 
-export function getBreakPointValue<T>(
+export function useBreakPointValue<T>(
   values: Partial<Dict<T, BreakPointKey | string>>,
 ) {
   const result = $derived.by(() => {
@@ -29,7 +29,7 @@ const DEVICES = {
 } as const
 
 export function useDeviceType() {
-  const useDeviceType = getBreakPointValue(DEVICES)
+  const useDeviceType = useBreakPointValue(DEVICES)
 
   const result = $derived.by(() => {
     const deviceType = useDeviceType()

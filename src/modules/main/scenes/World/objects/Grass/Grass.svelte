@@ -18,9 +18,14 @@
   interface Props {
     segments?: number
     grassCount?: number
+    opacity?: number
   }
 
-  const { segments = 4, grassCount = BLADE_COUNT }: Props = $props()
+  const {
+    segments = 3,
+    grassCount = BLADE_COUNT,
+    opacity = 0,
+  }: Props = $props()
 
   let materialRef: ShaderMaterial | undefined = $state()
 
@@ -32,10 +37,10 @@
 
   const uniforms = {
     baseColor: {
-      value: new Color(0x66ff00),
+      value: new Color(0xffffff),
     },
     tipColor: {
-      value: new Color(0xff6600),
+      value: new Color(0x91e0ce),
     },
     tick: {
       value: 0,
@@ -58,6 +63,7 @@
     swayFactor: {
       value: STIFFNESS,
     },
+    opacity: { value: opacity },
   }
 
   useTask(() => {
@@ -72,10 +78,12 @@
 <T.Mesh count={geometry.instanceCount}>
   <T is={geometry} />
   <T.ShaderMaterial
+    transparent
     bind:ref={materialRef}
     {vertexShader}
     {fragmentShader}
     {uniforms}
+    uniforms.opacity.value={opacity}
     side={FrontSide}
   />
 </T.Mesh>

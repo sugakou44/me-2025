@@ -1,4 +1,4 @@
-import { BackSide, DoubleSide, Vector3 } from 'three'
+import { BackSide, Color, DoubleSide, Vector3 } from 'three'
 
 import { LEAF_TYPE, TREE_TYPE } from './constants'
 
@@ -28,7 +28,7 @@ export default class TreeOptions {
     // Bark parameters
     this.bark = {
       // Tint of the tree trunk
-      tint: 0xffffff,
+      tint: new Color(0x83aeff),
 
       // Use face normals for shading instead of vertex normals
       flatShading: false,
@@ -148,7 +148,7 @@ export default class TreeOptions {
       sizeVariance: 0.5,
 
       // Tint color for the leaves
-      tint: 0xffffff,
+      tint: new Color(0x66ff00),
 
       // Controls transparency of leaf texture
       alphaTest: 0.5,
@@ -159,7 +159,8 @@ export default class TreeOptions {
       segmentCount: 18,
       sizeOffest: 0.1,
       sizeVariance: 0.2,
-      tint: 0xffffff,
+      tint: new Color(0xff696c),
+      tip: new Color(0xffffff),
     }
   }
 

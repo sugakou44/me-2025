@@ -5,6 +5,7 @@ uniform float tick;
 uniform vec3 diffuseColor;
 uniform vec3 tipColor;
 uniform vec3 origin;
+uniform float opacity;
 
 in vec3 vPosition;
 in vec2 vUv;
@@ -16,5 +17,5 @@ void main()
 
     float noise = 1.5 - mapRangeUv(snoise(vPosition / 10.0));
 
-    gl_FragColor = vec4(color * noise, 1.0);
+    gl_FragColor = vec4(color * noise, opacity);
 }

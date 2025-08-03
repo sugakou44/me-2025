@@ -42,7 +42,7 @@ export interface BarkOptions {
   // The bark texture
   type?: BarkType
   // Tint of the tree trunk
-  tint: number | Color | ArrayAsVector3
+  tint: Color
   // Use face normals for shading instead of vertex normals
   flatShading: boolean
   // Apply texture to bark
@@ -115,14 +115,15 @@ export interface LeaveOptions {
   sizeVariance: number
 
   // Tint color for the leaves
-  tint: number | Color | ArrayAsVector3
+  tint: Color
 
   // Controls transparency of leaf texture
   alphaTest: number
 }
 
 export interface BlobOptions {
-  tint: number | Color | ArrayAsVector3
+  tint: Color
+  tip: Color
   side?: Side
   sizeVariance: number
   sizeOffest: number

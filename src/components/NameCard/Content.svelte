@@ -11,7 +11,9 @@
     DURATION_SLOW,
   } from '@/lib/animations/constants'
   import { fade } from '@/lib/animations/transition'
+  import { useBreakPointValue } from '@/lib/svelte/breakpointValues.svelte'
   import { cn } from '@/lib/utils/className'
+  import { appState } from '@/modules/main/contexts/AppState'
 
   import { Button } from '../Buttons'
   import Avatar from './Avatar.svelte'
@@ -25,8 +27,18 @@
 
   let { forceOpen, isOpen = $bindable(false), initialIsIn }: Props = $props()
 
-  const animationDuration = $derived(initialIsIn ? DURATION_SLOW : 0)
-  const animationDelay = $derived(initialIsIn ? DURATION_NORMAL : 0)
+  const defaultDuration = useBreakPointValue({
+    base: 0,
+    md: DURATION_SLOW,
+  })
+
+  const defaultDelay = useBreakPointValue({
+    base: 0,
+    md: DURATION_NORMAL,
+  })
+
+  const animationDuration = $derived(initialIsIn ? (defaultDuration() ?? 0) : 0)
+  const animationDelay = $derived(initialIsIn ? (defaultDelay() ?? 0) : 0)
   const easing = eases.outBack(1.2)
 
   function buttonGroupAnimation(node: HTMLDivElement) {
@@ -100,20 +112,48 @@
       >
         Hi, I&apos;m
         <span
-          class=" font-handwritting text-[1.3em] font-bold tracking-wider text-primary-foreground"
+          class="font-handwritting text-[1.3em] font-bold tracking-wider whitespace-nowrap text-primary-foreground"
         >
           PAAN
-        </span>
-        <span
-          in:scale|global={{
-            opacity: 0.01,
-            easing: eases.outElastic(2, 0.5),
-            duration: animationDuration * 2,
-            delay: animationDelay * 8,
-          }}
-          class="inline-block origin-center font-handwritting text-[1.3em] font-bold tracking-wider text-primary-foreground will-change-transform"
-        >
-          <IconBombFilled />
+          {#if appState.scene !== 'game'}
+            <span
+              in:scale|global={{
+                opacity: 0.01,
+                easing: eases.outElastic(2, 0.5),
+                duration: animationDuration * 2,
+                delay: animationDelay * 8,
+              }}
+              class="hidden origin-center font-handwritting font-bold tracking-wider text-primary-foreground will-change-transform md:inline-block"
+              onclick={() => {
+                appState.scene = 'game'
+              }}
+            >
+              <IconBombFilled />
+            </span>
+            <span
+              in:scale|global={{
+                opacity: 0.01,
+                easing: eases.outElastic(2, 0.5),
+                duration: animationDuration * 2,
+                delay: animationDelay * 8,
+              }}
+              class="inline-block origin-center font-handwritting font-bold tracking-wider text-primary-foreground will-change-transform md:hidden"
+            >
+              .
+            </span>
+          {:else}
+            <span
+              in:scale|global={{
+                opacity: 0.01,
+                easing: eases.outElastic(2, 0.5),
+                duration: animationDuration * 2,
+                delay: animationDelay * 8,
+              }}
+              class="inline-block origin-center font-handwritting font-bold tracking-wider text-primary-foreground will-change-transform"
+            >
+              .
+            </span>
+          {/if}
         </span>
       </h1>
       <h4

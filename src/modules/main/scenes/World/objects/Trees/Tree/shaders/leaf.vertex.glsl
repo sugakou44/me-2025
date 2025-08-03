@@ -1,6 +1,7 @@
 
 #include "@/lib/shaders/transform.glsl"
 #include "@/modules/main/shaders/wind.glsl"
+#include "@/modules/main/shaders/terrain.glsl"
 
 uniform float tick;
 uniform float swayFactor;

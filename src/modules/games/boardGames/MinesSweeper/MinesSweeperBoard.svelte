@@ -1,13 +1,18 @@
 <script lang="ts">
   import Button from '@/components/Buttons/Button.svelte'
   import Spinner from '@/components/Spinners/Spinner.svelte'
+  import { squircleBackground } from '@/lib/svelte/backgroundSquircle.svelte'
+  import { useDeviceType } from '@/lib/svelte/breakpointValues.svelte'
   import { toggleClass } from '@/lib/utils/className'
   import { roughSvg } from '@/lib/utils/rough'
+  import { appState } from '@/modules/main/contexts/AppState'
 
   import { BOMB_PATH } from './constants'
   import { MinesSweeper } from './MinesSweeper.svelte'
 
   const game = new MinesSweeper()
+
+  const getDeviceType = useDeviceType()
 
   function drawBomb(node: SVGSVGElement) {
     const rough = roughSvg(node)
@@ -25,9 +30,24 @@
       }
     }
   }
+
+  $effect(() => {
+    const deviceType = getDeviceType()
+
+    if (!deviceType.isDesktop) {
+      appState.scene = 'top'
+    }
+  })
 </script>
 
-<div class="flex w-[560px] flex-col items-stretch justify-center gap-2">
+<div
+  class="transform-center fixed z-20 flex w-[560px] flex-col items-stretch justify-center gap-2 p-8"
+  {@attach squircleBackground({
+    cornerRadius: 16,
+    cornerSmoothing: 1,
+    class: 'fill-white -z-10',
+  })}
+>
   <div class="grid grid-cols-3 items-center gap-4">
     <div class="flex items-center justify-start gap-2 py-2">
       <svg class="h-6 w-6" viewBox="0 0 24 24" {@attach drawBomb}> </svg>
@@ -60,7 +80,7 @@
             variant="solid-tertiary"
             isLoading={game.isComputing}
             onclick={() => {
-              game.reset()
+              game.reset(true)
             }}
           >
             RESET

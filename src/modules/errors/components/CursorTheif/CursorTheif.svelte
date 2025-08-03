@@ -9,7 +9,7 @@
     SLOWEST_SPRING_CONFIG,
   } from '@/lib/animations/constants'
   import { scaleY } from '@/lib/animations/transition'
-  import { getBreakPointValue } from '@/lib/svelte/breakpointValues.svelte'
+  import { useBreakPointValue } from '@/lib/svelte/breakpointValues.svelte'
   import { gestures } from '@/lib/svelte/gestures.svelte'
   import { cn } from '@/lib/utils/className'
 
@@ -24,7 +24,7 @@
 
   let gotCursor = $state(false)
 
-  const dialogBound = getBreakPointValue(DIALOG_BOUNDS)
+  const dialogBound = useBreakPointValue(DIALOG_BOUNDS)
 
   const bodySpring = new Spring(
     {

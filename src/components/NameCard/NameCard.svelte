@@ -5,7 +5,10 @@
   import { fly, scale } from 'svelte/transition'
 
   import { DURATION_NORMAL, DURATION_SLOW } from '@/lib/animations/constants'
-  import { useDeviceType } from '@/lib/svelte/breakpointValues.svelte'
+  import {
+    useBreakPointValue,
+    useDeviceType,
+  } from '@/lib/svelte/breakpointValues.svelte'
   import { appState } from '@/modules/main/contexts/AppState'
 
   import { Button } from '../Buttons'
@@ -18,8 +21,13 @@
 
   const deviceType = useDeviceType()
 
+  const defaultDuration = useBreakPointValue({
+    base: 0,
+    md: DURATION_SLOW,
+  })
+
   const contentAnimation = new Tween(untrack(() => isIn) ? 0 : 1, {
-    duration: DURATION_SLOW,
+    duration: defaultDuration() ?? 0,
   })
 
   const contentTransform = $derived.by(() => {
@@ -55,7 +63,7 @@
     in:fly={{
       y: initialIsIn ? 0 : -100,
       opacity: 0.01,
-      duration: DURATION_SLOW,
+      duration: defaultDuration() ?? 0,
       easing: backOut,
     }}
     class="pointer-events-none fixed inset-4 z-50 will-change-transform md:inset-6"

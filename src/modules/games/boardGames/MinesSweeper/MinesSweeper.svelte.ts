@@ -117,7 +117,7 @@ export class MinesSweeper extends BoardGame {
     this.svg?.addEventListener('contextmenu', this.handleClick)
   }
 
-  reset() {
+  reset(shouldSkipAnimation = false) {
     if (this.isComputing) {
       return
     }
@@ -128,8 +128,8 @@ export class MinesSweeper extends BoardGame {
     this.isRevealed = false
     this.bombState.clear()
     this.bombMap.clear()
-    this.drawGrid(true)
-    this.drawFrame(true)
+    this.drawGrid(shouldSkipAnimation)
+    this.drawFrame(shouldSkipAnimation)
     this.generateBomb()
     // this.generateBombMap()
     // this.debug_revealAllCell()

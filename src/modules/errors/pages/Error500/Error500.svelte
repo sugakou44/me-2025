@@ -2,7 +2,7 @@
   import { innerHeight, innerWidth } from 'svelte/reactivity/window'
 
   import { DialogBox } from '@/components/DialogBox'
-  import { getBreakPointValue } from '@/lib/svelte/breakpointValues.svelte'
+  import { useBreakPointValue } from '@/lib/svelte/breakpointValues.svelte'
 
   import { BongoCat } from '../../components/BongoCat'
   import { ErrorText } from '../../components/ErrorText'
@@ -18,7 +18,7 @@
     console.error(error)
   })
 
-  const yMultiplier = getBreakPointValue({
+  const yMultiplier = useBreakPointValue({
     base: 0.35,
     md: 0.25,
   })

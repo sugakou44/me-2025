@@ -11,5 +11,5 @@ export const normalizeScreenHz = (
 const clock = new Clock()
 
 export function getTick() {
-  return clock.getElapsedTime() * 0.4
+  return clock.getElapsedTime() * 0.2
 }
