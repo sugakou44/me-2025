@@ -2,13 +2,11 @@
   import SvelteSeo from 'svelte-seo'
 
   import { Footer } from '@/components/Footer'
+  import { CONTACT } from '@/lib/constants/contact'
   import { DEFAULT_DESCRIPTION, DEFAULT_TITLE } from '@/lib/constants/seo'
   import { Error500 } from '@/modules/errors/pages/Error500'
 
-  import '@/lib/svelte/lenis.svelte'
   import '../app.css'
-
-  import { CONTACT } from '@/lib/constants/contact'
 
   let { children } = $props()
 
