@@ -4,9 +4,9 @@
   let { children } = $props()
 </script>
 
-<div class="document container mx-auto full-h max-w-4xl p-8">
+<div class="document container mx-auto full-h max-w-4xl p-4 md:p-8">
   <div
-    class="print:pt:4 h-full bg-white px-8 pt-10 pb-20 print:px-4 print:pb-4"
+    class="print:pt:4 h-full bg-white px-4 pt-10 pb-20 md:px-8 print:px-4 print:pb-4"
   >
     {@render children()}
   </div>

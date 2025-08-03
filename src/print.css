@@ -11,6 +11,7 @@
   h2:before,
   h3:before,
   button,
+  .rough-annotation,
   .non-printable {
     display: none;
   }

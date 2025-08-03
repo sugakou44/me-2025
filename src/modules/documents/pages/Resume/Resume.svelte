@@ -2,7 +2,6 @@
   import { Button } from '@/components/Buttons'
   import { CONTACT } from '@/lib/constants/contact'
   import { annotate } from '@/lib/svelte/annotate.svelte'
-  import { cn } from '@/lib/utils/className'
 
   import { STACK } from './constants'
   import Education from './Education.svelte'
@@ -12,9 +11,11 @@
 <article class="space-y-4">
   <section class="space-y-4">
     <h1>Saran Angsuwan</h1>
-    <div class="flex justify-between">
+    <div
+      class="flex flex-col justify-between space-y-1 md:flex-row md:space-y-0 print:flex-row"
+    >
       <p class="!text-sm">Bangkok, Thailand</p>
-      <div class="space-y-2">
+      <div class="space-y-1 md:space-y-2">
         <p class="!text-sm">
           Email:
           <Button
@@ -51,9 +52,7 @@
             type: 'highlight',
             iterations: 1,
           }}
-          class={cn('flex flex-row items-center gap-1 !text-sm', {
-            '!pl-0': index === 0,
-          })}
+          class="flex flex-row items-center gap-1 !pl-0 !text-sm"
         >
           <Icon size={18} />
           <span
