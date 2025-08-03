@@ -180,7 +180,7 @@
     @apply border-border outline-ring/50 ease-in;
   }
   body {
-    @apply cursor-default text-foreground;
+    @apply cursor-default bg-page-background text-foreground;
   }
   :root {
     @apply bg-page-background;

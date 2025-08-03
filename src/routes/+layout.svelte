@@ -20,6 +20,7 @@
   description={DEFAULT_DESCRIPTION}
   canonical={CONTACT.website.href}
   notranslate
+  themeColor="#fafafa"
   openGraph={{
     title: DEFAULT_TITLE,
     description: DEFAULT_DESCRIPTION,
