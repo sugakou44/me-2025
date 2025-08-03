@@ -12,6 +12,8 @@
   canonical={ROUTES.resume.pathname}
   noindex
   nofollow
+  notranslate
+  nositelinkssearchbox
 />
 
 {@render children()}
