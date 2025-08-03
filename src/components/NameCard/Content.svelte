@@ -1,7 +1,7 @@
 <script lang="ts">
   import { IconBombFilled, IconX } from '@tabler/icons-svelte'
   import { eases, stagger, utils } from 'animejs'
-  // import { tick } from 'svelte'
+  import { tick } from 'svelte'
   import { scale } from 'svelte/transition'
 
   import { animate } from '@/lib/animations/animejs'
@@ -74,104 +74,104 @@
 <div
   class="section relative aspect-[1/1.65] h-full w-full rounded-xl transform-3d"
 >
-  <!-- {#await tick() then} -->
-  <div
-    in:scale={{
-      easing,
-      opacity: 0.01,
-      duration: animationDuration,
-      delay: animationDelay,
-    }}
-    class="absolute right-2 bottom-[15%] left-2 h-[25%] overflow-hidden rounded-lg will-change-transform"
-  >
-    <div class="halftone-stripe-isometric text-primary"></div>
-    <div class=" absolute inset-0"></div>
-  </div>
-  <figure
-    in:scale={{
-      easing,
-      opacity: 0.01,
-      duration: animationDuration,
-      delay: animationDelay * 0.5,
-    }}
-    class="absolute right-2 bottom-2 left-2 will-change-transform md:top-1/5 md:right-[unset] md:bottom-0 md:left-0 md:w-[calc(50%-16px)]"
-  >
-    <Avatar isIn={!!isOpen || !!forceOpen} />
-  </figure>
-  <div
-    class="relative top-[10%] right-2 bottom-2 left-2 flex flex-col gap-2 md:absolute md:top-2 md:left-1/2"
-  >
-    <div class="flex-[1]"></div>
-    <h1
-      in:fade={{
+  {#await tick() then}
+    <div
+      in:scale={{
         easing,
-        duration: animationDuration * 2,
-        delay: animationDelay * 3,
+        opacity: 0.01,
+        duration: animationDuration,
+        delay: animationDelay,
       }}
-      class="text-center font-normal text-foreground will-change-opacity md:text-left"
+      class="absolute right-2 bottom-[15%] left-2 h-[25%] overflow-hidden rounded-lg will-change-transform"
     >
-      Hi, I&apos;m
-      <span
-        class="font-handwritting text-[1.3em] font-bold tracking-wider whitespace-nowrap text-primary-foreground"
+      <div class="halftone-stripe-isometric text-primary"></div>
+      <div class=" absolute inset-0"></div>
+    </div>
+    <figure
+      in:scale={{
+        easing,
+        opacity: 0.01,
+        duration: animationDuration,
+        delay: animationDelay * 0.5,
+      }}
+      class="absolute right-2 bottom-2 left-2 will-change-transform md:top-1/5 md:right-[unset] md:bottom-0 md:left-0 md:w-[calc(50%-16px)]"
+    >
+      <Avatar isIn={!!isOpen || !!forceOpen} />
+    </figure>
+    <div
+      class="relative top-[10%] right-2 bottom-2 left-2 flex flex-col gap-2 md:absolute md:top-2 md:left-1/2"
+    >
+      <div class="flex-[1]"></div>
+      <h1
+        in:fade={{
+          easing,
+          duration: animationDuration * 2,
+          delay: animationDelay * 3,
+        }}
+        class="text-center font-normal text-foreground will-change-opacity md:text-left"
       >
-        PAAN
-        {#if appState.scene !== 'game'}
-          <span
-            in:scale|global={{
-              opacity: 0.01,
-              easing: eases.outElastic(2, 0.5),
-              duration: animationDuration * 2,
-              delay: animationDelay * 8,
-            }}
-            class="hidden origin-center font-handwritting font-bold tracking-wider text-primary-foreground will-change-transform md:inline-block"
-            onclick={() => {
-              appState.scene = 'game'
-            }}
-          >
-            <IconBombFilled />
-          </span>
-          <span
-            in:scale|global={{
-              opacity: 0.01,
-              easing: eases.outElastic(2, 0.5),
-              duration: animationDuration * 2,
-              delay: animationDelay * 8,
-            }}
-            class="inline-block origin-center font-handwritting font-bold tracking-wider text-primary-foreground will-change-transform md:hidden"
-          >
-            .
-          </span>
-        {:else}
-          <span
-            in:scale|global={{
-              opacity: 0.01,
-              easing: eases.outElastic(2, 0.5),
-              duration: animationDuration * 2,
-              delay: animationDelay * 8,
-            }}
-            class="inline-block origin-center font-handwritting font-bold tracking-wider text-primary-foreground will-change-transform"
-          >
-            .
-          </span>
-        {/if}
-      </span>
-    </h1>
-    <h4
-      in:fade={{
-        easing,
-        duration: animationDuration * 2,
-        delay: animationDelay * 4,
-      }}
-      class="font-header text-center leading-tight font-light will-change-opacity md:text-left"
-    >
-      <span class="font-medium">Front-end developer</span>
-      <br />
-      based in Bangkok, Thailand
-    </h4>
-    <ButtonGroup {@attach buttonGroupAnimation} />
-    <div class="flex-[1]"></div>
-  </div>
-  <!-- {/await} -->
+        Hi, I&apos;m
+        <span
+          class="font-handwritting text-[1.3em] font-bold tracking-wider whitespace-nowrap text-primary-foreground"
+        >
+          PAAN
+          {#if appState.scene !== 'game'}
+            <span
+              in:scale|global={{
+                opacity: 0.01,
+                easing: eases.outElastic(2, 0.5),
+                duration: animationDuration * 2,
+                delay: animationDelay * 8,
+              }}
+              class="hidden origin-center font-handwritting font-bold tracking-wider text-primary-foreground will-change-transform md:inline-block"
+              onclick={() => {
+                appState.scene = 'game'
+              }}
+            >
+              <IconBombFilled />
+            </span>
+            <span
+              in:scale|global={{
+                opacity: 0.01,
+                easing: eases.outElastic(2, 0.5),
+                duration: animationDuration * 2,
+                delay: animationDelay * 8,
+              }}
+              class="inline-block origin-center font-handwritting font-bold tracking-wider text-primary-foreground will-change-transform md:hidden"
+            >
+              .
+            </span>
+          {:else}
+            <span
+              in:scale|global={{
+                opacity: 0.01,
+                easing: eases.outElastic(2, 0.5),
+                duration: animationDuration * 2,
+                delay: animationDelay * 8,
+              }}
+              class="inline-block origin-center font-handwritting font-bold tracking-wider text-primary-foreground will-change-transform"
+            >
+              .
+            </span>
+          {/if}
+        </span>
+      </h1>
+      <h4
+        in:fade={{
+          easing,
+          duration: animationDuration * 2,
+          delay: animationDelay * 4,
+        }}
+        class="font-header text-center leading-tight font-light will-change-opacity md:text-left"
+      >
+        <span class="font-medium">Front-end developer</span>
+        <br />
+        based in Bangkok, Thailand
+      </h4>
+      <ButtonGroup {@attach buttonGroupAnimation} />
+      <div class="flex-[1]"></div>
+    </div>
+  {/await}
 
   {#if !forceOpen && isOpen}
     <div
