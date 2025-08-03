@@ -6,7 +6,6 @@
 
   import {
     DURATION_FASTEST,
-    DURATION_SLOW,
     DURATION_SLOWEST,
   } from '@/lib/animations/constants'
 
