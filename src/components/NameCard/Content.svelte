@@ -114,8 +114,7 @@
         <span
           class="font-handwritting text-[1.3em] font-bold tracking-wider whitespace-nowrap text-primary-foreground"
         >
-          PAAN
-          <span
+          PAAN<span
             in:scale|global={{
               opacity: 0.01,
               easing: eases.outElastic(2, 0.5),
@@ -132,8 +131,7 @@
             {:else}
               .
             {/if}
-          </span>
-          <span
+          </span><span
             in:scale|global={{
               opacity: 0.01,
               easing: eases.outElastic(2, 0.5),
