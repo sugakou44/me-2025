@@ -1,6 +1,6 @@
 <script lang="ts">
   import { NameCard } from '@/components/NameCard'
-  import { DURATION_SLOWEST } from '@/lib/animations/constants'
+  import { DURATION_SLOW, DURATION_SLOWEST } from '@/lib/animations/constants'
   import { fade } from '@/lib/animations/transition'
   import { MinesSweeperBoard } from '@/modules/games/boardGames/MinesSweeper'
   import { Canvas } from '@/modules/main/components/Canvas'
@@ -23,7 +23,7 @@
     <div
       class="!z-40"
       in:fade={{
-        duration: DURATION_SLOWEST,
+        duration: DURATION_SLOW,
         delay: DURATION_SLOWEST * 2.5,
       }}
     >
