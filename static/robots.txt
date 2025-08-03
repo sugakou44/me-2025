@@ -1,0 +1,8 @@
+User-Agent: Googlebot
+Disallow: /documents/*
+
+User-Agent: *
+Allow: /
+Disallow: /documents/*
+
+Sitemap: https://paan.dev/sitemap.xml

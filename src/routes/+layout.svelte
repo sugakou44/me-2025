@@ -1,7 +1,9 @@
 <script lang="ts">
-  // import Curtain from '@/components/Spinners/Curtain.svelte'
+  import SvelteSeo from 'svelte-seo'
 
   import { Footer } from '@/components/Footer'
+  import { ROUTES } from '@/lib/constants/routes'
+  import { DEFAULT_DESCRIPTION, DEFAULT_TITLE } from '@/lib/constants/seo'
   import { Error500 } from '@/modules/errors/pages/Error500'
 
   import '@/lib/svelte/lenis.svelte'
@@ -9,6 +11,24 @@
 
   let { children } = $props()
 </script>
+
+<SvelteSeo
+  title={DEFAULT_TITLE}
+  description={DEFAULT_DESCRIPTION}
+  canonical={ROUTES.home.pathname}
+  openGraph={{
+    title: DEFAULT_TITLE,
+    description: DEFAULT_DESCRIPTION,
+    url: ROUTES.home.pathname,
+    type: 'website',
+    images: [
+      {
+        url: `${ROUTES.home.pathname}og.png`,
+      },
+    ],
+    site_name: DEFAULT_TITLE,
+  }}
+/>
 
 <svelte:head>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
