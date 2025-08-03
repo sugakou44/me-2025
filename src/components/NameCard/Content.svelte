@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { IconX } from '@tabler/icons-svelte'
+  import { IconBombFilled, IconX } from '@tabler/icons-svelte'
   import { eases, stagger, utils } from 'animejs'
   import { tick } from 'svelte'
   import { scale } from 'svelte/transition'
@@ -113,7 +113,7 @@
           }}
           class="inline-block origin-center font-handwritting text-[1.3em] font-bold tracking-wider text-primary-foreground will-change-transform"
         >
-          .
+          <IconBombFilled />
         </span>
       </h1>
       <h4
