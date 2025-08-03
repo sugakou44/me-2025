@@ -2,12 +2,13 @@
   import SvelteSeo from 'svelte-seo'
 
   import { Footer } from '@/components/Footer'
-  import { ROUTES } from '@/lib/constants/routes'
   import { DEFAULT_DESCRIPTION, DEFAULT_TITLE } from '@/lib/constants/seo'
   import { Error500 } from '@/modules/errors/pages/Error500'
 
   import '@/lib/svelte/lenis.svelte'
   import '../app.css'
+
+  import { CONTACT } from '@/lib/constants/contact'
 
   let { children } = $props()
 </script>
@@ -15,15 +16,15 @@
 <SvelteSeo
   title={DEFAULT_TITLE}
   description={DEFAULT_DESCRIPTION}
-  canonical={ROUTES.home.pathname}
+  canonical={CONTACT.website.href}
   openGraph={{
     title: DEFAULT_TITLE,
     description: DEFAULT_DESCRIPTION,
-    url: ROUTES.home.pathname,
+    url: CONTACT.website.href,
     type: 'website',
     images: [
       {
-        url: `${ROUTES.home.pathname}og.png`,
+        url: `${CONTACT.website.href}og.png`,
       },
     ],
     site_name: DEFAULT_TITLE,
