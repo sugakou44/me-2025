@@ -161,7 +161,7 @@
         <br />
         based in Bangkok, Thailand
       </h4>
-      {#if isOpen}
+      {#if isOpen || forceOpen}
         <ButtonGroup {@attach buttonGroupAnimation} />
       {/if}
       <div class="flex-[1]"></div>
