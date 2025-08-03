@@ -115,45 +115,36 @@
           class="font-handwritting text-[1.3em] font-bold tracking-wider whitespace-nowrap text-primary-foreground"
         >
           PAAN
-          {#if appState.scene !== 'game'}
-            <span
-              in:scale|global={{
-                opacity: 0.01,
-                easing: eases.outElastic(2, 0.5),
-                duration: animationDuration * 2,
-                delay: animationDelay * 8,
-              }}
-              class="hidden origin-center font-handwritting font-bold tracking-wider text-primary-foreground will-change-transform md:inline-block"
-              onclick={() => {
-                appState.scene = 'game'
-              }}
-            >
+
+          <span
+            in:scale|global={{
+              opacity: 0.01,
+              easing: eases.outElastic(2, 0.5),
+              duration: animationDuration * 2,
+              delay: animationDelay * 8,
+            }}
+            class="hidden origin-center font-handwritting font-bold tracking-wider text-primary-foreground will-change-transform md:inline-block"
+            onclick={() => {
+              appState.scene = 'game'
+            }}
+          >
+            {#if appState.scene !== 'game'}
               <IconBombFilled />
-            </span>
-            <span
-              in:scale|global={{
-                opacity: 0.01,
-                easing: eases.outElastic(2, 0.5),
-                duration: animationDuration * 2,
-                delay: animationDelay * 8,
-              }}
-              class="inline-block origin-center font-handwritting font-bold tracking-wider text-primary-foreground will-change-transform md:hidden"
-            >
+            {:else}
               .
-            </span>
-          {:else}
-            <span
-              in:scale|global={{
-                opacity: 0.01,
-                easing: eases.outElastic(2, 0.5),
-                duration: animationDuration * 2,
-                delay: animationDelay * 8,
-              }}
-              class="inline-block origin-center font-handwritting font-bold tracking-wider text-primary-foreground will-change-transform"
-            >
-              .
-            </span>
-          {/if}
+            {/if}
+          </span>
+          <span
+            in:scale|global={{
+              opacity: 0.01,
+              easing: eases.outElastic(2, 0.5),
+              duration: animationDuration * 2,
+              delay: animationDelay * 8,
+            }}
+            class="inline-block origin-center font-handwritting font-bold tracking-wider text-primary-foreground will-change-transform md:hidden"
+          >
+            .
+          </span>
         </span>
       </h1>
       <h4
