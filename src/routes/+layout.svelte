@@ -24,7 +24,7 @@
     type: 'website',
     images: [
       {
-        url: `${CONTACT.website.href}og.png`,
+        url: `${CONTACT.website.href}/og.png`,
       },
     ],
     site_name: DEFAULT_TITLE,

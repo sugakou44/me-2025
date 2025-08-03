@@ -5,7 +5,7 @@ export const CONTACT = {
   },
   linkedin: {
     label: 'linkedin.com/in/saranang',
-    href: 'https://www.linkedin.com/in/saranang/',
+    href: 'https://www.linkedin.com/in/saranang',
   },
   github: {
     label: 'github.com/sugakou44',
