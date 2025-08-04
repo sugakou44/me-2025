@@ -49,7 +49,7 @@
     },
   })}
   class={cn(
-    'h-fit w-fit touch-none rounded-full p-3 md:p-5',
+    'h-fit w-fit touch-none rounded-full p-3 lg:p-5',
     containerClassName,
   )}
 >
