@@ -76,7 +76,7 @@
   {/if}
   <div
     style:transform={contentTransform}
-    class="section pointer-events-auto absolute top-[45%] left-[50%] aspect-[1/1.65] w-full will-change-transform transform-3d md:aspect-[1.65]"
+    class="section pointer-events-auto absolute top-[45%] left-[50%] aspect-[1/1.65] w-full will-change-transform transform-3d md:aspect-[1.65] md:max-h-none"
   >
     <Content
       bind:isOpen
