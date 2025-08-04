@@ -219,6 +219,10 @@
   min-height: var(--screen-height);
 }
 
+@utility opacity-start {
+  opacity: 0.01;
+}
+
 @layer components {
   .section {
     @apply container mx-auto xl:max-w-6xl;
