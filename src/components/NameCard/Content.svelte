@@ -10,7 +10,6 @@
     DURATION_SLOW,
   } from '@/lib/animations/constants'
   import { fade } from '@/lib/animations/transition'
-  import { useBreakPointValue } from '@/lib/svelte/breakpointValues.svelte'
   import { cn } from '@/lib/utils/className'
   import { appState } from '@/modules/main/contexts/AppState'
 
@@ -27,18 +26,8 @@
   let { forceOpen, isOpen = $bindable(false), initialIsIn }: Props = $props()
   let hasAnimated = false
 
-  const defaultDuration = useBreakPointValue({
-    base: 0,
-    md: DURATION_SLOW,
-  })
-
-  const defaultDelay = useBreakPointValue({
-    base: 0,
-    md: DURATION_NORMAL,
-  })
-
-  const animationDuration = $derived(initialIsIn ? (defaultDuration() ?? 0) : 0)
-  const animationDelay = $derived(initialIsIn ? (defaultDelay() ?? 0) : 0)
+  const animationDuration = $derived(initialIsIn ? DURATION_SLOW : 0)
+  const animationDelay = $derived(initialIsIn ? DURATION_NORMAL : 0)
   const easing = eases.outBack(1.2)
 
   function buttonGroupAnimation(node: HTMLDivElement) {
