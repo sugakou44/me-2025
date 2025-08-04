@@ -11,6 +11,7 @@
 
   import { appState } from '../../contexts/AppState'
   import { Grass } from './objects/Grass'
+  import { LOW_BLADE_COUNT } from './objects/Grass/constants'
   import { Terrain } from './objects/Terrain'
   import { Trees } from './objects/Trees'
 
@@ -80,11 +81,13 @@
     <Grass
       opacity={glassTween.current.opacity}
       segments={1}
+      grassCount={LOW_BLADE_COUNT}
       position={[-4, 4, 0]}
     />
     <Grass
       opacity={glassTween.current.opacity}
       segments={1}
+      grassCount={LOW_BLADE_COUNT}
       position={[4, 4, 0]}
     />
     <Grass opacity={glassTween.current.opacity} position={[-4, -4, 0]} />
