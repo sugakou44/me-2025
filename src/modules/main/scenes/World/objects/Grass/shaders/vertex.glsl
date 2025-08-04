@@ -13,6 +13,7 @@
 #include "@/modules/main/shaders/wind.glsl"
 #include "@/modules/main/shaders/light.glsl"
 
+uniform vec3 center;
 uniform int segments;
 uniform int vertices;
 uniform float bladeWidth;
@@ -30,9 +31,11 @@ void main() {
     vec2 hashedInstanceID = hash21(float(gl_InstanceID)) * 2.0 - 1.0;
     vec3 bladeOffset = vec3(hashedInstanceID.x, hashedInstanceID.y, 0.0) * patchSize;
 
-    bladeOffset.z = getTerrainHeight(bladeOffset);
+    float terrainHeight = getTerrainHeight(bladeOffset + center);
+    bladeOffset.z += terrainHeight;
 
     vec3 bladeWorldPos = (modelMatrix * vec4(bladeOffset, 1.0)).xyz;
+
     vec3 hashVal = hash(bladeWorldPos);
 
     float heightFactor = 1.0 - hashVal.y * 0.5;

@@ -7,6 +7,7 @@
   // import { PerfMonitor } from '@/components/GL/PerfMonitor'
 
   // import Control from './Control.svelte'
+
   // import Effects from './Effects.svelte'
   // import Lights from './Lights.svelte'
 

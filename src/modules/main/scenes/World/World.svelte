@@ -77,7 +77,18 @@
 
 <T.Group position={[0, -0.3, -3]} rotation={[-Math.PI / 2, 0, 0]}>
   <T.Group scale={[glassTween.current.opacity, 1, glassTween.current.opacity]}>
-    <Grass opacity={glassTween.current.opacity} />
+    <Grass
+      opacity={glassTween.current.opacity}
+      segments={1}
+      position={[-4, 4, 0]}
+    />
+    <Grass
+      opacity={glassTween.current.opacity}
+      segments={1}
+      position={[4, 4, 0]}
+    />
+    <Grass opacity={glassTween.current.opacity} position={[-4, -4, 0]} />
+    <Grass opacity={glassTween.current.opacity} position={[4, -4, 0]} />
   </T.Group>
   <T.Group scale={[1, 1, treesTween.current.opacity]}>
     <Trees opacity={treesTween.current.opacity} />

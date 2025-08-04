@@ -19,12 +19,14 @@
     segments?: number
     grassCount?: number
     opacity?: number
+    position?: ArrayAsVector3
   }
 
   const {
     segments = 3,
     grassCount = BLADE_COUNT,
     opacity = 0,
+    position = [0, 0, 0],
   }: Props = $props()
 
   let materialRef: ShaderMaterial | undefined = $state()
@@ -64,6 +66,9 @@
       value: STIFFNESS,
     },
     opacity: { value: opacity },
+    center: {
+      value: position,
+    },
   }
 
   useTask(() => {
@@ -75,7 +80,7 @@
   })
 </script>
 
-<T.Mesh count={geometry.instanceCount}>
+<T.Mesh {position} count={geometry.instanceCount}>
   <T is={geometry} />
   <T.ShaderMaterial
     transparent
@@ -84,6 +89,7 @@
     {fragmentShader}
     {uniforms}
     uniforms.opacity.value={opacity}
+    uniforms.center.value={position}
     side={FrontSide}
   />
 </T.Mesh>
