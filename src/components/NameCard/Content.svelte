@@ -105,38 +105,40 @@
         class="text-center font-normal text-foreground will-change-opacity md:text-left"
       >
         Hi, I&apos;m
-        <span
-          class="font-handwritting text-[1.3em] font-bold tracking-wider whitespace-nowrap text-primary-foreground"
-        >
-          PAAN<span
-            in:scale={{
-              opacity: 0.001,
-              easing: eases.outElastic(2, 0.5),
-              duration: animationDuration * 2,
-              delay: animationDelay * 8,
-            }}
-            class="hidden origin-center font-handwritting font-bold tracking-wider text-primary-foreground will-change-transform md:inline-block"
-            onclick={() => {
-              appState.scene = 'game'
-            }}
+        {#if isOpen || forceOpen}
+          <span
+            class="font-handwritting text-[1.3em] font-bold tracking-wider whitespace-nowrap text-primary-foreground"
           >
-            {#if appState.scene !== 'game'}
-              <IconBombFilled />
-            {:else}
+            PAAN<span
+              in:scale={{
+                opacity: 0.001,
+                easing: eases.outElastic(2, 0.5),
+                duration: animationDuration * 2,
+                delay: animationDelay * 8,
+              }}
+              class="hidden origin-center font-handwritting font-bold tracking-wider text-primary-foreground will-change-transform md:inline-block"
+              onclick={() => {
+                appState.scene = 'game'
+              }}
+            >
+              {#if appState.scene !== 'game'}
+                <IconBombFilled />
+              {:else}
+                .
+              {/if}
+            </span><span
+              in:scale={{
+                opacity: 0.001,
+                easing: eases.outElastic(2, 0.5),
+                duration: animationDuration * 2,
+                delay: animationDelay * 8,
+              }}
+              class="inline-block origin-center font-handwritting font-bold tracking-wider text-primary-foreground will-change-transform md:hidden"
+            >
               .
-            {/if}
-          </span><span
-            in:scale={{
-              opacity: 0.001,
-              easing: eases.outElastic(2, 0.5),
-              duration: animationDuration * 2,
-              delay: animationDelay * 8,
-            }}
-            class="inline-block origin-center font-handwritting font-bold tracking-wider text-primary-foreground will-change-transform md:hidden"
-          >
-            .
+            </span>
           </span>
-        </span>
+        {/if}
       </h1>
       <h4
         in:fade={{
