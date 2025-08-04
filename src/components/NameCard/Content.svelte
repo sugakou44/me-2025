@@ -110,7 +110,7 @@
             class="font-handwritting text-[1.3em] font-bold tracking-wider whitespace-nowrap text-primary-foreground"
           >
             PAAN<span
-              in:scale={{
+              in:scale|global={{
                 opacity: 0.001,
                 easing: eases.outElastic(2, 0.5),
                 duration: animationDuration * 2,
@@ -127,7 +127,7 @@
                 .
               {/if}
             </span><span
-              in:scale={{
+              in:scale|global={{
                 opacity: 0.001,
                 easing: eases.outElastic(2, 0.5),
                 duration: animationDuration * 2,
