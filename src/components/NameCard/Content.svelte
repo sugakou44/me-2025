@@ -116,8 +116,14 @@
                 duration: hasAnimated ? 0 : animationDuration * 2,
                 delay: hasAnimated ? 0 : animationDelay * 8,
               }}
-              class="hidden origin-center font-handwritting font-bold tracking-wider text-primary-foreground will-change-transform md:inline-block"
+              class={cn(
+                'hidden origin-center font-handwritting font-bold tracking-wider text-primary-foreground will-change-transform md:inline-block',
+                { actionable: appState.scene !== 'game' },
+              )}
               onclick={() => {
+                if (appState.scene === 'game') {
+                  return
+                }
                 appState.scene = 'game'
               }}
             >
