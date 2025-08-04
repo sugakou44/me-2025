@@ -113,8 +113,8 @@
               in:scale|global={{
                 opacity: 0.001,
                 easing: eases.outElastic(2, 0.5),
-                duration: animationDuration * 2,
-                delay: animationDelay * 8,
+                duration: hasAnimated ? 0 : animationDuration * 2,
+                delay: hasAnimated ? 0 : animationDelay * 8,
               }}
               class="hidden origin-center font-handwritting font-bold tracking-wider text-primary-foreground will-change-transform md:inline-block"
               onclick={() => {
@@ -130,8 +130,8 @@
               in:scale|global={{
                 opacity: 0.001,
                 easing: eases.outElastic(2, 0.5),
-                duration: animationDuration * 2,
-                delay: animationDelay * 8,
+                duration: hasAnimated ? 0 : animationDuration * 2,
+                delay: hasAnimated ? 0 : animationDelay * 8,
               }}
               class="inline-block origin-center font-handwritting font-bold tracking-wider text-primary-foreground will-change-transform md:hidden"
             >
