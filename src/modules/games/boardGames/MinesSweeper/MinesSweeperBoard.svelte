@@ -2,17 +2,13 @@
   import Button from '@/components/Buttons/Button.svelte'
   import Spinner from '@/components/Spinners/Spinner.svelte'
   import { squircleBackground } from '@/lib/svelte/backgroundSquircle.svelte'
-  import { useDeviceType } from '@/lib/svelte/breakpointValues.svelte'
   import { toggleClass } from '@/lib/utils/className'
   import { roughSvg } from '@/lib/utils/rough'
-  import { appState } from '@/modules/main/contexts/AppState'
 
   import { BOMB_PATH } from './constants'
   import { MinesSweeper } from './MinesSweeper.svelte'
 
   const game = new MinesSweeper()
-
-  const getDeviceType = useDeviceType()
 
   function drawBomb(node: SVGSVGElement) {
     const rough = roughSvg(node)
@@ -30,14 +26,6 @@
       }
     }
   }
-
-  $effect(() => {
-    const deviceType = getDeviceType()
-
-    if (!deviceType.isDesktop) {
-      appState.scene = 'top'
-    }
-  })
 </script>
 
 <div

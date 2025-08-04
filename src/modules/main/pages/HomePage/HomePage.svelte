@@ -2,6 +2,7 @@
   import { NameCard } from '@/components/NameCard'
   import { DURATION_SLOW, DURATION_SLOWEST } from '@/lib/animations/constants'
   import { fade } from '@/lib/animations/transition'
+  import { useDeviceType } from '@/lib/svelte/breakpointValues.svelte'
   import { MinesSweeperBoard } from '@/modules/games/boardGames/MinesSweeper'
   import { Canvas } from '@/modules/main/components/Canvas'
   // import { MainChat } from '@/modules/main/components/Chat'
@@ -10,6 +11,16 @@
   import { World } from '@/modules/main/scenes/World'
 
   import { appState } from '../../contexts/AppState'
+
+  const getDeviceType = useDeviceType()
+
+  $effect(() => {
+    const deviceType = getDeviceType()
+
+    if (appState.scene === 'game' && !deviceType.isDesktop) {
+      appState.scene = 'top'
+    }
+  })
 </script>
 
 <NameCard />
