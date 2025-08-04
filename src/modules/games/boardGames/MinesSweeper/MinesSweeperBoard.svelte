@@ -1,6 +1,8 @@
 <script lang="ts">
   import Button from '@/components/Buttons/Button.svelte'
   import Spinner from '@/components/Spinners/Spinner.svelte'
+  import DrawingText from '@/components/Text/DrawingText.svelte'
+  import { DURATION_SLOWEST } from '@/lib/animations/constants'
   import { squircleBackground } from '@/lib/svelte/backgroundSquircle.svelte'
   import { toggleClass } from '@/lib/utils/className'
   import { roughSvg } from '@/lib/utils/rough'
@@ -36,6 +38,17 @@
     class: 'fill-white -z-10',
   })}
 >
+  <DrawingText
+    as="h2"
+    content=" Minesweeper"
+    isIn={true}
+    class="mx-auto leading-normal"
+    animationOptions={{
+      draw: '0 0.4',
+      // scale: isOpen ? 2 : 1,
+      delay: DURATION_SLOWEST * 3,
+    }}
+  />
   <div class="grid grid-cols-3 items-center gap-4">
     <div class="flex items-center justify-start gap-2 py-2">
       <svg class="h-6 w-6" viewBox="0 0 24 24" {@attach drawBomb}> </svg>

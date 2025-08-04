@@ -1,28 +1,39 @@
 <script lang="ts">
-  // import { RandomText } from '@/components/Text/RandomText'
-
   // import { NameCard } from '@/components/NameCard'
-  // import DrawingText from '@/components/Text/DrawingText.svelte'
+  import DrawingText from '@/components/Text/DrawingText.svelte'
+  import { RandomText } from '@/components/Text/RandomText'
+  import { Canvas } from '@/modules/main/components/Canvas'
   // import { MinesSweeperBoard } from '@/modules/games/boardGames/MinesSweeper'
   // import { TicTacToeBoard } from '@/modules/games/boardGames/TicTacToe'
   // import { MainChat } from '@/modules/main/components/Chat'
 
   // import Experience from '@/modules/main/components/Experience/Experience.svelte'
-  // import { HeroScene } from '@/modules/main/scenes/Hero'
-  import { Canvas } from '@/modules/main/components/Canvas'
+  import { HeroScene } from '@/modules/main/scenes/Hero'
   import { World } from '@/modules/main/scenes/World'
+
+  let isOpen = $state(false)
+
+  $effect(() => {
+    const timer = setTimeout(() => {
+      isOpen = !isOpen
+    }, 2000)
+
+    return () => {
+      clearTimeout(timer)
+    }
+  })
 </script>
 
 <!-- <NameCard /> -->
 
 <div class="fixed inset-0 z-40 full-h w-full">
   <Canvas>
-    <!-- <HeroScene /> -->
+    <HeroScene />
     <World />
   </Canvas>
 </div>
 <div class="section flex min-h-[1000vh] flex-col items-center gap-10 p-20">
-  <!-- <DrawingText
+  <DrawingText
     as="h2"
     content="DrawingText 404"
     isIn={true}
@@ -31,10 +42,10 @@
       draw: isOpen ? '0 0.001' : '0 0.4',
       // scale: isOpen ? 2 : 1,
     }}
-  /> -->
+  />
   <!-- <MainChat /> -->
   <!-- <Experience /> -->
   <!-- <TicTacToeBoard />
   <MinesSweeperBoard /> -->
-  <!-- <RandomText content="RandomText" isIn={isOpen} /> -->
+  <RandomText content="RandomText" isIn={isOpen} />
 </div>
