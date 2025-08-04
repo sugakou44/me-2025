@@ -220,7 +220,7 @@
 }
 
 @utility opacity-start {
-  opacity: 0.01;
+  opacity: 0.001;
 }
 
 @layer components {

@@ -37,6 +37,6 @@ export function fade(
     delay,
     duration,
     easing,
-    css: (t: number) => `opacity: ${0.01 + t * o}`,
+    css: (t: number) => `opacity: ${0.001 + t * o}`,
   }
 }

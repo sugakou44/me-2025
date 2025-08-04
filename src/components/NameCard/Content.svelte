@@ -73,7 +73,6 @@
     },
   )}
 ></div>
-<span class="absolute bottom-0 left-0 text-white/5">.</span>
 
 <!-- content -->
 <div
@@ -82,7 +81,7 @@
   <div
     in:scale|global={{
       easing,
-      opacity: 0.01,
+      opacity: 0.001,
       duration: animationDuration,
       delay: animationDelay,
     }}
@@ -94,7 +93,7 @@
   <figure
     in:scale|global={{
       easing,
-      opacity: 0.01,
+      opacity: 0.001,
       duration: animationDuration,
       delay: animationDelay * 0.5,
     }}
@@ -120,7 +119,7 @@
       >
         PAAN<span
           in:scale|global={{
-            opacity: 0.01,
+            opacity: 0.001,
             easing: eases.outElastic(2, 0.5),
             duration: animationDuration * 2,
             delay: animationDelay * 8,
@@ -137,7 +136,7 @@
           {/if}
         </span><span
           in:scale|global={{
-            opacity: 0.01,
+            opacity: 0.001,
             easing: eases.outElastic(2, 0.5),
             duration: animationDuration * 2,
             delay: animationDelay * 8,
@@ -170,7 +169,7 @@
     <div
       in:scale={{
         easing: eases.outBack(1.2),
-        opacity: 0.01,
+        opacity: 0.001,
         duration: DURATION_FAST,
         delay: DURATION_NORMAL,
       }}

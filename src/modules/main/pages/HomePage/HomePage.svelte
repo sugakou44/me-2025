@@ -13,6 +13,7 @@
 </script>
 
 <NameCard />
+<div class="fixed top-0 left-0 text-white/5 md:hidden">placeholder</div>
 
 <div class="fixed inset-0 z-10 full-h w-full">
   <Canvas>
