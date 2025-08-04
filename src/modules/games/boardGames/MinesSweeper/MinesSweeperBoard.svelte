@@ -31,7 +31,7 @@
 </script>
 
 <div
-  class="transform-center fixed z-20 flex w-[560px] flex-col items-stretch justify-center gap-2 p-8"
+  class="transform-center fixed z-20 flex w-[560px] flex-col items-stretch justify-center gap-2 p-6 pt-4"
   {@attach squircleBackground({
     cornerRadius: 16,
     cornerSmoothing: 1,
@@ -42,7 +42,7 @@
     as="h2"
     content=" Minesweeper"
     isIn={true}
-    class="mx-auto leading-normal"
+    class="mx-auto leading-[1.1]"
     animationOptions={{
       draw: '0 0.4',
       // scale: isOpen ? 2 : 1,
