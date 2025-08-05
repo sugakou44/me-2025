@@ -13,7 +13,7 @@ export const CONTACT = {
   },
   website: {
     label: 'paan.dev',
-    href: 'https://paan.dev',
+    href: 'https://www.paan.dev',
     hiddenInWeb: true,
   },
 }
