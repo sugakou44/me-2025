@@ -3,7 +3,11 @@
 
   import { Footer } from '@/components/Footer'
   import { CONTACT } from '@/lib/constants/contact'
-  import { DEFAULT_DESCRIPTION, DEFAULT_TITLE } from '@/lib/constants/seo'
+  import {
+    DEFAULT_DESCRIPTION,
+    DEFAULT_TITLE,
+    THEME_COLOR,
+  } from '@/lib/constants/seo'
   import { Error500 } from '@/modules/errors/pages/Error500'
 
   import '../app.css'
@@ -18,7 +22,8 @@
   description={DEFAULT_DESCRIPTION}
   canonical={CONTACT.website.href}
   notranslate
-  themeColor="#fafafa"
+  themeColor={THEME_COLOR}
+  manifest={`${CONTACT.website.href}/manifest.json`}
   openGraph={{
     title: DEFAULT_TITLE,
     description: DEFAULT_DESCRIPTION,
