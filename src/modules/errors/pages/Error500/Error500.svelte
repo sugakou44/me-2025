@@ -34,7 +34,7 @@
     <DialogBox
       position={dialogPosition}
       label="You broke it, didn&apos;t you"
-      class="lg:scale-150"
+      class="lg:scale-125"
     />
   {/if}
   <ErrorText class="-translate-y-[55%] scale-150" />

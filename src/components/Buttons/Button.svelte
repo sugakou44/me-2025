@@ -32,6 +32,7 @@
 </script>
 
 <Button.Root
+  data-sveltekit-preload-code="viewport"
   {...restProps as Props}
   disabled={disabled || isLoading}
   class={cn(buttonVariants({ variant, size, className: className as string }))}

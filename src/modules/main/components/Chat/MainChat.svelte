@@ -4,4 +4,6 @@
   import { MESSAGES } from './constants'
 </script>
 
-<Chat messages={MESSAGES} />
+<div class="margin-auto section flex justify-center">
+  <Chat messages={MESSAGES} />
+</div>

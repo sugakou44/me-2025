@@ -4,7 +4,7 @@
   import type { Snippet } from 'svelte'
 
   const COMMON_CLASSNAME =
-    'inset-0 text-[clamp(80px,20vw,240px)] font-bold tracking-widest font-handwritting'
+    'inset-0 text-[clamp(80px,20vw,240px)] font-bold tracking-widest font-handwritting-heading'
 
   interface Props {
     children?: Snippet

@@ -15,5 +15,5 @@
     <CursorTheif />
     <Charactor4 />
   </figure>
-  <Button href={ROUTES.home.pathname}>Back to home</Button>
+  <Button size="lg" href={ROUTES.home.pathname}>Back to home</Button>
 </PageContainer>

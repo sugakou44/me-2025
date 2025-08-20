@@ -2,13 +2,26 @@
   import Button from '@/components/Buttons/Button.svelte'
   import Spinner from '@/components/Spinners/Spinner.svelte'
   import DrawingText from '@/components/Text/DrawingText.svelte'
-  import { DURATION_SLOWEST } from '@/lib/animations/constants'
+  import HintText from '@/components/Text/HintText.svelte'
   import { squircleBackground } from '@/lib/svelte/backgroundSquircle.svelte'
   import { toggleClass } from '@/lib/utils/className'
   import { roughSvg } from '@/lib/utils/rough'
 
   import { BOMB_PATH } from './constants'
   import { MinesSweeper } from './MinesSweeper.svelte'
+
+  interface Props {
+    isOpen?: boolean
+  }
+
+  const { isOpen: isOpenProp = false }: Props = $props()
+  let isOpen = $state(false)
+
+  $effect(() => {
+    if (isOpenProp && !isOpen) {
+      isOpen = true
+    }
+  })
 
   const game = new MinesSweeper()
 
@@ -31,7 +44,7 @@
 </script>
 
 <div
-  class="transform-center fixed z-20 flex w-[560px] flex-col items-stretch justify-center gap-2 p-6 pt-4"
+  class="flex h-[669px] w-[560px] flex-col items-stretch justify-center gap-2 p-6 pt-4 pb-8"
   {@attach squircleBackground({
     cornerRadius: 16,
     cornerSmoothing: 1,
@@ -40,25 +53,24 @@
 >
   <DrawingText
     as="h2"
-    content=" Minesweeper"
-    isIn={true}
-    class="mx-auto leading-[1.1]"
+    content="Cookies sweeper"
+    isIn={isOpen}
+    class="mx-auto  leading-[1.1]"
     animationOptions={{
-      draw: '0 0.4',
+      draw: !isOpen ? '0 0.001' : '0 0.4',
       // scale: isOpen ? 2 : 1,
-      delay: DURATION_SLOWEST * 3,
     }}
   />
-  <div class="grid grid-cols-3 items-center gap-4">
+  <div class="z-50 grid grid-cols-3 items-center gap-4">
     <div class="flex items-center justify-start gap-2 py-2">
       <svg class="h-6 w-6" viewBox="0 0 24 24" {@attach drawBomb}> </svg>
-      <p class="font-handwritting">
+      <p class="font-handwritting-heading">
         {game.bombLeft}
       </p>
     </div>
     <div class="justify-self-center">
       {#if game.winner}
-        <p class="font-handwritting">YOU WON</p>
+        <p class="font-handwritting-heading">YOU WON</p>
       {/if}
     </div>
     <div class="justify-self-end">
@@ -102,4 +114,7 @@
       }
     }}
   ></svg>
+  <HintText class="bottom-1">
+    Left click to reveal | Right click to mark cookie
+  </HintText>
 </div>

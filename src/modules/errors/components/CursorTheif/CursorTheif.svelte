@@ -15,8 +15,17 @@
 
   import Hand from './Hand.svelte'
 
+  interface Props {
+    class?: string
+    hideShadow?: boolean
+    boundSize?: number
+  }
+
+  let { hideShadow, boundSize = 200, class: className }: Props = $props()
+
+  let container = $state<HTMLDivElement>()
+
   const DEG60 = utils.degToRad(60)
-  const BOUND_SIZE = 200
   const DIALOG_BOUNDS = {
     base: 50,
     md: 100,
@@ -88,7 +97,8 @@
 
 <svelte:window
   {@attach gestures({
-    onMove: ({ bound: { centerX, centerY }, xy: [mouseX, mouseY] }) => {
+    onMove: ({ xy: [mouseX, mouseY] }) => {
+      if (!container) return
       if (gotCursor) {
         bodySpring.set({
           x: 0,
@@ -109,17 +119,14 @@
         return
       }
 
+      const containerBound = container.getBoundingClientRect()
+
+      const centerX = containerBound.right - containerBound.width / 2
+      const centerY = containerBound.bottom - containerBound.height / 2
+
       const [x, y] = [
-        utils.clamp(
-          centerX !== undefined ? mouseX - centerX : 0,
-          -BOUND_SIZE,
-          BOUND_SIZE,
-        ),
-        utils.clamp(
-          centerY !== undefined ? mouseY - centerY : 0,
-          -BOUND_SIZE,
-          0,
-        ),
+        utils.clamp(mouseX - centerX, -boundSize, boundSize),
+        utils.clamp(mouseY - centerY, -boundSize, 0),
       ]
 
       const [diffX, diffY] = [x / 3, y / 3]
@@ -143,7 +150,7 @@
   })}
 />
 
-<div class="relative h-full w-full">
+<div class={cn('relative h-full w-full', className)} bind:this={container}>
   <div class="relative h-fit w-28 md:w-52">
     <div
       style:transform={`translate3d(calc(-50% + ${bodySpring.current.x}px), calc(-50% + ${bodySpring.current.y}px), 50px)`}
@@ -215,16 +222,18 @@
         label={gotCursor ? 'Gotcha' : 'Are you lost?'}
       />
     </div>
-    <div
-      style:transform={`translate3d(${shadowSpring.current.x}px, ${shadowSpring.current.y}px, 0px) scale(${shadowSpring.current.scale})`}
-      class="absolute inset-0"
-    >
+    {#if !hideShadow}
       <div
-        style:--size={`${(1 / shadowSpring.current.scale) * 0.06}em`}
-        style:--stop1={`${(1 / shadowSpring.current.scale) * 0.01}em`}
-        style:--stop2={`${(1 / shadowSpring.current.scale) * 0.01}em`}
-        class="halftone absolute inset-0 -z-50 aspect-square h-24 w-24 translate-x-5 translate-y-[50%] -translate-z-5 rotate-x-60 -skew-x-30 rounded-full text-primary [--size:0.06em] [--stop1:0.01em] [--stop2:0.01em] perspective-dramatic md:h-48 md:w-48 [&::after]:rounded-full [&::after]:text-[200px] md:[&::after]:text-[400px]"
-      ></div>
-    </div>
+        style:transform={`translate3d(${shadowSpring.current.x}px, ${shadowSpring.current.y}px, 0px) scale(${shadowSpring.current.scale})`}
+        class="absolute inset-0"
+      >
+        <div
+          style:--size={`${(1 / shadowSpring.current.scale) * 0.06}em`}
+          style:--stop1={`${(1 / shadowSpring.current.scale) * 0.01}em`}
+          style:--stop2={`${(1 / shadowSpring.current.scale) * 0.01}em`}
+          class="halftone absolute inset-0 -z-50 aspect-square h-24 w-24 translate-x-5 translate-y-[50%] -translate-z-5 rotate-x-60 -skew-x-30 rounded-full text-primary [--size:0.06em] [--stop1:0.01em] [--stop2:0.01em] perspective-dramatic md:h-48 md:w-48 [&::after]:rounded-full [&::after]:text-[200px] md:[&::after]:text-[400px]"
+        ></div>
+      </div>
+    {/if}
   </div>
 </div>

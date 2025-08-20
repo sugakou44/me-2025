@@ -1,20 +1,39 @@
 <script lang="ts">
+  import { page } from '$app/state'
   import { untrack } from 'svelte'
   import { backOut, cubicOut } from 'svelte/easing'
   import { Tween } from 'svelte/motion'
-  import { fly, scale } from 'svelte/transition'
+  import { fade, fly, scale } from 'svelte/transition'
 
-  import { DURATION_NORMAL, DURATION_SLOW } from '@/lib/animations/constants'
+  import { DURATION_SLOW, DURATION_SLOWEST } from '@/lib/animations/constants'
+  import { ROUTES } from '@/lib/constants/routes'
+  import { windowState } from '@/lib/contexts/Window'
   import { useDeviceType } from '@/lib/svelte/breakpointValues.svelte'
+  import { cn } from '@/lib/utils/className'
   import { appState } from '@/modules/main/contexts/AppState'
 
   import { Button } from '../Buttons'
+  import { ScrollIndicator } from '../ScrollIndicator'
   import Content from './Content.svelte'
 
   let isOpen = $state(false)
+  let isIn = $state(appState.forceOpenHero)
+  let timeoutMs = 0
 
-  const isIn = $derived(appState.shouldShowHeroDecorator || isOpen)
-  const initialIsIn = true
+  const initialIsIn = $derived(appState.maximizeAtTop)
+
+  $effect(() => {
+    const newIsIn = appState.forceOpenHero || isOpen
+
+    const timer = setTimeout(() => {
+      isIn = newIsIn
+      timeoutMs = 100
+    }, timeoutMs)
+
+    return () => {
+      clearTimeout(timer)
+    }
+  })
 
   const deviceType = useDeviceType()
 
@@ -44,68 +63,84 @@
   })
 
   $effect(() => {
-    if (!appState.shouldShowHeroDecorator) {
+    if (!appState.isInHero && untrack(() => isOpen) && appState.maximizeAtTop) {
+      isOpen = appState.isInHero
+    }
+  })
+
+  $effect(() => {
+    if (windowState.pathname && untrack(() => isOpen)) {
       isOpen = false
     }
   })
 </script>
 
-<div
-  in:fly={{
-    y: initialIsIn ? 0 : -100,
-    opacity: 0.01,
-    duration: DURATION_SLOW,
-    easing: backOut,
-  }}
-  class="pointer-events-none fixed inset-4 z-50 will-change-transform md:inset-6"
->
-  {#if appState.shouldShowHeroDecorator}
-    <div
-      in:scale={{
-        opacity: 0.01,
-        duration: DURATION_NORMAL,
-        easing: backOut,
-      }}
-      out:scale={{
-        opacity: 0.01,
-        duration: DURATION_SLOW,
-        easing: cubicOut,
-      }}
-      class="absolute inset-0 bg-background/80 will-change-transform"
-    ></div>
-  {/if}
+{#if page.status < 400 && page.url.pathname !== ROUTES.sandbox.pathname}
   <div
-    style:transform={contentTransform}
-    class="section pointer-events-auto absolute top-[45%] left-[50%] aspect-[1/1.65] w-full will-change-transform transform-3d md:aspect-[1.65] md:max-h-none"
+    in:fly={{
+      y: initialIsIn ? 0 : -100,
+      opacity: 0.01,
+      duration: DURATION_SLOW,
+      easing: backOut,
+    }}
+    class={cn(
+      'pointer-events-none fixed inset-4 z-50 will-change-transform md:inset-6 print:hidden',
+    )}
   >
-    <Content
-      bind:isOpen
-      forceOpen={appState.shouldShowHeroDecorator}
-      {initialIsIn}
-    />
-    {#if !isIn}
-      <div class="absolute inset-1 -translate-z-1">
-        <div
-          class="absolute right-0 bottom-0 !h-[96px] w-full -scale-x-100 md:top-[50%] md:right-12 md:w-[calc(100%/1.65)] md:translate-x-[50%] md:translate-y-[-50%] md:-rotate-90"
-        >
+    {#if appState.forceOpenHero}
+      <div
+        transition:scale={{
+          duration: DURATION_SLOW,
+          easing: cubicOut,
+        }}
+        class="absolute inset-0 hidden bg-background/80 will-change-transform md:block"
+      ></div>
+    {/if}
+    <div
+      style:transform={contentTransform}
+      class="pointer-events-auto absolute top-[45%] left-[50%] container mx-auto aspect-[1/1.65] w-full will-change-transform transform-3d md:aspect-[1.65] md:max-h-none xl:max-w-5xl"
+    >
+      <Content bind:isOpen forceOpen={appState.forceOpenHero} {initialIsIn} />
+      {#if !isIn}
+        <div class="absolute inset-1 -translate-z-1">
           <div
-            class="halftone-stripe absolute inset-4 bottom-0 rounded-t-none rounded-b-lg text-primary"
-          ></div>
-          <Button
-            variant="puller"
-            class="!h-full w-full rounded-t-none rounded-b-xl bg-transparent text-2xl md:text-3xl [&:hover>span]:shadow-lg"
-            onclick={() => {
-              isOpen = true
-            }}
+            class="absolute right-0 bottom-0 !h-[96px] w-full -scale-x-100 md:top-[50%] md:right-12 md:w-[calc(100%/1.65)] md:translate-x-[50%] md:translate-y-[-50%] md:-rotate-90"
           >
-            <span
-              class="pointer-events-none rounded-full bg-background px-10 py-5 text-primary-foreground"
+            <div
+              class="halftone-stripe absolute inset-4 bottom-0 rounded-t-none rounded-b-lg text-primary"
+            ></div>
+            <Button
+              variant="puller"
+              class="!h-full w-full rounded-t-none rounded-b-xl bg-transparent text-2xl md:text-3xl [&:hover>span]:shadow-lg"
+              onclick={() => {
+                isOpen = true
+              }}
             >
-              CONTACT
-            </span>
-          </Button>
+              <span
+                class="pointer-events-none rounded-full bg-background px-10 py-5 text-primary-foreground"
+              >
+                CONTACT
+              </span>
+            </Button>
+          </div>
         </div>
+      {/if}
+    </div>
+    {#if appState.forceOpenHero}
+      <div
+        in:fade|global={{
+          duration: DURATION_SLOWEST * 1.5,
+          delay: DURATION_SLOWEST * 4,
+          easing: backOut,
+        }}
+        out:fade={{
+          duration: DURATION_SLOW,
+          easing: cubicOut,
+        }}
+        class="absolute bottom-0 left-8 z-50 -translate-x-1/2 -translate-y-full print:hidden"
+      >
+        <ScrollIndicator />
       </div>
     {/if}
   </div>
-</div>
+{/if}

@@ -25,7 +25,7 @@
     containerClassName="md:mt-20 button"
     size="icon"
     href={CONTACT.email.href}
-    aria-label="Email"
+    aria-label={CONTACT.email.ariaLabel}
     isExternal
   >
     <IconMailFilled class="md:h-7 md:w-7" />
@@ -35,7 +35,7 @@
     class=""
     size="icon"
     href={CONTACT.github.href}
-    aria-label="Github"
+    aria-label={CONTACT.github.ariaLabel}
     isExternal
   >
     <IconBrandGithubFilled class="md:h-7 md:w-7" />
@@ -44,7 +44,7 @@
     containerClassName="md:mt-15 button"
     size="icon"
     href={CONTACT.linkedin.href}
-    aria-label="Linkedin"
+    aria-label={CONTACT.linkedin.ariaLabel}
     isExternal
   >
     <IconBrandLinkedinFilled class="md:h-7 md:w-7" />

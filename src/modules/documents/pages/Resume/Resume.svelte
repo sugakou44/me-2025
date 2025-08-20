@@ -46,13 +46,13 @@
     <ul class="flex flex-wrap gap-1">
       {#each STACK as { name, Icon, shouldHighlight }, index (name)}
         <li
-          use:annotate={{
+          class="flex flex-row items-center gap-1 !pl-0 !text-sm"
+          {@attach annotate({
             visible: !!shouldHighlight,
             color: 'var(--secondary)',
             type: 'highlight',
             iterations: 1,
-          }}
-          class="flex flex-row items-center gap-1 !pl-0 !text-sm"
+          })}
         >
           <Icon size={18} />
           <span

@@ -1,14 +1,14 @@
 <script lang="ts">
+  import { asset } from '$app/paths'
   import { utils } from 'animejs'
   import { nanoid } from 'nanoid'
 
   import { centerPointOrigin, normalize } from '@/lib/utils/math'
 
-  import LeftPrint from '@/assets/svgs/shoe-prints-left.svg?url'
-  import RightPrint from '@/assets/svgs/shoe-prints-right.svg?url'
-
   import type { Footprint } from './types'
 
+  const LeftPrint = asset('/svgs/shoe-prints-left.svg')
+  const RightPrint = asset('/svgs/shoe-prints-right.svg')
   const STEP_LENGTH = 88
   const LEFT_RIGHT_OFFSET = 24
   const WALK_SPEED = 500

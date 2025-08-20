@@ -127,7 +127,8 @@
   --font-mono: 'Sono', monospace;
   --font-body: 'Sono', monospace;
   --font-document: 'Inter', sans-serif;
-  --font-handwritting: 'Caveat Brush', cursive;
+  --font-handwritting-heading: 'Caveat Brush', cursive;
+  --font-handwritting-body: 'Caveat Brush', cursive;
   --font-heading: 'Bitter', serif;
 }
 
@@ -203,7 +204,11 @@
   }
 
   p {
-    @apply font-body text-lg text-foreground md:text-xl lg:text-2xl;
+    @apply font-body text-md text-foreground md:text-lg 2xl:text-2xl;
+  }
+
+  q {
+    @apply font-body text-md text-foreground;
   }
 }
 
@@ -225,15 +230,17 @@
 
 @layer components {
   .section {
-    @apply container mx-auto xl:max-w-6xl;
+    @apply relative container mx-auto p-4 py-40 md:p-6 md:py-52 lg:max-w-4xl xl:max-w-4xl;
   }
 
-  .section-padding {
-    @apply px-4 py-10 md:px-6 md:py-14;
+  .chapter {
+    --page-count: 1;
+    --page-size: 100vh;
+    min-height: calc(var(--page-size) * var(--page-count));
   }
 
-  .section-title {
-    font-size: clamp(2.5rem, 10vw, 10rem);
+  .page {
+    @apply container max-w-screen md:max-w-[44vw] lg:max-w-4xl xl:max-w-4xl;
   }
 
   .halftone-alternate,
@@ -322,8 +329,8 @@
 
   .halftone-clip-text::after {
     @apply text-fill-transparent;
+    background-clip: text;
     -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
   }
 
   .text-outline {

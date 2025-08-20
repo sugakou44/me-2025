@@ -1,10 +1,9 @@
 import { utils } from 'animejs'
 import { CatmullRomCurve3, Vector3 } from 'three'
 
+import { windowState } from '@/lib/contexts/Window'
 import { useAspectRatio } from '@/lib/svelte/aspectRatio.svelte'
-import { useDocumentScrollProgress } from '@/lib/svelte/document.svelte'
 
-const scrollProgress = useDocumentScrollProgress()
 const getAspectRatio = useAspectRatio()
 
 class CameraTrack {
@@ -23,16 +22,16 @@ class CameraTrack {
     [-0.734, -1.311, 0],
     [-1.123, -1.99, 0],
     [-0.608, -2.675, 0],
-    [0.79, -2.437, 0],
-    [1.824, -2.49, 0],
-    [2.089, -1.692, 0],
-    [3.128, -1.672, 0],
-    [3.271, -0.804, 0],
-    [4.091, -0.244, 0],
+    // [0.79, -2.437, 0],
+    // [1.824, -2.49, 0],
+    // [2.089, -1.692, 0],
+    // [3.128, -1.672, 0],
+    // [3.271, -0.804, 0],
+    // [4.091, -0.244, 0],
   ]
 
   #CAMERA_POINTS: ArrayAsVector3[] = [
-    [-1.521, 0.94, 0],
+    // [-1.521, 0.94, 0],
     // [-0.288, 0.634, 0],
     // [-0.218, 0.357, 0],
     // [-0.427, 0.211, 0],
@@ -42,16 +41,16 @@ class CameraTrack {
 
     [0.028, 0.664, 0],
     [0.701, 0.13, 0],
-    [0.48, -1.014, 0],
-    [-0.734, -1.311, 0],
-    [-1.123, -1.99, 0],
-    [-0.608, -2.675, 0],
-    [0.79, -2.437, 0],
-    [1.824, -2.49, 0],
-    [2.089, -1.692, 0],
-    [3.128, -1.672, 0],
-    [3.271, -0.804, 0],
-    [4.091, -0.244, 0],
+    [0.48, -1.014 + 0.5, 0],
+    [-0.734, -1.311 + 0.5, 0],
+    [-1.123, -1.99 + 0.5, 0],
+    [-0.608, -2.675 + 0.5, 0],
+    // [0.79, -2.437 + 0.5, 0],
+    // [1.824, -2.49 + 0.5, 0],
+    // [2.089, -1.692 + 0.5, 0],
+    // [3.128, -1.672, 0],
+    // [3.271, -0.804, 0],
+    // [4.091, -0.244, 0],
   ]
 
   mapPoint = (point: ArrayAsVector3) => {
@@ -100,7 +99,7 @@ class CameraTrack {
 
   get cameraPosition() {
     const position = this.cameraCurve.getPoint(
-      this.getCameraProgress(scrollProgress().progress),
+      this.getCameraProgress(windowState.scrollPercent),
     )
     return [position.x, position.z, 10] as ArrayAsVector3
   }

@@ -4,6 +4,7 @@
   import { scale } from 'svelte/transition'
 
   import { DURATION_FAST, DURATION_SLOW } from '@/lib/animations/constants'
+  import { squircleBackground } from '@/lib/svelte/backgroundSquircle.svelte'
   import { cn } from '@/lib/utils/className'
 
   import Bubble from './Bubble.svelte'
@@ -39,6 +40,11 @@
 
 <div
   class="container flex aspect-iphone-15pro !w-[400px] flex-col-reverse overflow-x-hidden overflow-y-auto p-10"
+  {@attach squircleBackground({
+    cornerRadius: 24,
+    cornerSmoothing: 1,
+    class: 'fill-white',
+  })}
 >
   {#each currentMessages as message (message.id)}
     <div
@@ -50,8 +56,8 @@
         duration: DURATION_FAST,
         easing: eases.inOutSine,
       }}
-      class={cn('relative origin-bottom-left self-start pt-2', {
-        'origin-bottom-right self-end': message.byUser,
+      class={cn('relative mr-4 origin-bottom-left self-start pt-2', {
+        'mr-0 ml-4 origin-bottom-right self-end': message.byUser,
       })}
     >
       <Bubble {...message} />

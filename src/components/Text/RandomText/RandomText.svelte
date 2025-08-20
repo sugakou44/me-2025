@@ -20,7 +20,7 @@
 
 <svelte:element
   this={as}
-  class={cn('flex flex-wrap gap-[0.25em] font-mono', className)}
+  class={cn('flex flex-wrap gap-x-[1ch] font-mono', className)}
 >
   {#each splittedText as word, index (index)}
     {@const prevWord = splittedText[index - 1]}
@@ -31,7 +31,7 @@
       {isIn}
       {immediateExit}
       {immediateEnter}
-      delay={prevWordCharCount * 40}
+      delay={prevWordCharCount * 55}
     />
   {/each}
 </svelte:element>

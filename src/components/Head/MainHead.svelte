@@ -1,0 +1,20 @@
+<svelte:head>
+  <link
+    rel="preload"
+    as="style"
+    href="https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,100..900;1,100..900&family=Caveat+Brush&family=Sono:wght,MONO@200..800,0..1&display=block"
+  />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,100..900;1,100..900&family=Caveat+Brush&family=Sono:wght,MONO@200..800,0..1&display=block"
+    rel="stylesheet"
+  />
+  <link
+    rel="preload"
+    as="style"
+    href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap"
+  />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap"
+    rel="stylesheet"
+  />
+</svelte:head>

@@ -13,21 +13,73 @@ export function squircleBackground({
   class?: string
   trackSize?: boolean
 } = {}) {
-  let node = $state<HTMLElement | null>(null)
   let size = $state.raw<Point2d>([0, 0])
+  let svg = $state<SVGSVGElement>()
+  let path = $state<SVGPathElement>()
+  let unobserve: (() => void) | undefined
+  let observe: ((node: Element) => () => void) | undefined
 
-  explicitEffect(
-    () => {
-      if (!node) {
-        return
-      }
+  return (node: HTMLElement) => {
+    explicitEffect(
+      () => {
+        const { width, height } = node.getBoundingClientRect()
 
-      const { width, height } = node.getBoundingClientRect()
+        const nodeComputedStyle = getComputedStyle(node)
 
-      let observe: (node: Element) => () => void
-      let unobserve: () => void
-      if (trackSize) {
-        observe = resizeObserver(({ clientBoundingRect }) => {
+        if (!svg) {
+          svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg')
+          node.insertBefore(svg, node.firstChild)
+        }
+
+        if (width > 0 && height > 0) {
+          if (nodeComputedStyle.getPropertyValue('position') === 'static') {
+            node.classList.toggle('relative', true)
+          }
+
+          toggleClass(
+            svg,
+            cn('absolute inset-0 h-full w-full', className),
+            true,
+          )
+
+          const squirclePath = squircle({
+            width: width,
+            height: height,
+            ...options,
+          })
+
+          if (!path) {
+            path = document.createElementNS(
+              'http://www.w3.org/2000/svg',
+              'path',
+            )
+            svg.appendChild(path)
+          }
+
+          path.setAttribute('d', squirclePath)
+        }
+      },
+      () => [node, size, className, trackSize],
+    )
+
+    explicitEffect(
+      () => {
+        if ((!node || !trackSize) && unobserve) {
+          unobserve()
+          unobserve = undefined
+          observe = undefined
+          return
+        }
+
+        if (!node) {
+          return
+        }
+
+        const onResize = ({
+          clientBoundingRect,
+        }: {
+          clientBoundingRect: DOMRect
+        }) => {
           const newSize: Point2d = [
             clientBoundingRect.width,
             clientBoundingRect.height,
@@ -36,56 +88,37 @@ export function squircleBackground({
           if (newSize[0] !== size[0] || newSize[1] !== size[1]) {
             size = newSize
           }
-        })
-
-        unobserve = observe(node)
-      }
-
-      const nodeComputedStyle = getComputedStyle(node)
-
-      const svg = document.createElementNS(
-        'http://www.w3.org/2000/svg',
-        'svg',
-      ) as SVGSVGElement
-
-      if (width >= 0.1 && height >= 0.1) {
-        if (nodeComputedStyle.getPropertyValue('position') === 'static') {
-          node.classList.toggle('relative', true)
         }
 
-        node.insertBefore(svg, node.firstChild)
-
-        toggleClass(svg, cn('absolute inset-0 h-full w-full', className), true)
-
-        const squirclePath = squircle({
-          width: width,
-          height: height,
-          ...options,
-        })
-
-        const path = document.createElementNS(
-          'http://www.w3.org/2000/svg',
-          'path',
-        ) as SVGPathElement
-
-        path.setAttribute('d', squirclePath)
-        svg.appendChild(path)
-      }
-
-      return () => {
-        if (unobserve) {
+        if (observe && unobserve) {
           unobserve()
+          unobserve = observe(node)
+
+          return
         }
 
-        if (node) {
-          node.removeChild(svg)
+        if (trackSize) {
+          observe = resizeObserver(onResize)
+
+          unobserve = observe(node)
+        }
+      },
+      () => [node, trackSize],
+    )
+
+    return () => {
+      if (unobserve) {
+        unobserve()
+      }
+
+      if (node) {
+        for (const child of node.children) {
+          if (child === svg) {
+            node.removeChild(svg)
+            return
+          }
         }
       }
-    },
-    () => [node, size],
-  )
-
-  return (_node: HTMLElement) => {
-    node = _node
+    }
   }
 }

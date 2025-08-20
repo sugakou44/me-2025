@@ -1,0 +1,13 @@
+uniform float tick;
+uniform vec3 diffuseColor;
+
+in vec3 vPosition;
+in vec2 vUv;
+
+void main()
+{
+    gl_FragColor = vec4(vec3(diffuseColor), 1.0);
+
+    #include <tonemapping_fragment>
+    #include <colorspace_fragment>
+}

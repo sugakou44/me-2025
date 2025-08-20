@@ -82,7 +82,7 @@
   <div class="flex justify-between gap-4">
     <div class="flex items-center justify-start gap-2 py-2">
       <svg class="h-6 w-6" viewBox="0 0 24 24" {@attach drawO}> </svg>
-      <p class="font-handwritting">
+      <p class="font-handwritting-heading">
         {victoryCount.O}
       </p>
     </div>
@@ -103,7 +103,7 @@
       </Button>
     {/if}
     <div class="flex items-center justify-end gap-2 py-2">
-      <p class="font-handwritting">
+      <p class="font-handwritting-heading">
         {victoryCount.X}
       </p>
       <svg class="h-6 w-6" viewBox="0 0 24 24" {@attach drawX}></svg>
