@@ -3,7 +3,11 @@
   import { eases, utils } from 'animejs'
   import { Tween } from 'svelte/motion'
 
-  import { DURATION_SLOW, DURATION_SLOWEST } from '@/lib/animations/constants'
+  import {
+    DEFAULT_ALPHA_TEST,
+    DURATION_SLOW,
+    DURATION_SLOWEST,
+  } from '@/lib/animations/constants'
   import { useAspectRatio } from '@/lib/svelte/aspectRatio.svelte'
 
   import { COLORS, PATTERNS, SHAPES, TOTAL, VARIANTS } from './constants'
@@ -18,25 +22,19 @@
 
   let { ref = $bindable(), isIn, ...props }: Props = $props()
 
-  const animationState = new Tween({ z: 2, opacity: 0 })
+  const animationState = new Tween(0)
 
   $effect(() => {
     if (isIn) {
-      animationState.set(
-        { z: 0, opacity: 1 },
-        {
-          duration: DURATION_SLOWEST,
-          easing: eases.outElastic(1.1, 1),
-        },
-      )
+      animationState.set(1, {
+        duration: DURATION_SLOWEST,
+        easing: eases.outElastic(1.1, 1),
+      })
     } else {
-      animationState.set(
-        { z: 3, opacity: 0 },
-        {
-          duration: DURATION_SLOW,
-          easing: eases.inQuad,
-        },
-      )
+      animationState.set(0, {
+        duration: DURATION_SLOW,
+        easing: eases.inQuad,
+      })
     }
   })
 
@@ -82,24 +80,28 @@
   })
 </script>
 
-<T.Group bind:ref {...props}>
+<T.Group
+  bind:ref
+  {...props}
+  visible={animationState.current > DEFAULT_ALPHA_TEST}
+>
   <Decorator
     scale={3}
     position.x={-5 * aspectRatio}
     position.y={-3}
-    position.z={1.5 + animationState.current.z}
+    position.z={1.5 + 3 * (1 - animationState.current)}
     rotation.x={utils.degToRad(40)}
     rotation.y={utils.degToRad(30)}
     variant="solid"
     shape="circle"
     color={COLORS[0].getHex()}
-    opacity={0.8 * animationState.current.opacity}
+    opacity={0.8 * animationState.current}
   />
   <Decorator
     scale={2}
     position.x={-3 * aspectRatio}
     position.y={2}
-    position.z={2 + animationState.current.z}
+    position.z={2 + 3 * (1 - animationState.current)}
     variant="ghost"
     shape="triangle"
     pattern="stripe"
@@ -107,17 +109,17 @@
     shapeRatio={1}
     rotation.y={utils.degToRad(-10)}
     rotation.z={utils.degToRad(-60)}
-    opacity={0.8 * animationState.current.opacity}
+    opacity={0.8 * animationState.current}
   />
   <Decorator
     scale={4}
     position.x={4 * aspectRatio}
     position.y={-2}
-    position.z={2.5 + animationState.current.z}
+    position.z={2.5 + 3 * (1 - animationState.current)}
     rotation.x={utils.degToRad(-30)}
     rotation.y={utils.degToRad(-30)}
     rotation.z={utils.degToRad(30)}
-    opacity={0.8 * animationState.current.opacity}
+    opacity={0.8 * animationState.current}
     variant="outline"
     shape="triangle"
     pattern="circle"
@@ -127,10 +129,10 @@
     scale={1.5}
     position.x={3 * aspectRatio}
     position.y={1.6}
-    position.z={1 + animationState.current.z}
+    position.z={1 + 3 * (1 - animationState.current)}
     rotation.x={utils.degToRad(15)}
     rotation.z={utils.degToRad(-20)}
-    opacity={0.8 * animationState.current.opacity}
+    opacity={0.8 * animationState.current}
     variant="outline"
     shape="rectangle"
     pattern={null}
@@ -140,8 +142,8 @@
     <Decorator
       position.x={position[0] * aspectRatio}
       position.y={position[1]}
-      position.z={position[0] + animationState.current.z}
-      opacity={opacity * animationState.current.opacity * 0.8}
+      position.z={position[0] + 3 * (1 - animationState.current)}
+      opacity={opacity * animationState.current * 0.8}
       {...state}
       {...shaderIndice[index]}
     />
