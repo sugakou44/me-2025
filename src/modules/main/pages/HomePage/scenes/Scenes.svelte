@@ -1,13 +1,14 @@
 <script lang="ts">
   import { T, useStage, useTask, useThrelte } from '@threlte/core'
-  import { useFBO } from '@threlte/extras'
+
+  // import { useFBO } from '@threlte/extras'
   // import { asset } from '$app/paths'
-  import {
-    // devicePixelRatio,
-    innerHeight,
-    innerWidth,
-  } from 'svelte/reactivity/window'
-  import { SRGBColorSpace } from 'three'
+  // import {
+  // devicePixelRatio,
+  //   innerHeight,
+  //   innerWidth,
+  // } from 'svelte/reactivity/window'
+  // import { SRGBColorSpace } from 'three'
 
   // import { Interactivity } from '@/components/GL/Interactivity'
   // import {
@@ -34,14 +35,14 @@
   let { container: _container }: Props = $props()
 
   let perspectiveCamera = $state<PerspectiveCamera | undefined>()
-  const perspectiveFBO = useFBO({
-    colorSpace: SRGBColorSpace,
-  })
+  // const perspectiveFBO = useFBO({
+  //   colorSpace: SRGBColorSpace,
+  // })
 
   let orthographicCamera = $state<OrthographicCamera | undefined>()
-  const orthographicFBO = useFBO({
-    colorSpace: SRGBColorSpace,
-  })
+  // const orthographicFBO = useFBO({
+  //   colorSpace: SRGBColorSpace,
+  // })
 
   // let effectScene = $state<Scene | undefined>()
   // let effectCamera = $state<OrthographicCamera | undefined>()
@@ -53,27 +54,27 @@
   const effectStage = useStage('effect', { before: mainStage })
   useStage('gpgpu', { before: effectStage })
 
-  $effect(() => {
-    if (!innerWidth.current || !innerHeight.current) {
-      return
-    }
+  // $effect(() => {
+  //   if (!innerWidth.current || !innerHeight.current) {
+  //     return
+  //   }
 
-    // const dpr = devicePixelRatio.current ?? 1.0
+  //   // const dpr = devicePixelRatio.current ?? 1.0
 
-    const width = innerWidth.current
-    const height = innerHeight.current
+  //   const width = innerWidth.current
+  //   const height = innerHeight.current
 
-    perspectiveFBO.setSize(width, height)
-    orthographicFBO.setSize(width, height)
-    renderer.setSize(width, height)
+  //   perspectiveFBO.setSize(width, height)
+  //   orthographicFBO.setSize(width, height)
+  //   renderer.setSize(width, height)
 
-    if (orthographicCamera) {
-      orthographicCamera.left = -width / 2
-      orthographicCamera.right = width / 2
-      orthographicCamera.top = height / 2
-      orthographicCamera.bottom = -height / 2
-    }
-  })
+  //   if (orthographicCamera) {
+  //     orthographicCamera.left = -width / 2
+  //     orthographicCamera.right = width / 2
+  //     orthographicCamera.top = height / 2
+  //     orthographicCamera.bottom = -height / 2
+  //   }
+  // })
 
   $effect(() => {
     renderer.setClearColor(
