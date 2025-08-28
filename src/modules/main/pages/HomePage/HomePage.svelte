@@ -25,7 +25,7 @@
 
 <div
   bind:this={container}
-  class="canvas-container fixed full-h w-full"
+  class="canvas-container fixed top-0 h-[100lvh] w-full"
   style:--scroll-y={appState.creditScrollProgress}
 >
   <Canvas {loadingFallback}>

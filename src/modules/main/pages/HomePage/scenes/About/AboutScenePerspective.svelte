@@ -18,23 +18,25 @@
 
   const suspend = useSuspense()
 
-  const promiseAll = Promise.all([
-    suspend(useTexture(asset('/images/tech-stacks/brand-nextjs.png'))),
-    suspend(useTexture(asset('/images/tech-stacks/brand-react.png'))),
-    suspend(useTexture(asset('/images/tech-stacks/brand-css3.png'))),
-    suspend(useTexture(asset('/images/tech-stacks/brand-tailwind.png'))),
-    suspend(useTexture(asset('/images/tech-stacks/brand-typescript.png'))),
-    suspend(useTexture(asset('/images/tech-stacks/brand-svelte.png'))),
-    suspend(useTexture(asset('/images/tech-stacks/brand-threejs.png'))),
-    suspend(useTexture(asset('/images/tech-stacks/brand-javascript.png'))),
-    suspend(useTexture(asset('/images/tech-stacks/brand-figma.png'))),
-    suspend(useTexture(asset('/images/tech-stacks/brand-github.png'))),
-    suspend(useTexture(asset('/images/tech-stacks/brand-gitlab.png'))),
-    // suspend(useTexture(asset('/images/tech-stacks/brand-headlessui.png'))),
-    suspend(useTexture(asset('/images/tech-stacks/brand-html5.png'))),
-    suspend(useTexture(asset('/images/tech-stacks/brand-nodejs.png'))),
-    suspend(useTexture(asset('/images/tech-stacks/brand-react-native.png'))),
-  ])
+  const promiseAll = suspend(
+    Promise.all([
+      useTexture(asset('/images/tech-stacks/brand-nextjs.png')),
+      useTexture(asset('/images/tech-stacks/brand-react.png')),
+      useTexture(asset('/images/tech-stacks/brand-css3.png')),
+      useTexture(asset('/images/tech-stacks/brand-tailwind.png')),
+      useTexture(asset('/images/tech-stacks/brand-typescript.png')),
+      useTexture(asset('/images/tech-stacks/brand-svelte.png')),
+      useTexture(asset('/images/tech-stacks/brand-threejs.png')),
+      useTexture(asset('/images/tech-stacks/brand-javascript.png')),
+      useTexture(asset('/images/tech-stacks/brand-figma.png')),
+      useTexture(asset('/images/tech-stacks/brand-github.png')),
+      useTexture(asset('/images/tech-stacks/brand-gitlab.png')),
+      // useTexture(asset('/images/tech-stacks/brand-headlessui.png')),
+      useTexture(asset('/images/tech-stacks/brand-html5.png')),
+      useTexture(asset('/images/tech-stacks/brand-nodejs.png')),
+      useTexture(asset('/images/tech-stacks/brand-react-native.png')),
+    ]),
+  )
 
   const opacityTween = new Tween(0, {
     duration: DURATION_NORMAL,

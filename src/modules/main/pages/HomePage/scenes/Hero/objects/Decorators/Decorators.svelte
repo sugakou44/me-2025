@@ -85,8 +85,11 @@
 <T.Group bind:ref {...props}>
   <Decorator
     scale={3}
-    position={[-5 * aspectRatio, -3, 1.5 + animationState.current.z]}
-    rotation={[utils.degToRad(40), utils.degToRad(30), 0]}
+    position.x={-5 * aspectRatio}
+    position.y={-3}
+    position.z={1.5 + animationState.current.z}
+    rotation.x={utils.degToRad(40)}
+    rotation.y={utils.degToRad(30)}
     variant="solid"
     shape="circle"
     color={COLORS[0].getHex()}
@@ -94,19 +97,26 @@
   />
   <Decorator
     scale={2}
-    position={[-3 * aspectRatio, 2, 2 + animationState.current.z]}
+    position.x={-3 * aspectRatio}
+    position.y={2}
+    position.z={2 + animationState.current.z}
     variant="ghost"
     shape="triangle"
     pattern="stripe"
     color={COLORS[3].getHex()}
     shapeRatio={1}
-    rotation={[0, utils.degToRad(-10), utils.degToRad(-60)]}
+    rotation.y={utils.degToRad(-10)}
+    rotation.z={utils.degToRad(-60)}
     opacity={0.8 * animationState.current.opacity}
   />
   <Decorator
     scale={4}
-    rotation={[utils.degToRad(-30), utils.degToRad(-30), utils.degToRad(30)]}
-    position={[4 * aspectRatio, -2, 2.5 + animationState.current.z]}
+    position.x={4 * aspectRatio}
+    position.y={-2}
+    position.z={2.5 + animationState.current.z}
+    rotation.x={utils.degToRad(-30)}
+    rotation.y={utils.degToRad(-30)}
+    rotation.z={utils.degToRad(30)}
     opacity={0.8 * animationState.current.opacity}
     variant="outline"
     shape="triangle"
@@ -115,8 +125,11 @@
   />
   <Decorator
     scale={1.5}
-    rotation={[utils.degToRad(15), utils.degToRad(0), utils.degToRad(-20)]}
-    position={[3 * aspectRatio, 1.6, 1 + animationState.current.z]}
+    position.x={3 * aspectRatio}
+    position.y={1.6}
+    position.z={1 + animationState.current.z}
+    rotation.x={utils.degToRad(15)}
+    rotation.z={utils.degToRad(-20)}
     opacity={0.8 * animationState.current.opacity}
     variant="outline"
     shape="rectangle"
@@ -125,11 +138,9 @@
   />
   {#each defaultStates as { position, opacity, ...state }, index (index)}
     <Decorator
-      position={[
-        position[0] * aspectRatio,
-        position[1],
-        position[2] + animationState.current.z,
-      ] as ArrayAsVector3}
+      position.x={position[0] * aspectRatio}
+      position.y={position[1]}
+      position.z={position[0] + animationState.current.z}
       opacity={opacity * animationState.current.opacity * 0.8}
       {...state}
       {...shaderIndice[index]}

@@ -3,7 +3,11 @@
   import { eases, utils } from 'animejs'
   import { Tween } from 'svelte/motion'
 
-  import { DEFAULT_ALPHA_TEST, DURATION_SLOW } from '@/lib/animations/constants'
+  import {
+    DEFAULT_ALPHA_TEST,
+    DURATION_FASTER,
+    DURATION_SLOW,
+  } from '@/lib/animations/constants'
   import { windowState } from '@/lib/contexts/Window'
   import { homeState } from '@/modules/main/contexts/HomeState'
 
@@ -16,7 +20,7 @@
     easing: eases.inOutSine,
   })
   const rotationTween = new Tween(0, {
-    duration: DURATION_SLOW,
+    duration: DURATION_FASTER,
     easing: eases.inOutSine,
   })
 
@@ -25,7 +29,7 @@
   })
   $effect(() => {
     rotationTween.set(windowState.scrollDirection > 0 ? 0 : 1, {
-      duration: !homeState.experienceVisibility ? 0 : DURATION_SLOW,
+      duration: !homeState.experienceVisibility ? 0 : DURATION_FASTER,
     })
   })
 

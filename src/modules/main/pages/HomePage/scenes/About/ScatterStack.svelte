@@ -27,7 +27,6 @@
   const positions = new Float32Array(_count * 3)
   const angle = new Float32Array(_count)
   const sizes = new Float32Array(_count)
-
   for (let i = 0; i < _count; i++) {
     const i3 = i * 3
 

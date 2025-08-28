@@ -29,7 +29,6 @@
     OrthographicCamera,
     PerspectiveCamera,
     Scene,
-    ShaderMaterial,
     Texture,
   } from 'three'
 
@@ -51,7 +50,6 @@
 
   let effectScene = $state<Scene | undefined>()
   let effectCamera = $state<OrthographicCamera | undefined>()
-  let effectMaterial = $state<ShaderMaterial | undefined>()
 
   const suspend = useSuspense()
   const fadeTexturePromise = suspend(
@@ -158,7 +156,8 @@
 
 <T.Scene bind:ref={homeState.orthographicScene}>
   <T.OrthographicCamera
-    position={[0, -windowState.scrollPosition, 20]}
+    position.y={-windowState.scrollPosition}
+    position.z={20}
     near={0}
     far={100}
     frustumCulled={false}
