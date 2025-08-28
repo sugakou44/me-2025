@@ -1,6 +1,6 @@
 #include "@/lib/shaders/math.glsl"
 
-float pattern(vec2 uv, float patternCount, float patternScaleRatio)
+float trianglePattern(vec2 uv, float patternCount, float patternScaleRatio)
 {
     vec2 st = uv;
     vec3 color = vec3(0.0);

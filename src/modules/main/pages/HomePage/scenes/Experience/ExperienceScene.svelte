@@ -38,8 +38,12 @@
 
 <T.Group
   position.y={-windowState.windowHeight * 0.5 - windowState.scrollPosition}
+  <!--
   visible={opacityTween.current > DEFAULT_ALPHA_TEST}
+  --
 >
+  dispose={false}
+  >
   <T.Group
     position.x={-homeState.experienceScrollProgress * windowState.windowWidth}
     scale.y={size}

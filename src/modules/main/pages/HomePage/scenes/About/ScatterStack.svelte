@@ -35,7 +35,7 @@
     colors[i3 + 1] = color.g
     colors[i3 + 2] = color.b
 
-    const rad = utils.degToRad(utils.random(0, 180, 10))
+    const rad = utils.degToRad(utils.random(0, 180, 4))
     const radius = utils.random(1, 5, 100)
     positions[i3 + 0] = Math.cos(rad) * radius
     positions[i3 + 1] = Math.sin(rad) * radius

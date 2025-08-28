@@ -2,7 +2,7 @@
 
 #include "@/lib/shaders/math.glsl"
 
-float shape(vec2 uv, float radius, float roundness)
+float squircle(vec2 uv, float radius, float roundness)
 {
     vec2 st = uv;
 

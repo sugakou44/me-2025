@@ -1,6 +1,6 @@
 #include "@/lib/shaders/math.glsl"
 
-float shape(vec2 uv, float borderWidth, float shapeRatio)
+float circle(vec2 uv, float borderWidth, float shapeRatio)
 {
     vec2 st = uv;
 

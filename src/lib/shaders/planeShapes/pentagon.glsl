@@ -2,7 +2,7 @@
 
 #include "@/lib/shaders/math.glsl"
 
-float shape(vec2 uv, float borderWidth, float shapeRatio)
+float pentagon(vec2 uv, float borderWidth, float shapeRatio)
 {
     vec3 color = vec3(0.0);
 

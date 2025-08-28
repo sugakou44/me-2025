@@ -1,6 +1,6 @@
 import { COLORS as _COLORS } from '@/modules/main/constants/colors'
 
-export const TOTAL = 6
+export const TOTAL = 12
 export const SHAPES = [
   'triangle',
   'circle',
@@ -18,6 +18,7 @@ export const PATTERNS = [
   'circle',
   'square',
   'stripe',
+  'plus',
   null,
 ] as const
 export type Pattern = (typeof PATTERNS)[number]
