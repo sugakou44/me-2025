@@ -99,7 +99,6 @@ Title: Box Man
   })
 </script>
 
-<T.AmbientLight intensity={4.5 * opacity} color={0xffffff} />
 <T is={ref} dispose={false} {...props}>
   <!-- eslint-disable-next-line svelte/require-store-reactive-access  -->
   {#await gltf}
@@ -121,7 +120,7 @@ Title: Box Man
           roughness={0}
           metalness={0}
         />
-        <Outlines color="white" thickness={4} />
+        <Outlines color="white" thickness={4} {opacity} transparent />
       </T.SkinnedMesh>
     </T.Group>
   {:catch err}

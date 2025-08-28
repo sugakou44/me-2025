@@ -26,17 +26,25 @@
 
   const rotationRad = utils.degToRad(45)
 
-  const tween = new Tween(0, {
+  const opacityTween = new Tween(0, {
+    duration: DURATION_NORMAL,
+    easing: eases.inOutSine,
+  })
+  const positionTween = new Tween(0, {
     duration: DURATION_NORMAL,
     easing: eases.inOutSine,
   })
 
   const lookAt = new Spring(0, FAST_SPRING_CONFIG)
 
-  const inIn = $derived(homeState.aboutScrollProgress < 1)
+  const inIn = $derived(homeState.aboutScrollProgress < 1.01)
+  const isVisible = $derived(homeState.aboutScrollProgress < 1)
 
   $effect(() => {
-    tween.set(inIn ? 1 : 0)
+    positionTween.set(inIn ? 1 : 0)
+  })
+  $effect(() => {
+    opacityTween.set(isVisible ? 1 : 0)
   })
 </script>
 
@@ -47,18 +55,19 @@
     },
   })}
 />
+<T.AmbientLight intensity={4.5 * positionTween.current} color={0xffffff} />
 <T.Group
   position.y={-(windowState.windowHeight * 1.4) + size * Math.cos(rotationRad)}
-  visible={tween.current > DEFAULT_ALPHA_TEST}
+  visible={opacityTween.current > DEFAULT_ALPHA_TEST}
 >
-  <T.Group scale.x={tween.current}>
+  <T.Group scale.x={opacityTween.current}>
     <WobblyPlane {size} {rotationRad} />
   </T.Group>
-  <T.Group position.y={(1 - tween.current) * -size * 0.5}>
+  <T.Group position.y={(1 - positionTween.current) * -size * 0.5}>
     <Character
       position={[0, -minSize * 3.4, 2]}
       scale={[minSize, minSize, 1]}
-      opacity={tween.current}
+      opacity={opacityTween.current}
       lookAt={lookAt.current}
     />
   </T.Group>
