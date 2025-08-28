@@ -5,8 +5,8 @@
   // import { asset } from '$app/paths'
   // import {
   // devicePixelRatio,
-  //   innerHeight,
-  //   innerWidth,
+  // innerHeight,
+  // innerWidth,
   // } from 'svelte/reactivity/window'
   // import { SRGBColorSpace } from 'three'
 
@@ -54,27 +54,23 @@
   const effectStage = useStage('effect', { before: mainStage })
   useStage('gpgpu', { before: effectStage })
 
-  // $effect(() => {
-  //   if (!innerWidth.current || !innerHeight.current) {
-  //     return
-  //   }
+  $effect(() => {
+    // const dpr = devicePixelRatio.current ?? 1.0
 
-  //   // const dpr = devicePixelRatio.current ?? 1.0
+    const width = windowState.windowWidth
+    const height = windowState.windowHeight
 
-  //   const width = innerWidth.current
-  //   const height = innerHeight.current
+    // perspectiveFBO.setSize(width, height)
+    // orthographicFBO.setSize(width, height)
+    renderer.setSize(width, height)
 
-  //   perspectiveFBO.setSize(width, height)
-  //   orthographicFBO.setSize(width, height)
-  //   renderer.setSize(width, height)
-
-  //   if (orthographicCamera) {
-  //     orthographicCamera.left = -width / 2
-  //     orthographicCamera.right = width / 2
-  //     orthographicCamera.top = height / 2
-  //     orthographicCamera.bottom = -height / 2
-  //   }
-  // })
+    if (orthographicCamera) {
+      orthographicCamera.left = -width / 2
+      orthographicCamera.right = width / 2
+      orthographicCamera.top = height / 2
+      orthographicCamera.bottom = -height / 2
+    }
+  })
 
   $effect(() => {
     renderer.setClearColor(
