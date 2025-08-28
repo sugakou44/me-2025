@@ -42,7 +42,7 @@
       <p>{paragraph}</p>
     </div>
 
-    <div class="flex gap-2">
+    <div class="flex flex-wrap gap-2">
       {#each techStack as tech, index (index)}
         <div
           {@attach roughBackground({

@@ -54,7 +54,7 @@ export const EXPERIENCE: ExperienceItem[] = [
     role: 'Developer',
     paragraph:
       'Created 360°/3D spatial experiences for exhibitions using Three.js; implemented RESTful APIs for content and questionnaire management with NestJS and PostgreSQL;',
-    techStack: ['react', 'react-native', 'three-js'],
+    techStack: ['react', 'react-native', 'three.js', 'nest.js'],
   },
 ]
 
