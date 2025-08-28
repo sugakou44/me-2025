@@ -93,13 +93,13 @@ export default class TreeOptions {
       // Number of sections per branch level
       sections: {
         0: 12,
-        1: 8,
+        1: 6,
         2: 2,
       },
 
       // Number of radial segments per branch level
       segments: {
-        0: 32,
+        0: 16,
         1: 4,
         2: 2,
       },

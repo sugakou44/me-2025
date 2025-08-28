@@ -1,9 +1,9 @@
 import { eases } from 'animejs'
 import {
   BufferAttribute,
-  BufferGeometry,
   Euler,
   Group,
+  InstancedBufferGeometry,
   Mesh,
   Quaternion,
   ShaderMaterial,
@@ -826,7 +826,7 @@ export class Tree extends Group {
   }
 
   createBranchesGeometry() {
-    const g = new BufferGeometry()
+    const g = new InstancedBufferGeometry()
 
     g.setAttribute(
       'sectionOrigin',
@@ -852,7 +852,7 @@ export class Tree extends Group {
         value: 0,
       },
       swayFactor: {
-        value: 0.5,
+        value: 1.4,
       },
       diffuseColor: {
         value: this.options.bark.tint,
@@ -893,7 +893,7 @@ export class Tree extends Group {
    * Generates the geometry for the leaves
    */
   createLeavesGeometry() {
-    const g = new BufferGeometry()
+    const g = new InstancedBufferGeometry()
     g.setAttribute(
       'position',
       new BufferAttribute(new Float32Array(this.leaves.verts), 3),
@@ -952,7 +952,7 @@ export class Tree extends Group {
   }
 
   createBlobsGeometry() {
-    const g = new BufferGeometry()
+    const g = new InstancedBufferGeometry()
 
     g.setAttribute(
       'sectionOrigin',

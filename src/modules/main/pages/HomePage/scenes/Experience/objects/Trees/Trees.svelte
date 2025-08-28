@@ -1,8 +1,11 @@
 <script lang="ts">
   import { T, useTask } from '@threlte/core'
-  import { Outlines } from '@threlte/extras'
   import { utils } from 'animejs'
 
+  import {
+    Instance,
+    InstancedMesh,
+  } from '@/components/GL/InstancedUniformsMesh'
   import { Tree } from '@/components/GL/Tree'
   import { getTick } from '@/lib/three/frame'
   import { COLORS } from '@/modules/main/constants/colors'
@@ -16,7 +19,7 @@
 
   let { opacity = 1, texture }: Props = $props()
 
-  const trees: Tree[] = new Array(18).fill(0).map((position, index) => {
+  const trees: Tree[] = new Array(4).fill(0).map((_, index) => {
     const tree = new Tree()
 
     tree.options.seed = index
@@ -38,7 +41,7 @@
     // Generate tree and add to your Three.js scene
     tree.generate()
 
-    tree.translateX(utils.random(-5, 30, 100))
+    // tree.translateX(utils.random(-5, 30, 4))
     tree.translateY(1)
 
     return tree
@@ -53,10 +56,25 @@
   })
 </script>
 
-<T.Group position={[0.2, 0, 0]}>
-  {#each trees as tree, index (index)}
-    <T is={tree}>
-      <Outlines color="white" thickness={4} />
-    </T>
+<T.Group position={[0.2, 0, 0]} dispose={false}>
+  {#each trees as tree, i (i)}
+    {@const branchId = `branch-${i}`}
+    {@const leaveId = `leave-${i}`}
+    <InstancedMesh id={branchId}>
+      <T is={tree.branchesMesh.geometry} />
+      <T is={tree.branchesMesh.material} />
+      <InstancedMesh id={leaveId}>
+        <T is={tree.leavesMesh.geometry} />
+        <T is={tree.leavesMesh.material} />
+        {#each { length: 5 } as _, j (j)}
+          {@const x = utils.random(-5, 30, 4)}
+          {@const z = utils.random(-50, 50, 4)}
+          <T.Group position.x={x} position.y={z} scale={tree.options.scale}>
+            <Instance id={branchId} />
+            <Instance id={leaveId} />
+          </T.Group>
+        {/each}
+      </InstancedMesh>
+    </InstancedMesh>
   {/each}
 </T.Group>

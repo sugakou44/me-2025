@@ -15,7 +15,7 @@ out vec3 vPosition;
 
 void main()
 {
-    vec4 transformedSectionOrigin = modelMatrix * vec4(leaveOrigin, 1.0);
+    vec4 transformedSectionOrigin = modelMatrix * instanceMatrix * vec4(leaveOrigin, 1.0);
 
     vec3 windAxis = getWindAxis(transformedSectionOrigin.xyz, tick);
     float windStrength = getWindStrength(transformedSectionOrigin.xyz, tick);

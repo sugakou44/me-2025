@@ -38,19 +38,15 @@
 
 <T.Group
   position.y={-windowState.windowHeight * 0.5 - windowState.scrollPosition}
-  <!--
   visible={opacityTween.current > DEFAULT_ALPHA_TEST}
-  --
->
   dispose={false}
-  >
+>
   <T.Group
     position.x={-homeState.experienceScrollProgress * windowState.windowWidth}
     scale.y={size}
     scale.x={size}
   >
     <T.Group rotation={[utils.degToRad(-90), 0, 0]}>
-      <!-- eslint-disable-next-line svelte/require-store-reactive-access  -->
       <Trees opacity={opacityTween.current} />
       <Grass opacity={opacityTween.current} position={[0, 0, -0.05]} />
     </T.Group>

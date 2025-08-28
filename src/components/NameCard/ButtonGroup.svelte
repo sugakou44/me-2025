@@ -23,16 +23,7 @@
     Resume
   </MagnetButton>
   <MagnetButton
-    containerClassName="md:mt-30 button md:scale-100 "
-    size="icon"
-    href={CONTACT.github.href}
-    aria-label={CONTACT.github.ariaLabel}
-    isExternal
-  >
-    <IconBrandGithubFilled class="md:h-7 md:w-7" />
-  </MagnetButton>
-  <MagnetButton
-    containerClassName="md:mt-10 button md:scale-130"
+    containerClassName="md:mt-10 button lg:scale-130"
     size="icon"
     href={CONTACT.email.href}
     aria-label={CONTACT.email.ariaLabel}
@@ -41,7 +32,16 @@
     <IconMailFilled class="md:h-7 md:w-7" />
   </MagnetButton>
   <MagnetButton
-    containerClassName="md:mt-20 button md:scale-120"
+    containerClassName="md:mt-30 button lg:scale-100 "
+    size="icon"
+    href={CONTACT.github.href}
+    aria-label={CONTACT.github.ariaLabel}
+    isExternal
+  >
+    <IconBrandGithubFilled class="md:h-7 md:w-7" />
+  </MagnetButton>
+  <MagnetButton
+    containerClassName="md:mt-20 button lg:scale-120"
     size="icon"
     href={CONTACT.linkedin.href}
     aria-label={CONTACT.linkedin.ariaLabel}

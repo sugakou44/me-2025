@@ -36,10 +36,10 @@
     colors[i3 + 2] = color.b
 
     const rad = utils.degToRad(utils.random(0, 180, 4))
-    const radius = utils.random(1, 5, 100)
+    const radius = utils.random(1, 5, 4)
     positions[i3 + 0] = Math.cos(rad) * radius
     positions[i3 + 1] = Math.sin(rad) * radius
-    positions[i3 + 2] = utils.random(-3, -1, 100)
+    positions[i3 + 2] = utils.random(-3, -1, 4)
 
     angle[i] = Math.random() * Math.PI * 2
     sizes[i] = utils.mapRange(Math.random(), 0, 1, 0.3, 0.5)

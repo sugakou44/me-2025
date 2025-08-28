@@ -16,7 +16,7 @@
 {#if appState.isIntroAnimationEnded}
   <div
     in:fade={{ duration: DURATION_FAST }}
-    class="right-8 bottom-8 z-[100] hidden items-end gap-3 md:fixed md:flex"
+    class="right-8 bottom-8 z-[100] hidden items-center gap-3 md:fixed md:flex"
   >
     {#if appState.isInHero}
       <div in:fade|global={{ duration: DURATION_FAST, delay: DURATION_FAST }}>
@@ -65,15 +65,15 @@
       size="icon"
       variant="secondary"
       aria-label="Chat"
-      class="!h-16 !w-16"
+      class="xl:h-16 xl:w-16"
       onclick={() => {
         mainChatContext.isOpen = !mainChatContext.isOpen
       }}
     >
       {#if mainChatContext.isOpen}
-        <IconX class="h-8 w-8" />
+        <IconX class="xl:h-8 xl:w-8" />
       {:else}
-        <IconMessageChatbotFilled class="h-8 w-8" />
+        <IconMessageChatbotFilled class="xl:h-8 xl:w-8" />
       {/if}
     </Button>
   </div>

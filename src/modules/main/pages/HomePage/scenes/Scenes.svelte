@@ -153,7 +153,7 @@
     position.y={-windowState.scrollPosition}
     position.z={20}
     near={0}
-    far={1100}
+    far={100}
     frustumCulled={false}
     bind:ref={orthographicCamera}
   />
