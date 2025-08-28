@@ -9,7 +9,7 @@
 
 <section
   class="chapter section lg:!max-w-[unset]"
-  style:--page-size="140vh"
+  style:--page-size="100vh"
   bind:this={homeState.aboutContainer}
 >
   {#if homeState.aboutVisibility}

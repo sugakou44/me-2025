@@ -18,10 +18,10 @@
 
   const aspectRatio = useAspectRatio()
   const size = $derived(
-    Math.max(windowState.windowWidth, windowState.windowHeight) * 2.75,
+    Math.max(windowState.windowWidth, windowState.windowHeight) * 3,
   )
   const minSize = $derived(
-    windowState.windowHeight * Math.max(aspectRatio(), 1) * 0.675,
+    windowState.windowHeight * Math.max(aspectRatio(), 1) * 0.75,
   )
 
   const rotationRad = utils.degToRad(45)
