@@ -2,7 +2,6 @@
   import { T, useStage, useTask, useThrelte } from '@threlte/core'
   import { useFBO, useSuspense, useTexture } from '@threlte/extras'
   import { asset } from '$app/paths'
-  import { utils } from 'animejs'
   import {
     // devicePixelRatio,
     innerHeight,
@@ -37,7 +36,6 @@
   }
 
   let { container }: Props = $props()
-  let alternate = true
 
   let perspectiveCamera = $state<PerspectiveCamera | undefined>()
   const perspectiveFBO = useFBO({
@@ -100,24 +98,17 @@
 
     const lastRenderTarget = renderer.getRenderTarget()
 
-    const mixFactor = utils.clamp(1, 0, 1)
-
-    if (alternate) {
-      renderer.setRenderTarget(perspectiveFBO)
-      renderer.render(homeState.perspectiveScene, perspectiveCamera)
-    } else {
-      renderer.setRenderTarget(orthographicFBO)
-      renderer.render(homeState.orthographicScene, orthographicCamera)
-    }
+    renderer.setRenderTarget(perspectiveFBO)
+    renderer.render(homeState.perspectiveScene, perspectiveCamera)
+    renderer.setRenderTarget(orthographicFBO)
+    renderer.render(homeState.orthographicScene, orthographicCamera)
 
     effectQuadUniform.perspectiveTexture.value = perspectiveFBO.texture
     effectQuadUniform.orthographicTexture.value = orthographicFBO.texture
-    effectQuadUniform.fadeMixFactor.value = mixFactor
     effectQuadUniform.tick.value = getTick()
 
     renderer.setRenderTarget(lastRenderTarget)
     renderer.render(effectScene, effectCamera)
-    alternate = !alternate
   })
 
   const effectQuadUniform = {
