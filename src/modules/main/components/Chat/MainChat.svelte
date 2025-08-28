@@ -16,12 +16,12 @@
 {#if appState.isIntroAnimationEnded}
   <div
     in:fade={{ duration: DURATION_FAST }}
-    class="right-8 bottom-8 z-[100] hidden gap-4 md:fixed md:flex"
+    class="right-8 bottom-8 z-[100] hidden items-end gap-3 md:fixed md:flex"
   >
     {#if appState.isInHero}
       <div in:fade|global={{ duration: DURATION_FAST, delay: DURATION_FAST }}>
         <Button
-          size="lg"
+          size="default"
           variant="secondary"
           aria-label="ask question"
           onclick={() => {
@@ -35,7 +35,7 @@
     {:else if homeState.aboutVisibility}
       <div in:fade={{ duration: DURATION_FAST }}>
         <Button
-          size="lg"
+          size="default"
           variant="secondary"
           aria-label="ask question"
           onclick={() => {
@@ -49,7 +49,7 @@
     {:else if homeState.experienceVisibility}
       <div in:fade={{ duration: DURATION_FAST }}>
         <Button
-          size="lg"
+          size="default"
           variant="secondary"
           aria-label="ask question"
           onclick={() => {
@@ -65,6 +65,7 @@
       size="icon"
       variant="secondary"
       aria-label="Chat"
+      class="!h-16 !w-16"
       onclick={() => {
         mainChatContext.isOpen = !mainChatContext.isOpen
       }}

@@ -76,7 +76,7 @@ Title: Box Man
   })
 </script>
 
-<T.AmbientLight intensity={5 * opacity} color={0xffffff} />
+<T.AmbientLight intensity={4.5 * opacity} color={0xffffff} />
 <T is={ref} dispose={false} {...props}>
   <!-- eslint-disable-next-line svelte/require-store-reactive-access  -->
   {#await gltf}
