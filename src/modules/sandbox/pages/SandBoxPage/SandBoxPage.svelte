@@ -6,8 +6,6 @@
   import Interactivity from '@/components/GL/Interactivity/Interactivity.svelte'
   import { MainChat } from '@/modules/main/components/Chat'
   import { storyState } from '@/modules/main/contexts/StoryState'
-  import Character from '@/modules/main/pages/HomePage/scenes/About/Character.svelte'
-  import { CardStack } from '@/modules/main/pages/HomePage/scenes/Experience/objects/CardStack'
   import { Experience } from '@/modules/main/pages/HomePage/sections/Experience'
 
   let isOpen = $state(false)
@@ -29,8 +27,6 @@
     <Interactivity>
       <World gravity={[0, 0, -10]}>
         <Debug />
-        <CardStack />
-        <Character />
       </World>
     </Interactivity>
   </Canvas>
