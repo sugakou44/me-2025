@@ -1,6 +1,6 @@
-import { PUBLIC_HOSTNAME, PUBLIC_PROTOCOLE } from '$env/static/public'
+import { PUBLIC_HOSTNAME, PUBLIC_PROTOCOL } from '$env/static/public'
 
-const HOSTNAME = `${PUBLIC_PROTOCOLE || 'https://'}${PUBLIC_HOSTNAME || 'paan.dev'}`
+const HOSTNAME = `${PUBLIC_PROTOCOL || 'https://'}${PUBLIC_HOSTNAME || 'paan.dev'}`
 
 const _ROUTES = {
   home: {
