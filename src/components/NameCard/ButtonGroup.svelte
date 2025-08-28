@@ -23,7 +23,7 @@
     Resume
   </MagnetButton>
   <MagnetButton
-    containerClassName="md:mt-10 button lg:scale-130"
+    containerClassName="md:mt-10 button"
     size="icon"
     href={CONTACT.email.href}
     aria-label={CONTACT.email.ariaLabel}
@@ -32,7 +32,7 @@
     <IconMailFilled class="md:h-7 md:w-7" />
   </MagnetButton>
   <MagnetButton
-    containerClassName="md:mt-30 button lg:scale-100 "
+    containerClassName="md:mt-30 button"
     size="icon"
     href={CONTACT.github.href}
     aria-label={CONTACT.github.ariaLabel}
@@ -41,7 +41,7 @@
     <IconBrandGithubFilled class="md:h-7 md:w-7" />
   </MagnetButton>
   <MagnetButton
-    containerClassName="md:mt-20 button lg:scale-120"
+    containerClassName="md:mt-20 button"
     size="icon"
     href={CONTACT.linkedin.href}
     aria-label={CONTACT.linkedin.ariaLabel}
