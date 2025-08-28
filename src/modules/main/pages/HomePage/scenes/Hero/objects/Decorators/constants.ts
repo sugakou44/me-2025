@@ -1,6 +1,6 @@
 import { COLORS as _COLORS } from '@/modules/main/constants/colors'
 
-export const TOTAL = 8
+export const TOTAL = 6
 export const SHAPES = [
   'triangle',
   'circle',
