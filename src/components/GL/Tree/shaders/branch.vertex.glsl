@@ -29,7 +29,7 @@ void main()
 
     localPosition = localPosition + windAxis * windLeanAngle;
 
-    vec4 mvpPosition = projectionMatrix * viewMatrix * modelMatrix * instanceMatrix * vec4(localPosition, 1.0);
+    vec4 mvpPosition = projectionMatrix * viewMatrix * modelMatrix * vec4(localPosition, 1.0);
 
     gl_Position = mvpPosition;
 

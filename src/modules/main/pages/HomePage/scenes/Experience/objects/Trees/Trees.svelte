@@ -19,7 +19,7 @@
 
   let { opacity = 1, texture }: Props = $props()
 
-  const trees: Tree[] = new Array(4).fill(0).map((_, index) => {
+  const trees: Tree[] = new Array(20).fill(0).map((_, index) => {
     const tree = new Tree()
 
     tree.options.seed = index
@@ -41,8 +41,9 @@
     // Generate tree and add to your Three.js scene
     tree.generate()
 
-    // tree.translateX(utils.random(-5, 30, 4))
+    tree.translateX(utils.random(-5, 30, 4))
     tree.translateY(1)
+    tree.translateY(utils.random(10, 50, 4) * (Math.random() > 0.5 ? 1 : -1))
 
     return tree
   })
@@ -58,6 +59,9 @@
 
 <T.Group position={[0.2, 0, 0]} dispose={false}>
   {#each trees as tree, i (i)}
+    <T is={tree} />
+  {/each}
+  <!-- {#each trees as tree, i (i)}
     {@const branchId = `branch-${i}`}
     {@const leaveId = `leave-${i}`}
     <InstancedMesh id={branchId}>
@@ -76,5 +80,5 @@
         {/each}
       </InstancedMesh>
     </InstancedMesh>
-  {/each}
+  {/each} -->
 </T.Group>
