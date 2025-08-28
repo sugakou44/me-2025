@@ -32,7 +32,7 @@
       fill: 'var(--secondary)',
     })}
   >
-    <p class="relative px-2 py-1 text-sm">
+    <p class="relative px-2 py-1 text-sm shadow-sm">
       {tag}
     </p>
   </div>
