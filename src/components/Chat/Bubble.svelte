@@ -17,7 +17,7 @@
     bottomLeftCornerRadius: byUser ? BORDER_RADIUS : 0,
     bottomRightCornerRadius: !byUser ? BORDER_RADIUS : 0,
     class: cn('fill-primary-foreground', {
-      'fill-secondary-foreground': byUser,
+      'fill-secondary-foreground': !byUser,
     }),
   })}
 >

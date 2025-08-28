@@ -22,7 +22,7 @@
       <div in:fade|global={{ duration: DURATION_FAST, delay: DURATION_FAST }}>
         <Button
           size="default"
-          variant="secondary"
+          variant="primary"
           aria-label="ask question"
           onclick={() => {
             mainChatContext.isOpen = true
@@ -36,7 +36,7 @@
       <div in:fade={{ duration: DURATION_FAST }}>
         <Button
           size="default"
-          variant="secondary"
+          variant="primary"
           aria-label="ask question"
           onclick={() => {
             mainChatContext.isOpen = true
@@ -50,7 +50,7 @@
       <div in:fade={{ duration: DURATION_FAST }}>
         <Button
           size="default"
-          variant="secondary"
+          variant="primary"
           aria-label="ask question"
           onclick={() => {
             mainChatContext.isOpen = true
@@ -63,7 +63,7 @@
     {/if}
     <Button
       size="icon"
-      variant="secondary"
+      variant="primary"
       aria-label="Chat"
       class="xl:h-16 xl:w-16"
       onclick={() => {
