@@ -117,7 +117,6 @@ Title: Box Man
         <T.MeshToonMaterial
           transparent
           {opacity}
-          toneMapped={false}
           map={gltf.materials.HeZiTou.map}
           emissive={0xffffff}
           emissiveIntensity={0.2}

@@ -1,7 +1,7 @@
 <script lang="ts">
   import { Canvas as ThreeCanvas } from '@threlte/core'
   import { Suspense } from '@threlte/extras'
-  import { ACESFilmicToneMapping, SRGBColorSpace } from 'three'
+  import { SRGBColorSpace } from 'three'
 
   import { PerfMonitor } from '@/components/GL/PerfMonitor'
 
@@ -16,11 +16,7 @@
   const { children, renderMode = 'manual', loadingFallback }: Props = $props()
 </script>
 
-<ThreeCanvas
-  colorSpace={SRGBColorSpace}
-  toneMapping={ACESFilmicToneMapping}
-  {renderMode}
->
+<ThreeCanvas colorSpace={SRGBColorSpace} toneMapping={false} {renderMode}>
   <PerfMonitor />
   <Suspense>
     {#snippet fallback()}
