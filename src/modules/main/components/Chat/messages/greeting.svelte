@@ -13,7 +13,7 @@
 
 {#snippet hello()}
   Hey
-  <span class=" hand-waving inline-block origin-bottom-right"> 👋 </span>
+  <span class="hand-waving inline-block origin-bottom-right"> 👋 </span>
 {/snippet}
 
 {#snippet helloMe()}
@@ -38,13 +38,13 @@
 {/snippet}
 
 <style>
-  .hand-waving {
+  :global(.hand-waving) {
     will-change: transform, transform-origin;
     animation-duration: var(--tw-duration, 1s);
     animation-iteration-count: infinite;
     animation-fill-mode: forwards;
     animation-direction: alternate;
     animation-timing-function: ease-in-out;
-    animation-name: hand-waving;
+    animation-name: handwaving;
   }
 </style>
