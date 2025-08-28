@@ -86,7 +86,7 @@ Title: Box Man
 
   $effect(() => {
     if (joint) {
-      tmpVec3.set(-1.5 + lookAt, 0, 4)
+      tmpVec3.set(-2 + lookAt, 0, 4)
     }
   })
 

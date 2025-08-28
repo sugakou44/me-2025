@@ -57,8 +57,10 @@
   </T.Group>
   <T.Group position.y={(1 - opacityTween.current) * -size * 0.5}>
     <Character
-      position={[0, -minSize * 3.4, 2]}
-      scale={[minSize, minSize, 1]}
+      position.y={-minSize * 3.25}
+      position.z={2}
+      scale.x={minSize * 0.75}
+      scale.y={minSize * 0.75}
       opacity={opacityTween.current}
       lookAt={lookAt.current}
     />
