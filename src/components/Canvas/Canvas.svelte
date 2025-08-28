@@ -1,11 +1,7 @@
 <script lang="ts">
   import { Canvas as ThreeCanvas } from '@threlte/core'
   import { Suspense } from '@threlte/extras'
-  import {
-    ACESFilmicToneMapping,
-    PCFSoftShadowMap,
-    SRGBColorSpace,
-  } from 'three'
+  import { ACESFilmicToneMapping, SRGBColorSpace } from 'three'
 
   import { PerfMonitor } from '@/components/GL/PerfMonitor'
 
@@ -23,7 +19,6 @@
 <ThreeCanvas
   colorSpace={SRGBColorSpace}
   toneMapping={ACESFilmicToneMapping}
-  shadows={PCFSoftShadowMap}
   {renderMode}
 >
   <PerfMonitor />

@@ -84,6 +84,7 @@
   bind:ref
   {...props}
   visible={animationState.current > DEFAULT_ALPHA_TEST}
+  depthTest={false}
 >
   <Decorator
     scale={3}
