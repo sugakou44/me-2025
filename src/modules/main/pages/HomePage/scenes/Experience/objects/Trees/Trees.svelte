@@ -68,7 +68,7 @@
         <T is={tree.leavesMesh.material} />
         {#each { length: 5 } as _, j (j)}
           {@const x = utils.random(-5, 30, 4)}
-          {@const z = utils.random(-50, 50, 4)}
+          {@const z = utils.random(10, 50, 4) * (Math.random() > 0.5 ? 1 : -1)}
           <T.Group position.x={x} position.y={z} scale={tree.options.scale}>
             <Instance id={branchId} />
             <Instance id={leaveId} />
