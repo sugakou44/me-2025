@@ -9,6 +9,7 @@
     DEFAULT_ALPHA_TEST,
     DURATION_NORMAL,
   } from '@/lib/animations/constants'
+  import { appState } from '@/lib/contexts/AppState'
   import { windowState } from '@/lib/contexts/Window'
   import { prepareDataTextureArray } from '@/lib/three/textures'
   import { homeState } from '@/modules/main/contexts/HomeState'
@@ -43,19 +44,10 @@
     easing: eases.inOutSine,
   })
 
-  $effect(() => {
-    opacityTween.set(homeState.aboutVisibility ? 1 : 0)
-  })
-
-  const positionTween = new Tween(0, {
-    duration: DURATION_NORMAL,
-    easing: eases.inOutSine,
-  })
-
   const inIn = $derived(homeState.aboutScrollProgress < 1)
 
   $effect(() => {
-    positionTween.set(inIn ? 0 : 1)
+    opacityTween.set(inIn && !appState.forceOpenHero ? 1 : 0)
   })
 </script>
 
@@ -68,7 +60,7 @@
       0.01}
     visible={opacityTween.current > DEFAULT_ALPHA_TEST}
   >
-    <T.Group position.y={positionTween.current * 2}>
+    <T.Group position.y={(1 - opacityTween.current) * -4}>
       <InnerCircle
         opacity={opacityTween.current}
         textures={dataTextureArray}
@@ -81,7 +73,7 @@
       />
       <!-- <Character
         position.z={2}
-        position.y={-5 * (1 - positionTween.current)}
+        position.y={-5 * (positionTween.current)}
         scale={5}
       /> -->
     </T.Group>
