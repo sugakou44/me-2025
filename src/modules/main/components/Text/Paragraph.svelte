@@ -7,12 +7,14 @@
 
   interface Props extends Partial<FigmaSquircleParams> {
     class?: string
+    classNoMerge?: string
     children?: Snippet
     backgroundClass?: string
   }
 
   let {
     class: className,
+    classNoMerge = '',
     children,
     backgroundClass,
     ...restProps
@@ -20,11 +22,12 @@
 </script>
 
 <p
-  class={cn('relative p-4 text-center md:p-6', className)}
+  class={`${cn('relative p-4 text-center md:p-6', className)} ${classNoMerge}`}
+  style:--outline-color="#ffffff"
   {@attach squircleBackground({
-    cornerRadius: 16,
-    cornerSmoothing: 1,
-    class: cn('fill-white/20 -z-10', backgroundClass),
+    cornerRadius: 64,
+    bottomRightCornerRadius: 0,
+    class: cn('fill-white', backgroundClass),
     ...restProps,
   })}
 >

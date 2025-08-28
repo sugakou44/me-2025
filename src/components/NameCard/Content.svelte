@@ -10,6 +10,7 @@
     DURATION_NORMAL,
     DURATION_SLOW,
   } from '@/lib/animations/constants'
+  import { appState } from '@/lib/contexts/AppState'
   import { cn } from '@/lib/utils/className'
 
   import { Button } from '../Buttons'
@@ -42,6 +43,9 @@
             (stagger(animationDuration / 4)(...args) as number) +
             animationDelay * 5
         : 0,
+      onComplete: () => {
+        appState.isIntroAnimationEnded = true
+      },
     })
 
     hasAnimated = true
@@ -68,9 +72,10 @@
 ></div> -->
 <div
   class={cn(
-    'absolute inset-0 -translate-z-[2px] overflow-hidden rounded-xl bg-white text-white transition-all duration-200 select-none',
+    'absolute inset-0 -translate-z-[2px] overflow-hidden rounded-xl  text-white transition-all duration-200 select-none',
     {
       'shadow-lg': !forceOpen && !isOpen,
+      'bg-white': !forceOpen,
     },
   )}
 ></div>

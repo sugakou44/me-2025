@@ -6,15 +6,15 @@
   } from '@tabler/icons-svelte'
   import { page } from '$app/state'
   import { eases } from 'animejs'
-  import { innerWidth } from 'svelte/reactivity/window'
 
   import Link from '@/components/Links/Link.svelte'
   import { CONTACT } from '@/lib/constants/contact'
   import { ROUTES } from '@/lib/constants/routes'
+  import { appState } from '@/lib/contexts/AppState'
+  import { windowState } from '@/lib/contexts/Window'
   import { squircleBackground } from '@/lib/svelte/backgroundSquircle.svelte'
   import { cn } from '@/lib/utils/className'
   import { CursorTheif } from '@/modules/main/components/CursorTheif'
-  import { appState } from '@/modules/main/contexts/AppState'
 
   import BackButton from '../Buttons/BackButton.svelte'
 
@@ -43,7 +43,7 @@
   {@attach squircleBackground({
     cornerRadius:
       eases.inSine(5 * appState.creditScrollProgress) *
-      Math.max((innerWidth.current ?? 0) / 12, 24),
+      Math.max(windowState.windowWidth / 12, 24),
     bottomLeftCornerRadius: 0,
     bottomRightCornerRadius: 0,
     class: 'fill-tertiary-foreground',

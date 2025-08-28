@@ -2,6 +2,7 @@
   import { DURATION_SLOWEST } from '@/lib/animations/constants'
   import { scaleY } from '@/lib/animations/transition'
 
+  import BouncingText from '../Text/BouncingText.svelte'
   import JumpingSpinner from './JumpingSpinner.svelte'
 </script>
 
@@ -11,14 +12,5 @@
 >
   <JumpingSpinner />
 
-  <p class="flex font-mono text-lg font-medium text-white">
-    {#each '...LOADING...'.split('') as char, index (index)}
-      <span
-        class="block animate-bounce"
-        style:animation-delay={`${index * 100}ms`}
-      >
-        {char}
-      </span>
-    {/each}
-  </p>
+  <BouncingText content="...LOADING..." />
 </div>

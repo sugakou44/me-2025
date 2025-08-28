@@ -38,7 +38,10 @@ export function squircleBackground({
 
           toggleClass(
             svg,
-            cn('absolute inset-0 h-full w-full', className),
+            cn(
+              'pointer-events-none absolute inset-0 -z-10 h-full w-full',
+              className,
+            ),
             true,
           )
 
@@ -59,7 +62,7 @@ export function squircleBackground({
           path.setAttribute('d', squirclePath)
         }
       },
-      () => [node, size, className, trackSize],
+      () => [node, size, className],
     )
 
     explicitEffect(
@@ -68,6 +71,11 @@ export function squircleBackground({
           unobserve()
           unobserve = undefined
           observe = undefined
+
+          if (!node) {
+            path = undefined
+            svg = undefined
+          }
           return
         }
 
@@ -115,6 +123,10 @@ export function squircleBackground({
         for (const child of node.children) {
           if (child === svg) {
             node.removeChild(svg)
+            path = undefined
+            svg = undefined
+            unobserve = undefined
+            observe = undefined
             return
           }
         }

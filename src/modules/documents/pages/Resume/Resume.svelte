@@ -1,9 +1,9 @@
 <script lang="ts">
   import { Button } from '@/components/Buttons'
   import { CONTACT } from '@/lib/constants/contact'
+  import { STACK } from '@/lib/constants/content'
   import { annotate } from '@/lib/svelte/annotate.svelte'
 
-  import { STACK } from './constants'
   import Education from './Education.svelte'
   import Experiences from './Experiences.svelte'
 </script>

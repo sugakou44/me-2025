@@ -49,7 +49,7 @@
         shape: SHAPES[utils.random(0, SHAPES.length - 1)],
         variant: VARIANTS[utils.random(0, VARIANTS.length - 1)],
         pattern: PATTERNS[utils.random(0, PATTERNS.length - 1)],
-        shapeRaio: utils.random(800, 1000) / 1000,
+        shapeRaio: utils.random(0.8, 1, 4),
         patternCount: utils.random(8, 15),
         negative: utils.random(0, 4) >= 3,
         idleMovementItensity: utils.random(0, 100) / 10000,
@@ -60,18 +60,18 @@
       const isLeft = index < centerShaderIndice.length / 2
       return {
         position: [
-          (utils.random(100, 500) / 100) * (isLeft ? -1 : 1),
-          utils.random(-500, 500) / 100,
-          utils.random(-200, 100) / 100,
+          utils.random(1, 5, 4) * (isLeft ? -1 : 1),
+          utils.random(-5, 5, 4),
+          utils.random(-2, 1, 4),
         ] as ArrayAsVector3,
         rotation: [
           utils.degToRad(utils.random(-50, 50)),
           utils.degToRad(utils.random(0, 50) * (isLeft ? 1 : -1)),
           utils.degToRad(utils.random(-180, 180)),
         ] as ArrayAsVector3,
-        scale: utils.random(50, 100) / 100,
+        scale: utils.random(0.5, 1, 4),
         color: COLORS[utils.random(0, COLORS.length - 1)],
-        opacity: utils.random(80, 100) / 100,
+        opacity: utils.random(0.8, 1, 4),
       }
     })
 
@@ -89,7 +89,7 @@
     rotation={[utils.degToRad(40), utils.degToRad(30), 0]}
     variant="solid"
     shape="circle"
-    color="#83aeff"
+    color={COLORS[0].getHex()}
     opacity={0.8 * animationState.current.opacity}
   />
   <Decorator
@@ -98,7 +98,7 @@
     variant="ghost"
     shape="triangle"
     pattern="stripe"
-    color="#88e8c2"
+    color={COLORS[3].getHex()}
     shapeRatio={1}
     rotation={[0, utils.degToRad(-10), utils.degToRad(-60)]}
     opacity={0.8 * animationState.current.opacity}
@@ -111,7 +111,7 @@
     variant="outline"
     shape="triangle"
     pattern="circle"
-    color="#88e8c2"
+    color={COLORS[2].getHex()}
   />
   <Decorator
     scale={1.5}
@@ -121,7 +121,7 @@
     variant="outline"
     shape="rectangle"
     pattern={null}
-    color="#ffa69e"
+    color={COLORS[1].getHex()}
   />
   {#each defaultStates as { position, opacity, ...state }, index (index)}
     <Decorator

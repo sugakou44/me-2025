@@ -1,5 +1,6 @@
 <script lang="ts">
-  import { EDUCATION } from './constants'
+  import { EDUCATION } from '@/lib/constants/content'
+
   import Section from './Section.svelte'
 </script>
 

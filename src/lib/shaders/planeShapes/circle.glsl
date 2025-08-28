@@ -3,7 +3,7 @@
 float shape(vec2 uv, float borderWidth, float shapeRatio)
 {
     vec2 st = uv;
-    // Remap the space to -1. to 1.
+
     st = st * 2. - 1.;
 
     float radius = distance(vec2(0, st.y / shapeRatio), vec2(st.x, 0));

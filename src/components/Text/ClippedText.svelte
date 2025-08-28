@@ -4,7 +4,7 @@
   import type { Snippet } from 'svelte'
 
   interface ClippedTextProps<
-    T extends keyof HTMLElementTagNameMap | Snippet = 'span',
+    T extends keyof HTMLElementTagNameMap | Snippet = 'p',
   > {
     as?: T
     class?: string

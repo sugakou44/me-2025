@@ -1,7 +1,6 @@
 <script lang="ts">
   import { T, useStage, useTask, useThrelte } from '@threlte/core'
   import { useFBO, useSuspense, useTexture } from '@threlte/extras'
-  import { World } from '@threlte/rapier'
   import { asset } from '$app/paths'
   import { utils } from 'animejs'
   import {
@@ -16,15 +15,13 @@
     vertexShader as QuadVertexShader,
     ScreenQuad,
   } from '@/components/GL/ScreenQuad'
+  import { windowState } from '@/lib/contexts/Window'
   import { getTick } from '@/lib/three/frame'
-  import { appState } from '@/modules/main/contexts/AppState'
+  import { COLORS } from '@/modules/main/constants/colors'
+  import { homeState } from '@/modules/main/contexts/HomeState'
 
-  import { Chapter1Scene } from './Chapter1'
-  import { Chapter2Scene } from './Chapter2'
-  import { Chapter3Scene } from './Chapter3'
-  import { Chapter4Scene } from './Chapter4'
-  import { Chapter5Scene } from './Chapter5'
-  import { EpilogueScene } from './Epilogue'
+  import { AboutScene, AboutScenePerspective } from './About'
+  import { ExperienceScene } from './Experience'
   import { HeroScene } from './Hero'
   import QuadFragmentShader from './shaders/effect.fragment.glsl'
 
@@ -33,7 +30,7 @@
     PerspectiveCamera,
     Scene,
     ShaderMaterial,
-    // Texture,
+    Texture,
   } from 'three'
 
   interface Props {
@@ -41,20 +38,14 @@
   }
 
   let { container }: Props = $props()
-  // const dataTextures: Texture[] = new Array(8).fill(null)
 
-  let mainScene = $state<Scene | undefined>()
-  let mainCamera = $state<PerspectiveCamera | undefined>()
-  const mainFBO = useFBO({
+  let perspectiveCamera = $state<PerspectiveCamera | undefined>()
+  const perspectiveFBO = useFBO({
     colorSpace: SRGBColorSpace,
   })
 
-  // colorSpace={SRGBColorSpace}
-  // toneMapping={ACESFilmicToneMapping}
-  // shadows={PCFSoftShadowMap}
-  let epilogueScene = $state<Scene | undefined>()
-  let epilogueCamera = $state<PerspectiveCamera | undefined>()
-  const epilogueFBO = useFBO({
+  let orthographicCamera = $state<OrthographicCamera | undefined>()
+  const orthographicFBO = useFBO({
     colorSpace: SRGBColorSpace,
   })
 
@@ -84,60 +75,58 @@
     const width = innerWidth.current
     const height = innerHeight.current
 
-    mainFBO.setSize(width, height)
-    epilogueFBO.setSize(width, height)
+    perspectiveFBO.setSize(width, height)
+    orthographicFBO.setSize(width, height)
     renderer.setSize(width, height)
+
+    if (orthographicCamera) {
+      orthographicCamera.left = -width / 2
+      orthographicCamera.right = width / 2
+      orthographicCamera.top = height / 2
+      orthographicCamera.bottom = -height / 2
+    }
   })
 
   useTask(() => {
     if (
-      !mainScene ||
-      !mainCamera ||
-      !epilogueScene ||
-      !epilogueCamera ||
+      !homeState.perspectiveScene ||
+      !perspectiveCamera ||
+      !homeState.orthographicScene ||
+      !orthographicCamera ||
       !effectScene ||
-      !effectCamera ||
-      !effectMaterial
+      !effectCamera
     ) {
       return
     }
 
     const lastRenderTarget = renderer.getRenderTarget()
 
-    const mixFactor = utils.clamp(appState.epilogueScrollProgress, 0, 0.98)
+    const mixFactor = utils.clamp(1, 0, 1)
 
-    renderer.setRenderTarget(mainFBO)
-    renderer.render(mainScene, mainCamera)
+    renderer.setRenderTarget(perspectiveFBO)
+    renderer.render(homeState.perspectiveScene, perspectiveCamera)
 
-    if (mixFactor >= 0.001) {
-      renderer.setRenderTarget(epilogueFBO)
-      renderer.render(epilogueScene, epilogueCamera)
-    }
+    renderer.setRenderTarget(orthographicFBO)
+    renderer.render(homeState.orthographicScene, orthographicCamera)
 
-    // dataTextures.push(mainFBO.texture)
-
-    // while (dataTextures.length > 8) {
-    //   dataTextures.shift()
-    // }
-
-    effectMaterial.uniforms.mainTexture.value = mainFBO.texture
-    effectMaterial.uniforms.epilogueTexture.value = epilogueFBO.texture
-    effectMaterial.uniforms.fadeMixFactor.value = mixFactor
-    effectMaterial.uniforms.tick.value = getTick()
+    effectQuadUniform.perspectiveTexture.value = perspectiveFBO.texture
+    effectQuadUniform.orthographicTexture.value = orthographicFBO.texture
+    effectQuadUniform.fadeMixFactor.value = mixFactor
+    effectQuadUniform.tick.value = getTick()
 
     renderer.setRenderTarget(lastRenderTarget)
     renderer.render(effectScene, effectCamera)
   })
 
-  const quadUniform = {
+  const effectQuadUniform = {
     tick: {
       value: 0,
     },
-    mainTexture: {
-      value: null,
+    perspectiveTexture: {
+      value: null as unknown as Texture,
     },
-    epilogueTexture: {
-      value: null,
+    orthographicTexture: {
+      value: null as unknown as Texture,
     },
     fadeTexture: {
       value: null,
@@ -145,42 +134,38 @@
     fadeMixFactor: {
       value: 0,
     },
+    diffuse: {
+      value: COLORS.secondary.clone().addScalar(0.75).multiplyScalar(0.8),
+    },
   }
 </script>
 
-<T.Scene bind:ref={epilogueScene}>
+<T.Scene bind:ref={homeState.perspectiveScene}>
   <T.PerspectiveCamera
-    position={[0, 0, 5]}
+    position={[0, 0, 6]}
     lookAt={[0, 0, 0]}
-    fov={75}
-    near={0.01}
-    far={1000}
+    fov={70}
+    near={0.001}
+    far={20}
     frustumCulled={true}
-    bind:ref={epilogueCamera}
-  />
-  <EpilogueScene />
-</T.Scene>
-
-<T.Scene bind:ref={mainScene}>
-  <T.PerspectiveCamera
-    position={[0, 0, 5]}
-    lookAt={[0, 0, 0]}
-    fov={75}
-    near={0.01}
-    far={1000}
-    frustumCulled={true}
-    bind:ref={mainCamera}
+    bind:ref={perspectiveCamera}
   />
   <Interactivity {container}>
     <HeroScene />
-    <!-- <Chapter1Scene /> -->
-    <!-- <Chapter2Scene /> -->
-    <Chapter3Scene />
-    <!-- <World>
-      <Chapter4Scene />
-    </World>
-    <Chapter5Scene /> -->
+    <AboutScenePerspective />
   </Interactivity>
+</T.Scene>
+
+<T.Scene bind:ref={homeState.orthographicScene}>
+  <T.OrthographicCamera
+    position={[0, -windowState.scrollPosition, 20]}
+    near={0}
+    far={100}
+    frustumCulled={false}
+    bind:ref={orthographicCamera}
+  />
+  <AboutScene />
+  <ExperienceScene />
 </T.Scene>
 
 <!-- eslint-disable-next-line svelte/require-store-reactive-access  -->
@@ -190,15 +175,14 @@
       bind:ref={effectCamera}
       position={[0, 0, 5]}
       lookAt={[0, 0, 0]}
-      near={0.01}
-      far={1000}
+      near={0}
+      far={10}
     />
     <ScreenQuad>
       <T.ShaderMaterial
-        bind:ref={effectMaterial}
         vertexShader={QuadVertexShader}
         fragmentShader={QuadFragmentShader}
-        uniforms={quadUniform}
+        uniforms={effectQuadUniform}
         uniforms.fadeTexture.value={fadeTexture}
       />
     </ScreenQuad>

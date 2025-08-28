@@ -66,3 +66,11 @@ export const COLORS = [
   '#AE2012',
   '#9B2226',
 ] as const
+
+export const CONFETTI_OPTIONS = {
+  scalar: 2,
+  spread: 120,
+  particleCount: 222,
+  origin: { y: -0.1 },
+  startVelocity: -70,
+}

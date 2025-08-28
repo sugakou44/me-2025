@@ -3,11 +3,12 @@
 
   import { Canvas } from '@/components/Canvas'
   import Control from '@/components/Canvas/Control.svelte'
-  import { Chapter1Scene } from '@/modules/main/pages/HomePage/scenes/Chapter1'
-  import { Chapter2Scene } from '@/modules/main/pages/HomePage/scenes/Chapter2'
-  import { Chapter3Scene } from '@/modules/main/pages/HomePage/scenes/Chapter3'
-  import { Chapter4Scene } from '@/modules/main/pages/HomePage/scenes/Chapter4'
-  import { Chapter5Scene } from '@/modules/main/pages/HomePage/scenes/Chapter5'
+  import Interactivity from '@/components/GL/Interactivity/Interactivity.svelte'
+  import { MainChat } from '@/modules/main/components/Chat'
+  import { storyState } from '@/modules/main/contexts/StoryState'
+  import Character from '@/modules/main/pages/HomePage/scenes/About/Character.svelte'
+  import { CardStack } from '@/modules/main/pages/HomePage/scenes/Experience/objects/CardStack'
+  import { Experience } from '@/modules/main/pages/HomePage/sections/Experience'
 
   let isOpen = $state(false)
 
@@ -25,13 +26,15 @@
 <div class="fixed inset-0 z-40 full-h w-full">
   <Canvas renderMode="always">
     <Control />
-    <World gravity={[0, 0, -10]}>
-      <Debug />
-      <!-- <Chapter1Scene /> -->
-      <!-- <Chapter2Scene /> -->
-      <Chapter3Scene />
-      <!-- <Chapter4Scene /> -->
-      <!-- <Chapter5Scene /> -->
-    </World>
+    <Interactivity>
+      <World gravity={[0, 0, -10]}>
+        <Debug />
+        <CardStack />
+        <Character />
+      </World>
+    </Interactivity>
   </Canvas>
 </div>
+<Experience />
+<MainChat />
+<div class="min-h-[400vh]" bind:this={storyState.chapter2Container}></div>

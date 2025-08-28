@@ -1,5 +1,7 @@
 <script lang="ts">
-  import Button from '@/components/Buttons/Button.svelte'
+  import confetti from 'canvas-confetti'
+
+  import { Button } from '@/components/Buttons'
   import Spinner from '@/components/Spinners/Spinner.svelte'
   import DrawingText from '@/components/Text/DrawingText.svelte'
   import HintText from '@/components/Text/HintText.svelte'
@@ -7,23 +9,20 @@
   import { toggleClass } from '@/lib/utils/className'
   import { roughSvg } from '@/lib/utils/rough'
 
-  import { BOMB_PATH } from './constants'
+  import { BOMB_PATH, CONFETTI_OPTIONS } from './constants'
   import { MinesSweeper } from './MinesSweeper.svelte'
+
+  import type { Shape } from 'canvas-confetti'
 
   interface Props {
     isOpen?: boolean
   }
 
-  const { isOpen: isOpenProp = false }: Props = $props()
-  let isOpen = $state(false)
-
-  $effect(() => {
-    if (isOpenProp && !isOpen) {
-      isOpen = true
-    }
-  })
+  const { isOpen = $bindable(false) }: Props = $props()
 
   const game = new MinesSweeper()
+
+  let bombShape: Shape
 
   function drawBomb(node: SVGSVGElement) {
     const rough = roughSvg(node)
@@ -41,8 +40,26 @@
       }
     }
   }
+
+  $effect(() => {
+    bombShape = confetti.shapeFromPath({
+      path: BOMB_PATH[0],
+    })
+  })
+
+  $effect(() => {
+    if (game.winner && bombShape) {
+      confetti({
+        ...CONFETTI_OPTIONS,
+        zIndex: 1000,
+        shapes: [bombShape],
+        colors: ['#ff9a00', '#ff7400', '#ff4d00'],
+      })
+    }
+  })
 </script>
 
+<!-- <canvas bind:this={confettiCanvas} class="fixed top-0"></canvas> -->
 <div
   class="flex h-[669px] w-[560px] flex-col items-stretch justify-center gap-2 p-6 pt-4 pb-8"
   {@attach squircleBackground({

@@ -1,12 +1,11 @@
 import type { T } from '@threlte/core'
 import type { ComponentProps } from 'svelte'
-import type { Pattern } from './shaders/pattern'
-import type { Shape } from './shaders/shape'
+import type { Pattern, Shape, Variant } from './constants'
 
 export interface Props extends ComponentProps<typeof T.Group> {
   isIn?: boolean
   idleMovementItensity?: number
-  color?: string
+  color?: string | number
   opacity?: number
   width?: number
   height?: number
@@ -16,6 +15,6 @@ export interface Props extends ComponentProps<typeof T.Group> {
   shapeRatio?: number
   negative?: boolean
   shape?: Shape
-  variant?: 'solid' | 'outline' | 'ghost'
+  variant?: Variant
   pattern?: Pattern
 }

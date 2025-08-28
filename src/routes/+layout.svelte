@@ -22,13 +22,11 @@
   const OG_IMAGE = `${ROUTES.home.href}/og.png`
 </script>
 
-{#if windowState.pathname === ROUTES.home.pathname}
-  <SvelteSeo
-    title={DEFAULT_TITLE}
-    description={DEFAULT_DESCRIPTION}
-    canonical={ROUTES.home.href}
-  />
-{/if}
+<SvelteSeo
+  title={DEFAULT_TITLE}
+  description={DEFAULT_DESCRIPTION}
+  canonical={ROUTES.home.href}
+/>
 
 <SvelteSeo
   notranslate

@@ -1,5 +1,5 @@
 <div
-  class="non-printable fixed top-[50%] right-5 z-[1000] hidden aspect-square translate-x-[100%] translate-y-[-50%] rotate-90 transform animate-in flex-col justify-end duration-500 select-none fade-in md:flex"
+  class="non-printable fixed top-[50%] right-5 z-[100] hidden aspect-square translate-x-[100%] translate-y-[-50%] rotate-90 transform animate-in flex-col justify-end duration-500 select-none fade-in md:flex"
   style:animation-fill-mode="forwards"
 >
   <p

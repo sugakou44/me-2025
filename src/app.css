@@ -129,7 +129,8 @@
   --font-document: 'Inter', sans-serif;
   --font-handwritting-heading: 'Caveat Brush', cursive;
   --font-handwritting-body: 'Caveat Brush', cursive;
-  --font-heading: 'Bitter', serif;
+  /*--font-body: 'Sono', monospace;*/
+  --font-heading: 'Sono', monospace;
 }
 
 @utility will-change-transform {
@@ -149,7 +150,8 @@
 }
 
 @utility font-heading {
-  font-optical-sizing: auto;
+  /*font-optical-sizing: auto;*/
+  font-variation-settings: 'MONO' 0;
 }
 
 @utility text-fill-transparent {
@@ -334,8 +336,8 @@
   }
 
   .text-outline {
-    --outline-width: 1px;
-    --outline-color: currentColor;
+    --outline-width: 0.075em;
+    --outline-color: white;
     -webkit-text-stroke: var(--outline-width) var(--outline-color);
   }
 }

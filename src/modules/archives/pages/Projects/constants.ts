@@ -104,12 +104,20 @@ export const PROJECTS: Project[] = [
     techStacks: ['next.js', 'tailwind css', 'typescript', 'directus'],
     href: WORK_ROUTES.captainSite.pathname,
   },
+  // freelance
+  {
+    title: 'Vich.ai',
+    year: '2019',
+    company: 'Magic Box',
+    techStacks: ['express.js', 'react', 'react-native', 'open-cv'],
+    href: WORK_ROUTES.vishai.pathname,
+  },
 
   // freelance
   {
     title: '2020 World Rabies - Virtual Exhibition',
     year: '2020',
-    techStacks: ['react.js', 'three.js', 'Express.js', 'typescript'],
+    techStacks: ['react.js', 'three.js', 'express.js', 'typescript'],
   },
   {
     title: 'Rabies 101',

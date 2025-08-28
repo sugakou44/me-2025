@@ -42,6 +42,6 @@
   }
 
   .paused > .circle {
-    animation-iteration-count: 1;
+    animation-iteration-count: 0;
   }
 </style>

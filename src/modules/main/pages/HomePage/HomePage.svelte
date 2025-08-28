@@ -1,20 +1,20 @@
 <script lang="ts">
+  import { IconX } from '@tabler/icons-svelte'
+  import { fade, slide } from 'svelte/transition'
+
+  import { Button } from '@/components/Buttons'
   import { Canvas } from '@/components/Canvas'
   import PageSpinner from '@/components/Spinners/PageSpinner.svelte'
-  import { appState } from '@/modules/main/contexts/AppState'
+  import { appState } from '@/lib/contexts/AppState'
+  import { MinesSweeperBoard } from '@/modules/games/boardGames/MinesSweeper'
 
+  import { MainChat } from '../../components/Chat'
   import { SuspenseFallback } from '../../components/SuspenseFallback'
   import { Scenes } from './scenes'
-  import Chapter1 from './sections/Chapter1.svelte'
-  import Chapter2 from './sections/Chapter2.svelte'
-  import Chapter3 from './sections/Chapter3.svelte'
-  import Chapter4 from './sections/Chapter4.svelte'
-  import Chapter5 from './sections/Chapter5.svelte'
-  import Credit from './sections/Credit.svelte'
-  import Epilogue from './sections/Epilogue.svelte'
-  import Hero from './sections/Hero.svelte'
-  import Prologue from './sections/Prologue.svelte'
-  import Spacer from './sections/Spacer.svelte'
+  import { About } from './sections/About'
+  import { Credit } from './sections/Credit'
+  import { Experience } from './sections/Experience'
+  import { Hero } from './sections/Hero'
 
   let container = $state<HTMLDivElement>()
 </script>
@@ -33,25 +33,30 @@
   </Canvas>
 </div>
 
+{#if appState.isOpenCookiesweeper}
+  <div transition:slide class="transform-center fixed z-[200] hidden md:block">
+    <MinesSweeperBoard isOpen={appState.isOpenCookiesweeper} />
+    <Button
+      variant="ghost"
+      size="icon"
+      class="absolute top-4 right-4"
+      onclick={() => {
+        appState.isOpenCookiesweeper = false
+      }}
+    >
+      <IconX />
+    </Button>
+  </div>
+{/if}
+
 {#if appState.isReady}
+  <MainChat />
   <Hero />
 
-  <div class="z-50 w-full">
+  <div in:fade class="z-50 min-h-screen w-full">
     <div class="z-50 min-h-screen w-full"></div>
-    <Prologue />
-    <Spacer />
-    <Spacer />
-    <Chapter1 />
-    <Spacer />
-    <Chapter2 />
-    <Spacer />
-    <Chapter3 />
-    <Spacer />
-    <Chapter4 />
-    <Spacer />
-    <Chapter5 />
-    <Spacer />
-    <Epilogue />
+    <About />
+    <Experience />
     <Credit />
   </div>
 {:else}
@@ -61,6 +66,6 @@
 <style>
   .canvas-container {
     --scroll-y: 0;
-    transform: translateY(calc(max(var(--scroll-y), 0) * -100vh));
+    transform: translateY(calc(max(var(--scroll-y), 0) * -20vh));
   }
 </style>

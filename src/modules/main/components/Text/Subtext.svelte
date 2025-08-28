@@ -11,6 +11,9 @@
   const { class: className, children }: Props = $props()
 </script>
 
-<span class={cn('text-[0.5em] opacity-60', className)}>
+<span
+  class={cn('inline-block text-[0.5em] opacity-60', className)}
+  style:--outline-width="0px"
+>
   {@render children?.()}
 </span>

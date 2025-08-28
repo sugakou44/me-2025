@@ -2,6 +2,7 @@
   import { T } from '@threlte/core'
   import { Color, DoubleSide } from 'three'
 
+  import { DEFAULT_ALPHA_TEST } from '@/lib/animations/constants'
   import vertexShader from '@/lib/shaders/base.vertex.glsl'
 
   import fragmentShader from './shaders/base.fragment.glsl'
@@ -66,6 +67,7 @@
       {fragmentShader}
       {uniforms}
       uniforms.opacity.value={opacity}
+      alphaTest={DEFAULT_ALPHA_TEST}
     />
   </T.Mesh>
 </T.Group>

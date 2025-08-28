@@ -1,5 +1,5 @@
 import { page } from '$app/state'
-import { innerHeight, scrollY } from 'svelte/reactivity/window'
+import { innerHeight, innerWidth, scrollY } from 'svelte/reactivity/window'
 import { Clock } from 'three'
 
 const END_THRESHOLD = 88
@@ -26,6 +26,7 @@ class WindowState {
       : this.previousPathnames[0]
   })
 
+  windowWidth = $derived(innerWidth.current ?? 0)
   windowHeight = $derived(innerHeight.current ?? 0)
   scrollPosition = $derived.by(() => {
     const currentValue = scrollY.current ?? 0

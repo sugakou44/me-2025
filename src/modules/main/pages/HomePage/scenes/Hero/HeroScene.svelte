@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { appState } from '@/modules/main/contexts/AppState'
+  import { appState } from '@/lib/contexts/AppState'
 
   import { Decorators } from './objects/Decorators'
 </script>

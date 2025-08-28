@@ -18,6 +18,9 @@ const _ROUTES = {
   sandbox: {
     pathname: '/sandbox',
   },
+  storiesMe: {
+    pathname: '/me',
+  },
 } as const
 
 export type RouteKey = keyof typeof _ROUTES
@@ -82,5 +85,8 @@ export const WORK_ROUTES = {
   },
   captainSite: {
     pathname: 'https://www.captain.ai/about',
+  },
+  vishai: {
+    pathname: 'https://store.vich.ai',
   },
 } as const
