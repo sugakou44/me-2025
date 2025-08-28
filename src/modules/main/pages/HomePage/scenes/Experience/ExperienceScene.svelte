@@ -13,11 +13,11 @@
 
   const opacityTween = new Tween(0, {
     duration: DURATION_SLOW,
-    easing: eases.inOutCubic,
+    easing: eases.inOutSine,
   })
   const rotationTween = new Tween(0, {
     duration: DURATION_SLOW,
-    easing: eases.inOutCubic,
+    easing: eases.inOutSine,
   })
 
   $effect(() => {
