@@ -341,3 +341,7 @@
     -webkit-text-stroke: var(--outline-width) var(--outline-color);
   }
 }
+
+#three-perf-ui {
+  @apply !z-[10000];
+}

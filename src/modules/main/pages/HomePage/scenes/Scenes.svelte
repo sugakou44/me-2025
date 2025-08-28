@@ -37,6 +37,7 @@
   }
 
   let { container }: Props = $props()
+  let alternate = true
 
   let perspectiveCamera = $state<PerspectiveCamera | undefined>()
   const perspectiveFBO = useFBO({
@@ -101,11 +102,13 @@
 
     const mixFactor = utils.clamp(1, 0, 1)
 
-    renderer.setRenderTarget(perspectiveFBO)
-    renderer.render(homeState.perspectiveScene, perspectiveCamera)
-
-    renderer.setRenderTarget(orthographicFBO)
-    renderer.render(homeState.orthographicScene, orthographicCamera)
+    if (alternate) {
+      renderer.setRenderTarget(perspectiveFBO)
+      renderer.render(homeState.perspectiveScene, perspectiveCamera)
+    } else {
+      renderer.setRenderTarget(orthographicFBO)
+      renderer.render(homeState.orthographicScene, orthographicCamera)
+    }
 
     effectQuadUniform.perspectiveTexture.value = perspectiveFBO.texture
     effectQuadUniform.orthographicTexture.value = orthographicFBO.texture
@@ -114,6 +117,7 @@
 
     renderer.setRenderTarget(lastRenderTarget)
     renderer.render(effectScene, effectCamera)
+    alternate = !alternate
   })
 
   const effectQuadUniform = {
