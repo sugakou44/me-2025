@@ -99,7 +99,7 @@ Title: Box Man
   })
 </script>
 
-<T.AmbientLight intensity={5 * opacity} color={0xeeeeff} />
+<T.AmbientLight intensity={5 * opacity} color={0xffffff} />
 <T is={ref} dispose={false} {...props}>
   <!-- eslint-disable-next-line svelte/require-store-reactive-access  -->
   {#await gltf}
@@ -118,8 +118,6 @@ Title: Box Man
           transparent
           {opacity}
           map={gltf.materials.HeZiTou.map}
-          emissive={0xffffff}
-          emissiveIntensity={0.2}
           roughness={0}
           metalness={0}
         />
