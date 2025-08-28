@@ -1,8 +1,11 @@
 <script lang="ts">
+  import { DocumentsHead } from '@/components/Head'
   import HintText from '@/components/Text/HintText.svelte'
 
   let { children } = $props()
 </script>
+
+<DocumentsHead />
 
 <div class="document container mx-auto full-h max-w-4xl p-4 md:p-8">
   <div
@@ -13,18 +16,6 @@
 </div>
 
 <HintText class="bg-white/70">You can print this page if necessary</HintText>
-
-<svelte:head>
-  <link
-    rel="preload"
-    as="style"
-    href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
-  />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
-    rel="stylesheet"
-  />
-</svelte:head>
 
 <style>
   :global(

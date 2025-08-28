@@ -43,3 +43,5 @@ export const DURATION_FASTEST = 50
 export const DURATION_SLOW = 500
 export const DURATION_SLOWER = 700
 export const DURATION_SLOWEST = 1000
+
+export const DEFAULT_ALPHA_TEST = 0.001

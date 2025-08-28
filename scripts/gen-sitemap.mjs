@@ -2,7 +2,7 @@ import { createWriteStream, existsSync, writeFileSync } from 'fs'
 import { resolve } from 'path'
 import { SitemapStream } from 'sitemap'
 
-const HOSTNAME = 'https://paan.dev'
+const HOSTNAME = `https://paan.dev`
 const FILE_PATH = resolve('./static/sitemap.xml')
 
 if (!existsSync(FILE_PATH)) {

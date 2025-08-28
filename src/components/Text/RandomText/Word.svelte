@@ -40,7 +40,7 @@
 
       return {
         original: index,
-        target: utils.random(0, ALL_CHARACTERS.length * 3),
+        target: utils.random(ALL_CHARACTERS.length, ALL_CHARACTERS.length * 3),
       }
     })
     return [chars, indice]
@@ -52,13 +52,13 @@
     const animationNode = animate(node.children, {
       opacity: isIn ? 1 : 0,
       duration: 0,
-      delay: (...args) => (stagger(44)(...args) as number) + delay,
+      delay: (...args) => (stagger(55)(...args) as number) + delay,
     })
 
     const animationIndice = animate(indice, {
       target: isIn ? 0 : () => utils.random(0, ALL_CHARACTERS.length * 3),
       duration: immediate ? 0 : duration,
-      delay: (...args) => (stagger(44)(...args) as number) + delay,
+      delay: (...args) => (stagger(55)(...args) as number) + delay,
       onUpdate: () => {
         indice.forEach(({ original, target }, index) => {
           const roundedOffset = Math.floor(target)
@@ -80,7 +80,7 @@
 
 <span
   {@attach attachAnimation}
-  class={cn('flex flex-wrap gap-[0.25em] font-mono', className)}
+  class={cn('flex flex-wrap font-mono', className)}
 >
   {#each chars as char, index (index)}
     <span class="opacity-0">

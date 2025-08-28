@@ -1,45 +1,71 @@
 <script lang="ts">
-  import { NameCard } from '@/components/NameCard'
-  import { DURATION_SLOW, DURATION_SLOWEST } from '@/lib/animations/constants'
-  import { fade } from '@/lib/animations/transition'
-  import { useDeviceType } from '@/lib/svelte/breakpointValues.svelte'
+  import { IconX } from '@tabler/icons-svelte'
+  import { fade, slide } from 'svelte/transition'
+
+  import { Button } from '@/components/Buttons'
+  import { Canvas } from '@/components/Canvas'
+  import PageSpinner from '@/components/Spinners/PageSpinner.svelte'
+  import { appState } from '@/lib/contexts/AppState'
   import { MinesSweeperBoard } from '@/modules/games/boardGames/MinesSweeper'
-  import { Canvas } from '@/modules/main/components/Canvas'
-  // import { MainChat } from '@/modules/main/components/Chat'
 
-  import { HeroScene } from '@/modules/main/scenes/Hero'
-  import { World } from '@/modules/main/scenes/World'
+  import { MainChat } from '../../components/Chat'
+  import { SuspenseFallback } from '../../components/SuspenseFallback'
+  import { Scenes } from './scenes'
+  import { About } from './sections/About'
+  import { Credit } from './sections/Credit'
+  import { Experience } from './sections/Experience'
+  import { Hero } from './sections/Hero'
 
-  import { appState } from '../../contexts/AppState'
-
-  const getDeviceType = useDeviceType()
-
-  $effect(() => {
-    const deviceType = getDeviceType()
-
-    if (appState.scene === 'game' && !deviceType.isDesktop) {
-      appState.scene = 'top'
-    }
-  })
+  let container = $state<HTMLDivElement>()
 </script>
 
-<NameCard />
-<div class="fixed top-0 left-0 text-white/5 md:hidden">placeholder</div>
+{#snippet loadingFallback()}
+  <SuspenseFallback />
+{/snippet}
 
-<div class="fixed inset-0 z-10 full-h w-full">
-  <Canvas>
-    <HeroScene />
-    <World />
+<div
+  bind:this={container}
+  class="canvas-container fixed full-h w-full"
+  style:--scroll-y={appState.creditScrollProgress}
+>
+  <Canvas {loadingFallback}>
+    <Scenes {container} />
   </Canvas>
-  {#if appState.scene === 'game'}
-    <div
-      class="!z-40"
-      in:fade={{
-        duration: DURATION_SLOW,
-        delay: DURATION_SLOWEST * 2.5,
+</div>
+
+{#if appState.isOpenCookiesweeper}
+  <div transition:slide class="transform-center fixed z-[200] hidden md:block">
+    <MinesSweeperBoard isOpen={appState.isOpenCookiesweeper} />
+    <Button
+      variant="ghost"
+      size="icon"
+      class="absolute top-4 right-4"
+      onclick={() => {
+        appState.isOpenCookiesweeper = false
       }}
     >
-      <MinesSweeperBoard />
-    </div>
-  {/if}
-</div>
+      <IconX />
+    </Button>
+  </div>
+{/if}
+
+{#if appState.isReady}
+  <MainChat />
+  <Hero />
+
+  <div in:fade class="z-50 min-h-screen w-full">
+    <div class="z-50 min-h-screen w-full"></div>
+    <About />
+    <Experience />
+    <Credit />
+  </div>
+{:else}
+  <PageSpinner />
+{/if}
+
+<style>
+  .canvas-container {
+    --scroll-y: 0;
+    transform: translateY(calc(max(var(--scroll-y), 0) * -20vh));
+  }
+</style>

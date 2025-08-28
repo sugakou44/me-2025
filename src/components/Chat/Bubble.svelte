@@ -21,5 +21,11 @@
     }),
   })}
 >
-  <span class="relative block px-4 py-2">{content}</span>
+  <span class="relative block px-4 py-2">
+    {#if typeof content === 'string'}
+      {content}
+    {:else}
+      {@render content()}
+    {/if}
+  </span>
 </p>

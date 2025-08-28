@@ -1,33 +1,60 @@
-import { nanoid } from 'nanoid'
+import { messages as experience } from './messages/experience.svelte'
+import { messages as greeting } from './messages/greeting.svelte'
+import { messages as techStack } from './messages/techStack.svelte'
 
 import type { Message } from '@/components/Chat'
 
-export const MESSAGES: Message[] = [
+type MessageWithoutID = Omit<Message, 'id'>
+
+export const HELLO_MESSAGES: MessageWithoutID[] = [
   {
-    id: nanoid(),
-    content: 'In consequat incididunt qui ea.',
-  },
-  {
-    id: nanoid(),
-    content: 'Deserunt aliqua elit amet.',
+    content: greeting.hello,
     byUser: true,
   },
   {
-    id: nanoid(),
-    content: 'Duis aliquip.',
+    content: greeting.helloMe,
   },
   {
-    id: nanoid(),
-    content: 'Nisi minim.',
+    delay: 10_000,
+    content: greeting.gameInvite,
+  },
+  {
+    delay: 10,
+    content: 'left click to reveal, right click to mark as 🍪',
+  },
+]
+
+export const TECHSTACK_MESSAGES: MessageWithoutID[] = [
+  {
+    content: 'I want to know more',
     byUser: true,
   },
   {
-    id: nanoid(),
-    content: 'Culpa proident irure amet consequat.',
+    content: 'Sure!',
+  },
+  {
+    content: 'I am actively using',
+  },
+  {
+    content: techStack.currentStack,
+  },
+  {
+    content: 'I also use these in lesser degrees',
+  },
+  {
+    content: techStack.pastStack,
+  },
+]
+
+export const EXPERIENCE_MESSAGES: MessageWithoutID[] = [
+  {
+    content: 'Do you have show cases of your work?',
     byUser: true,
   },
   {
-    id: nanoid(),
-    content: 'Lorem ipsum adipisicing irure cillum ad proident.',
+    content: "Unfortunately I haven't finihsed that section yet.",
+  },
+  {
+    content: experience.projectArchiveLink,
   },
 ]

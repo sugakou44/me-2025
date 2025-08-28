@@ -12,7 +12,7 @@ export const buttonVariants = tv({
   ),
   variants: {
     variant: {
-      default: cn(
+      primary: cn(
         'border border-current bg-background text-primary-foreground shadow-[0.125rem_0.125rem_var(--color-primary)]',
         'hover:bg-primary-foreground hover:text-background',
         'active:translate-x-[0.125rem] active:translate-y-[0.125rem] active:shadow-[0rem_0rem_var(--color-primary)]',
@@ -59,11 +59,12 @@ export const buttonVariants = tv({
       sm: 'h-8 px-3 text-sm md:h-10',
       lg: 'h-10 px-4 py-2 md:h-12 md:text-lg lg:text-xl',
       xl: 'h-12 px-8 md:h-14 md:text-lg lg:text-xl',
+      '4xl': 'h-20 px-12 py-8 text-2xl md:h-14 md:text-4xl lg:text-4xl',
       icon: 'aspect-square h-10 w-10 md:h-12 md:w-12',
     },
   },
   defaultVariants: {
-    variant: 'default',
+    variant: 'primary',
     size: 'default',
   },
 })

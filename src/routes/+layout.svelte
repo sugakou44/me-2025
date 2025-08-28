@@ -1,33 +1,41 @@
 <script lang="ts">
   import SvelteSeo from 'svelte-seo'
 
-  import { Footer } from '@/components/Footer'
-  import { CONTACT } from '@/lib/constants/contact'
+  import { SideFooter } from '@/components/Footer'
+  import { MainHead } from '@/components/Head'
+  import { NameCard } from '@/components/NameCard'
   import {
     DEFAULT_DESCRIPTION,
     DEFAULT_TITLE,
     THEME_COLOR,
   } from '@/lib/constants/seo'
+  import { windowState } from '@/lib/contexts/Window'
   import { Error500 } from '@/modules/errors/pages/Error500'
 
+  import '@/lib/svelte/lenis.svelte'
   import '../app.css'
+
+  import { ROUTES } from '@/lib/constants/routes'
 
   let { children } = $props()
 
-  const OG_IMAGE = `${CONTACT.website.href}/og.png`
+  const OG_IMAGE = `${ROUTES.home.href}/og.png`
 </script>
 
 <SvelteSeo
   title={DEFAULT_TITLE}
   description={DEFAULT_DESCRIPTION}
-  canonical={CONTACT.website.href}
+  canonical={ROUTES.home.href}
+/>
+
+<SvelteSeo
   notranslate
   themeColor={THEME_COLOR}
-  manifest={`${CONTACT.website.href}/manifest.json`}
+  manifest={`${ROUTES.home.href}/manifest.json`}
   openGraph={{
     title: DEFAULT_TITLE,
     description: DEFAULT_DESCRIPTION,
-    url: CONTACT.website.href,
+    url: ROUTES.home.href,
     type: 'website',
     images: [
       {
@@ -42,9 +50,10 @@
   <meta property="og:image" content={OG_IMAGE} />
 </svelte:head>
 
+<MainHead />
 <main>
-  <!-- <Curtain /> -->
   <svelte:boundary>
+    <NameCard />
     {@render children()}
 
     {#snippet failed(error)}
@@ -53,4 +62,4 @@
   </svelte:boundary>
 </main>
 
-<Footer />
+<SideFooter />

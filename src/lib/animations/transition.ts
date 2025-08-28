@@ -1,6 +1,6 @@
-import { cubicOut, linear } from 'svelte/easing'
+import { cubicOut } from 'svelte/easing'
 
-import type { FadeParams, ScaleParams } from 'svelte/transition'
+import type { ScaleParams } from 'svelte/transition'
 
 export function scaleY(
   node: HTMLElement,
@@ -28,15 +28,28 @@ export function scaleY(
   }
 }
 
-export function fade(
+export function curtainOut(
   node: HTMLElement,
-  { delay = 0, duration = 400, easing = linear }: FadeParams = {},
+  {
+    delay = 0,
+    duration = 400,
+    easing = cubicOut,
+    start = 0,
+    opacity = 0,
+  }: ScaleParams = {},
 ) {
-  const o = +getComputedStyle(node).opacity
+  const style = getComputedStyle(node)
+  const target_opacity = +style.opacity
+  const transform = style.transform === 'none' ? '' : style.transform
+  const sd = 1 - start
+  const od = target_opacity * (1 - opacity)
   return {
     delay,
     duration,
     easing,
-    css: (t: number) => `opacity: ${0.001 + t * o}`,
+    css: (_: unknown, t: number) => `
+			transform: ${transform} scaleY(${1 - sd * t});
+			opacity: ${0.01 + (target_opacity - od * t)}
+		`,
   }
 }

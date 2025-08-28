@@ -1,31 +1,6 @@
 import { utils } from 'animejs'
-import { innerHeight, scrollY } from 'svelte/reactivity/window'
 
 import { centerPointOrigin } from '@/lib/utils/math'
-
-export function useDocumentScrollProgress() {
-  const { position, progress } = $derived.by(() => {
-    if (typeof document === 'undefined') {
-      return {
-        position: 0,
-        progress: 0,
-      }
-    }
-    const scrollHeight = document.documentElement.scrollHeight ?? 0
-    const position = scrollY.current ?? 0
-    const progress = position / (scrollHeight - (innerHeight.current ?? 0))
-
-    return {
-      position,
-      progress,
-    }
-  })
-
-  return () => ({
-    position,
-    progress,
-  })
-}
 
 export function processMouseEvent(event: MouseEvent) {
   const target = event.currentTarget as HTMLElement

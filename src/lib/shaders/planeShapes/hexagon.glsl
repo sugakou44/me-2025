@@ -5,10 +5,9 @@
 float shape(vec2 uv, float borderWidth, float shapeRatio)
 {
     vec2 st = uv;
-    vec3 color = vec3(0.0);
 
-    // Remap the space to -1. to 1.
     st = st * 2. - 1.;
+    vec3 color = vec3(0.0);
 
     // Angle and radius from the current pixel
     float angle = atan(st.x, st.y) + PI;

@@ -1,15 +1,12 @@
 <script lang="ts">
-  // import { NameCard } from '@/components/NameCard'
-  import DrawingText from '@/components/Text/DrawingText.svelte'
-  import { RandomText } from '@/components/Text/RandomText'
-  import { Canvas } from '@/modules/main/components/Canvas'
-  // import { MinesSweeperBoard } from '@/modules/games/boardGames/MinesSweeper'
-  // import { TicTacToeBoard } from '@/modules/games/boardGames/TicTacToe'
-  // import { MainChat } from '@/modules/main/components/Chat'
+  import { Debug, World } from '@threlte/rapier'
 
-  // import Experience from '@/modules/main/components/Experience/Experience.svelte'
-  import { HeroScene } from '@/modules/main/scenes/Hero'
-  import { World } from '@/modules/main/scenes/World'
+  import { Canvas } from '@/components/Canvas'
+  import Control from '@/components/Canvas/Control.svelte'
+  import Interactivity from '@/components/GL/Interactivity/Interactivity.svelte'
+  import { MainChat } from '@/modules/main/components/Chat'
+  import { storyState } from '@/modules/main/contexts/StoryState'
+  import { Experience } from '@/modules/main/pages/HomePage/sections/Experience'
 
   let isOpen = $state(false)
 
@@ -24,28 +21,16 @@
   })
 </script>
 
-<!-- <NameCard /> -->
-
 <div class="fixed inset-0 z-40 full-h w-full">
-  <Canvas>
-    <HeroScene />
-    <World />
+  <Canvas renderMode="always">
+    <Control />
+    <Interactivity>
+      <World gravity={[0, 0, -10]}>
+        <Debug />
+      </World>
+    </Interactivity>
   </Canvas>
 </div>
-<div class="section flex min-h-[1000vh] flex-col items-center gap-10 p-20">
-  <DrawingText
-    as="h2"
-    content="DrawingText 404"
-    isIn={true}
-    class="section-title"
-    animationOptions={{
-      draw: isOpen ? '0 0.001' : '0 0.4',
-      // scale: isOpen ? 2 : 1,
-    }}
-  />
-  <!-- <MainChat /> -->
-  <!-- <Experience /> -->
-  <!-- <TicTacToeBoard />
-  <MinesSweeperBoard /> -->
-  <RandomText content="RandomText" isIn={isOpen} />
-</div>
+<Experience />
+<MainChat />
+<div class="min-h-[400vh]" bind:this={storyState.chapter2Container}></div>

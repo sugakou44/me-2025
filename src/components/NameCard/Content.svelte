@@ -1,8 +1,8 @@
 <script lang="ts">
-  import { IconBombFilled, IconX } from '@tabler/icons-svelte'
+  import { IconX } from '@tabler/icons-svelte'
   import { eases, stagger, utils } from 'animejs'
   import { tick } from 'svelte'
-  import { scale } from 'svelte/transition'
+  import { fade, scale } from 'svelte/transition'
 
   import { animate } from '@/lib/animations/animejs'
   import {
@@ -10,13 +10,14 @@
     DURATION_NORMAL,
     DURATION_SLOW,
   } from '@/lib/animations/constants'
-  import { fade } from '@/lib/animations/transition'
+  import { appState } from '@/lib/contexts/AppState'
   import { cn } from '@/lib/utils/className'
-  import { appState } from '@/modules/main/contexts/AppState'
 
   import { Button } from '../Buttons'
   import Avatar from './Avatar.svelte'
   import ButtonGroup from './ButtonGroup.svelte'
+
+  // import { squircleBackground } from '@/lib/svelte/backgroundSquircle.svelte'
 
   interface Props {
     forceOpen?: boolean
@@ -42,6 +43,9 @@
             (stagger(animationDuration / 4)(...args) as number) +
             animationDelay * 5
         : 0,
+      onComplete: () => {
+        appState.isIntroAnimationEnded = true
+      },
     })
 
     hasAnimated = true
@@ -54,19 +58,31 @@
 </script>
 
 <!-- background -->
-<div
+<!-- <div
   class={cn(
     'roate-y-180 absolute inset-0 -translate-z-[2px] overflow-hidden rounded-xl text-white transition-shadow select-none',
     {
       'shadow-md delay-500': !forceOpen && !isOpen,
-      'bg-background': !forceOpen,
+    },
+  )}
+  {@attach squircleBackground({
+    cornerRadius: 32,
+    class: 'fill-white',
+  })}
+></div> -->
+<div
+  class={cn(
+    'absolute inset-0 -translate-z-[2px] overflow-hidden rounded-xl  text-white transition-all duration-200 select-none',
+    {
+      'shadow-lg': !forceOpen && !isOpen,
+      'bg-white': !forceOpen,
     },
   )}
 ></div>
 
 <!-- content -->
 <div
-  class="section relative aspect-[1/1.65] h-full w-full rounded-xl transform-3d"
+  class="relative container mx-auto aspect-[1/1.65] h-full w-full overflow-hidden rounded-[32px] transform-3d xl:max-w-5xl"
 >
   {#await tick() then}
     <div
@@ -105,46 +121,26 @@
         class="text-center font-normal text-foreground will-change-opacity md:text-left"
       >
         Hi, I&apos;m
-        {#if isOpen || forceOpen}
-          <span
-            class="font-handwritting text-[1.3em] font-bold tracking-wider whitespace-nowrap text-primary-foreground"
+        <span
+          class={cn(
+            'font-handwritting-heading text-[1.3em] font-bold tracking-wider whitespace-nowrap text-primary-foreground opacity-0 transition-opacity',
+            {
+              'opacity-100': isOpen || forceOpen,
+            },
+          )}
+        >
+          PAAN<span
+            in:scale|global={{
+              opacity: 0.001,
+              easing: eases.outElastic(2, 0.5),
+              duration: hasAnimated ? 0 : animationDuration * 2,
+              delay: hasAnimated ? 0 : animationDelay * 8,
+            }}
+            class="inline-block origin-center font-handwritting-heading font-bold tracking-wider text-primary-foreground will-change-transform"
           >
-            PAAN<span
-              in:scale|global={{
-                opacity: 0.001,
-                easing: eases.outElastic(2, 0.5),
-                duration: hasAnimated ? 0 : animationDuration * 2,
-                delay: hasAnimated ? 0 : animationDelay * 8,
-              }}
-              class={cn(
-                'hidden origin-center font-handwritting font-bold tracking-wider text-primary-foreground will-change-transform md:inline-block',
-                { actionable: appState.scene !== 'game' },
-              )}
-              onclick={() => {
-                if (appState.scene === 'game') {
-                  return
-                }
-                appState.scene = 'game'
-              }}
-            >
-              {#if appState.scene !== 'game'}
-                <IconBombFilled />
-              {:else}
-                .
-              {/if}
-            </span><span
-              in:scale|global={{
-                opacity: 0.001,
-                easing: eases.outElastic(2, 0.5),
-                duration: hasAnimated ? 0 : animationDuration * 2,
-                delay: hasAnimated ? 0 : animationDelay * 8,
-              }}
-              class="inline-block origin-center font-handwritting font-bold tracking-wider text-primary-foreground will-change-transform md:hidden"
-            >
-              .
-            </span>
+            .
           </span>
-        {/if}
+        </span>
       </h1>
       <h4
         in:fade={{
@@ -158,9 +154,13 @@
         <br />
         based in Bangkok, Thailand
       </h4>
-      {#if isOpen || forceOpen}
+      <div
+        class={cn('opacity-0 transition-opacity', {
+          'opacity-100': isOpen || forceOpen,
+        })}
+      >
         <ButtonGroup {@attach buttonGroupAnimation} />
-      {/if}
+      </div>
       <div class="flex-[1]"></div>
     </div>
   {/await}
