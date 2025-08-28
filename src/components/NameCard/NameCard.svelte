@@ -55,13 +55,13 @@
 	`
   })
 
-  $effect(() => {
+  $effect.pre(() => {
     contentAnimation.set(isIn ? 0 : 1, {
       easing: isIn ? backOut : cubicOut,
     })
   })
 
-  $effect(() => {
+  $effect.pre(() => {
     if (
       !appState.isInHero &&
       untrack(() => appState.isOpenNameCard) &&
@@ -71,7 +71,7 @@
     }
   })
 
-  $effect(() => {
+  $effect.pre(() => {
     if (windowState.pathname && untrack(() => appState.isOpenNameCard)) {
       appState.isOpenNameCard = false
     }

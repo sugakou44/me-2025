@@ -125,7 +125,7 @@
     return [`translateY(${leftY}px)`, `translateY(${rightY}px)`]
   })
 
-  $effect(() => {
+  $effect.pre(() => {
     spring.set(
       { x: innerWidth / 2, y: innerHeight / 2 },
       {

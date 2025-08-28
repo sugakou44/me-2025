@@ -1,30 +1,13 @@
 <script lang="ts">
   import { T, useStage, useTask, useThrelte } from '@threlte/core'
 
-  // import { useFBO } from '@threlte/extras'
-  // import { asset } from '$app/paths'
-  // import {
-  // devicePixelRatio,
-  // innerHeight,
-  // innerWidth,
-  // } from 'svelte/reactivity/window'
-  // import { SRGBColorSpace } from 'three'
-
-  // import { Interactivity } from '@/components/GL/Interactivity'
-  // import {
-  //   vertexShader as QuadVertexShader,
-  //   ScreenQuad,
-  // } from '@/components/GL/ScreenQuad'
   import { windowState } from '@/lib/contexts/Window'
-  // import { getTick } from '@/lib/three/frame'
   import { COLORS } from '@/modules/main/constants/colors'
   import { homeState } from '@/modules/main/contexts/HomeState'
 
   import { AboutScene, AboutScenePerspective } from './About'
   import { ExperienceScene } from './Experience'
   import { HeroScene } from './Hero'
-
-  // import QuadFragmentShader from './shaders/effect.fragment.glsl'
 
   import type { OrthographicCamera, PerspectiveCamera } from 'three'
 
@@ -35,33 +18,22 @@
   let { container: _container }: Props = $props()
 
   let perspectiveCamera = $state<PerspectiveCamera | undefined>()
-  // const perspectiveFBO = useFBO({
-  //   colorSpace: SRGBColorSpace,
-  // })
 
   let orthographicCamera = $state<OrthographicCamera | undefined>()
-  // const orthographicFBO = useFBO({
-  //   colorSpace: SRGBColorSpace,
-  // })
-
-  // let effectScene = $state<Scene | undefined>()
-  // let effectCamera = $state<OrthographicCamera | undefined>()
+  let precompileCamera = $state<OrthographicCamera | undefined>()
 
   const { mainStage, renderer, autoRender } = useThrelte()
 
   autoRender.current = false
+  let compiled = false
 
   const effectStage = useStage('effect', { before: mainStage })
   useStage('gpgpu', { before: effectStage })
 
-  $effect(() => {
-    // const dpr = devicePixelRatio.current ?? 1.0
-
+  $effect.pre(() => {
     const width = windowState.windowWidth
     const height = windowState.windowHeight
 
-    // perspectiveFBO.setSize(width, height)
-    // orthographicFBO.setSize(width, height)
     renderer.setSize(width, height)
 
     if (orthographicCamera) {
@@ -72,10 +44,33 @@
     }
   })
 
-  $effect(() => {
+  $effect.pre(() => {
     renderer.setClearColor(
       COLORS.secondary.clone().addScalar(0.75).multiplyScalar(0.8),
     )
+  })
+
+  $effect(() => {
+    if (compiled) {
+      return
+    }
+
+    if (
+      !homeState.perspectiveScene ||
+      !homeState.orthographicScene ||
+      !precompileCamera
+    ) {
+      return
+    }
+
+    precompileCamera.left = -windowState.windowWidth / 2
+    precompileCamera.right = windowState.windowWidth / 2
+    precompileCamera.top = windowState.windowHeight / 2
+    precompileCamera.bottom = windowState.scrollHeight * 2
+    renderer.compile(homeState.orthographicScene, precompileCamera)
+    renderer.compile(homeState.perspectiveScene, precompileCamera)
+
+    compiled = true
   })
 
   useTask(() => {
@@ -93,41 +88,16 @@
     renderer.render(homeState.orthographicScene, orthographicCamera)
     renderer.clearDepth()
     renderer.render(homeState.perspectiveScene, perspectiveCamera)
-
-    // renderer.setRenderTarget(perspectiveFBO)
-    // renderer.render(homeState.perspectiveScene, perspectiveCamera)
-    // renderer.setRenderTarget(orthographicFBO)
-    // renderer.render(homeState.orthographicScene, orthographicCamera)
-
-    // effectQuadUniform.perspectiveTexture.value = perspectiveFBO.texture
-    // effectQuadUniform.orthographicTexture.value = orthographicFBO.texture
-    // effectQuadUniform.tick.value = getTick()
-
-    // renderer.setRenderTarget(lastRenderTarget)
-    // renderer.render(effectScene, effectCamera)
   })
-
-  // const effectQuadUniform = {
-  //   tick: {
-  //     value: 0,
-  //   },
-  //   perspectiveTexture: {
-  //     value: null as unknown as Texture,
-  //   },
-  //   orthographicTexture: {
-  //     value: null as unknown as Texture,
-  //   },
-  //   fadeTexture: {
-  //     value: null,
-  //   },
-  //   fadeMixFactor: {
-  //     value: 0,
-  //   },
-  //   diffuse: {
-  //     value: COLORS.secondary.clone().addScalar(0.75).multiplyScalar(0.8),
-  //   },
-  // }
 </script>
+
+<T.OrthographicCamera
+  position.y={-windowState.scrollPosition}
+  position.z={200}
+  near={0}
+  far={400}
+  bind:ref={precompileCamera}
+/>
 
 <T.Scene bind:ref={homeState.perspectiveScene}>
   <T.PerspectiveCamera
@@ -136,7 +106,6 @@
     fov={70}
     near={0.001}
     far={20}
-    frustumCulled={true}
     bind:ref={perspectiveCamera}
   />
   <T.Group>
@@ -151,7 +120,6 @@
     position.z={200}
     near={0}
     far={400}
-    frustumCulled={false}
     bind:ref={orthographicCamera}
   />
   <T.Group>
@@ -159,21 +127,3 @@
     <ExperienceScene />
   </T.Group>
 </T.Scene>
-
-<!-- <T.Scene bind:ref={effectScene}>
-    <T.OrthographicCamera
-      bind:ref={effectCamera}
-      position={[0, 0, 5]}
-      lookAt={[0, 0, 0]}
-      near={0}
-      far={10}
-    />
-    <ScreenQuad>
-      <T.ShaderMaterial
-        vertexShader={QuadVertexShader}
-        fragmentShader={QuadFragmentShader}
-        uniforms={effectQuadUniform}
-        uniforms.fadeTexture.value={fadeTexture}
-      />
-    </ScreenQuad>
-  </T.Scene> -->
