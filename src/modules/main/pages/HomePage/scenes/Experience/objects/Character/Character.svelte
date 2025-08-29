@@ -111,7 +111,7 @@ Title: Box Man
       const speed = windowState.scrollVelocity
       const acceleration = windowState.scrollAcceleration
 
-      const speedFactor = (acceleration <= 0 ? 0.1 : 1) * speed * dt + 0.01
+      const speedFactor = (acceleration <= 0 ? 0.1 : 8) * speed * dt + 0.01
 
       if (acceleration <= 0) {
         const weight = utils.clamp(
@@ -130,7 +130,7 @@ Title: Box Man
         walkingAnimationClip.setEffectiveWeight(weight)
         idleAnimationClip.setEffectiveWeight(1 - weight)
       }
-      mixer.update(dt * 0.01)
+      mixer.update(speed * 0.1 * dt)
     }
   })
 </script>
