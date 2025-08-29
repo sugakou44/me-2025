@@ -1,10 +1,7 @@
 import { page } from '$app/state'
 import { innerHeight, innerWidth, scrollY } from 'svelte/reactivity/window'
-import { Clock } from 'three'
 
 const END_THRESHOLD = 88
-
-const clock = new Clock()
 
 class WindowState {
   previousPathnames: string[] = []
@@ -34,23 +31,56 @@ class WindowState {
     while (this.previousScrollPositions.length > 1) {
       this.previousScrollPositions.shift()
     }
-    this.previousScrollPositions.push(currentValue)
+    this.previousScrollPositions.push({
+      value: currentValue,
+      timestamp: Date.now(),
+    })
 
     return currentValue
   })
-  previousScrollPositions: number[] = []
+  previousScrollPositions: { value: number; timestamp: number }[] = []
   get previousScrollPosition() {
     return this.previousScrollPositions[0]
   }
 
   get scrollDirection() {
-    return Math.sign(this.scrollPosition - this.previousScrollPosition)
+    return Math.sign(this.scrollPosition - this.previousScrollPosition.value)
   }
   get scrollVelocity() {
-    const dt = clock.getDelta() || 1
-    const diff = Math.abs(this.scrollPosition - this.previousScrollPosition)
+    const previousValue = this.previousScrollPosition
+    const dt = Math.max(Date.now() - previousValue.timestamp, 1)
+    const diff = Math.abs(this.scrollPosition - previousValue.value)
 
-    return diff / dt
+    let velocity = diff / dt
+
+    velocity = velocity < 0.001 ? 0 : velocity
+
+    while (this.previousScrollVelocities.length > 1) {
+      this.previousScrollVelocities.shift()
+    }
+    this.previousScrollVelocities.push({
+      value: velocity,
+      timestamp: Date.now(),
+    })
+
+    return velocity
+  }
+
+  previousScrollVelocities: { value: number; timestamp: number }[] = []
+  get previousScrollVelocity() {
+    return this.previousScrollVelocities[0]
+  }
+
+  get scrollAcceleration() {
+    const previousValue = this.previousScrollVelocity
+    const dt = Math.max(Date.now() - previousValue.timestamp, 1)
+    const diff = this.scrollVelocity - previousValue.value
+
+    const acceleration = diff / dt
+
+    // acceleration = Math.abs(acceleration) < 0.001 ? 0 : acceleration
+
+    return acceleration
   }
 
   scrollHeight = $derived.by(() => {

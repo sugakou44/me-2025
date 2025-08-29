@@ -15,11 +15,19 @@ Title: Box Man
     useGltfAnimations,
     useSuspense,
   } from '@threlte/extras'
+  import { utils } from 'animejs'
   import { AnimationUtils, Group } from 'three'
+
+  import { windowState } from '@/lib/contexts/Window'
 
   import type { Props } from '@threlte/core'
   import type { Snippet } from 'svelte'
-  import type { Bone, MeshStandardMaterial, SkinnedMesh } from 'three'
+  import type {
+    AnimationAction,
+    Bone,
+    MeshStandardMaterial,
+    SkinnedMesh,
+  } from 'three'
 
   let {
     fallback,
@@ -39,6 +47,8 @@ Title: Box Man
   const dracoLoader = useDraco()
   const suspend = useSuspense()
 
+  let walkingAnimationClip = $state<AnimationAction>()
+  let idleAnimationClip = $state<AnimationAction>()
   ref = new Group()
 
   type ActionName = 'walk' | 'idle' | 'jump' | 'running' | 'victory'
@@ -61,18 +71,67 @@ Title: Box Man
   export const { actions, mixer } = useGltfAnimations<ActionName>(gltf, ref)
 
   $effect(() => {
-    const action = $actions.walk
+    const walkingAction = $actions.walk
+    const idleAction = $actions.idle
 
-    if (action && mixer && ref) {
-      const clip = AnimationUtils.subclip(action.getClip(), 'walk', 400, 900)
+    if (
+      idleAction &&
+      walkingAction &&
+      mixer &&
+      ref &&
+      !walkingAnimationClip &&
+      !idleAnimationClip
+    ) {
+      const walkingClip = AnimationUtils.subclip(
+        walkingAction.getClip(),
+        'walk',
+        400,
+        900,
+      )
 
-      const clipAction = mixer.clipAction(clip, ref)
-      clipAction.play()
+      walkingAnimationClip = mixer.clipAction(walkingClip, ref)
+      walkingAnimationClip.setEffectiveWeight(0)
+      walkingAnimationClip.play()
+
+      const idleClip = AnimationUtils.subclip(
+        idleAction.getClip(),
+        'idle',
+        0,
+        400,
+      )
+
+      idleAnimationClip = mixer.clipAction(idleClip, ref)
+      idleAnimationClip.setEffectiveWeight(1)
+      idleAnimationClip.play()
     }
   })
 
   useTask((dt) => {
-    if (mixer) mixer.update(dt * 0.1)
+    if (mixer && idleAnimationClip && walkingAnimationClip) {
+      const speed = windowState.scrollVelocity
+      const acceleration = windowState.scrollAcceleration
+
+      const speedFactor = (acceleration <= 0 ? 0.1 : 1) * speed * dt + 0.01
+
+      if (acceleration <= 0) {
+        const weight = utils.clamp(
+          walkingAnimationClip.getEffectiveWeight() - speedFactor,
+          0,
+          1,
+        )
+        walkingAnimationClip.setEffectiveWeight(weight)
+        idleAnimationClip.setEffectiveWeight(1 - weight)
+      } else {
+        const weight = utils.clamp(
+          walkingAnimationClip.getEffectiveWeight() + speedFactor,
+          0,
+          1,
+        )
+        walkingAnimationClip.setEffectiveWeight(weight)
+        idleAnimationClip.setEffectiveWeight(1 - weight)
+      }
+      mixer.update(dt * 0.01)
+    }
   })
 </script>
 

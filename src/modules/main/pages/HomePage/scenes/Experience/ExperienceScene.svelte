@@ -60,7 +60,7 @@
     <Character
       opacity={opacityTween.current}
       position={[0, 0, 2]}
-      rotation={[0, utils.degToRad(90) + rotationTween.current * Math.PI, 0]}
+      rotation={[0, utils.degToRad(90) + rotationTween.current * -Math.PI, 0]}
     />
   </T.Group>
 </T.Group>

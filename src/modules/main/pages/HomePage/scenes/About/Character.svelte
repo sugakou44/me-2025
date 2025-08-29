@@ -16,7 +16,7 @@ Title: Box Man
     useGltfAnimations,
     useSuspense,
   } from '@threlte/extras'
-  import { Group, Vector3 } from 'three'
+  import { AnimationUtils, Euler, Group } from 'three'
 
   import type { Props } from '@threlte/core'
   import type { Snippet } from 'svelte'
@@ -43,7 +43,7 @@ Title: Box Man
   const suspend = useSuspense()
 
   ref = new Group()
-  const tmpVec3 = new Vector3()
+  const originalRotation = new Euler()
 
   let mesh = $state<SkinnedMesh>()
   let joint = $state<Bone>()
@@ -70,9 +70,16 @@ Title: Box Man
   $effect(() => {
     const action = $actions.idle
 
-    if (action) {
-      action.play()
-      action.stop()
+    if (action && mixer && ref) {
+      const animationClip = AnimationUtils.subclip(
+        action.getClip(),
+        'idle',
+        0,
+        400,
+      )
+
+      const clipAction = mixer.clipAction(animationClip, ref)
+      clipAction.play()
     }
   })
 
@@ -82,20 +89,19 @@ Title: Box Man
     }
 
     joint = mesh.skeleton.bones.find((bone) => bone.name === 'Head_06')
-  })
 
-  $effect(() => {
     if (joint) {
-      tmpVec3.set(-2 + lookAt, 0, 4)
+      originalRotation.copy(joint.rotation)
     }
   })
 
   useTask((dt) => {
-    if (joint) {
-      joint.lookAt(tmpVec3)
+    if (mixer) mixer.update(dt * 0.000001)
+    if (joint && originalRotation) {
+      joint.rotation.copy(originalRotation)
+      joint.rotation.x -= 0.75
+      joint.rotation.y += lookAt * 0.5
     }
-
-    if (mixer) mixer.update(dt / 10000)
   })
 </script>
 
