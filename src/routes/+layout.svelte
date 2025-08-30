@@ -9,7 +9,6 @@
     DEFAULT_TITLE,
     THEME_COLOR,
   } from '@/lib/constants/seo'
-  import { windowState } from '@/lib/contexts/Window'
   import { Error500 } from '@/modules/errors/pages/Error500'
 
   import '@/lib/svelte/lenis.svelte'

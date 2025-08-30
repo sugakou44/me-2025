@@ -9,22 +9,28 @@
   import { DURATION_FAST } from '@/lib/animations/constants'
   import { appState } from '@/lib/contexts/AppState'
   import { squircleBackground } from '@/lib/svelte/backgroundSquircle.svelte'
+  import { cn } from '@/lib/utils/className'
 
-  import { MainChat } from '../../components/Chat'
   import { SuspenseFallback } from '../../components/SuspenseFallback'
   import { Scenes } from './scenes'
   import { About } from './sections/About'
   import { Credit } from './sections/Credit'
   import { Experience } from './sections/Experience'
-  import { Hero } from './sections/Hero'
   import Spacer from './Spacer.svelte'
 
   let container = $state<HTMLDivElement>()
   let gameLoader = $state<Promise<any>>()
+  let chatLoader = $state<Promise<any>>()
 
   $effect.pre(() => {
     if (appState.isOpenCookiesweeper && !gameLoader) {
       gameLoader = import('@/modules/games/boardGames/MinesSweeper')
+    }
+  })
+
+  $effect.pre(() => {
+    if (appState.isIntroAnimationEnded && !chatLoader) {
+      chatLoader = import('../../components/Chat')
     }
   })
 </script>
@@ -79,18 +85,27 @@
   </div>
 {/if}
 
-{#if appState.isReady}
-  <MainChat />
-  <Hero />
+{#if chatLoader && appState.isIntroAnimationEnded}
+  {#await chatLoader then { MainChat }}
+    <MainChat />
+  {/await}
+{/if}
 
-  <div in:fade class="z-50 min-h-screen w-full">
-    <div class="z-50 min-h-screen w-full"></div>
+<div
+  class={cn('contents', {
+    'fixed inset-0 -z-50 block': !appState.isReady,
+  })}
+>
+  <div in:fade class="z-50 min-h-dvh w-full">
+    <div class="z-50 min-h-dvh w-full"></div>
     <Spacer />
     <About />
     <Experience />
     <Credit />
   </div>
-{:else}
+</div>
+
+{#if !appState.isReady}
   <PageSpinner />
 {/if}
 

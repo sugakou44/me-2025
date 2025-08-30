@@ -26,6 +26,8 @@ export default defineConfig({
       root: '.',
     }),
     sveltekit(),
-    analyzer(),
+    analyzer({
+      enabled: process.env.ANALYZE_DEBUG === 'true',
+    }),
   ],
 })
