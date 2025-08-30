@@ -1,4 +1,4 @@
-#include "@/lib/shaders/math.glsl"
+#include "@/shaders/math.glsl"
 
 float cappedCone(in vec3 p, in float h, in float r1, in float r2)
 {

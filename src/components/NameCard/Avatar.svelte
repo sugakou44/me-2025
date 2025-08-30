@@ -20,12 +20,12 @@
     DEFAULT_SPRING_CONFIG,
   )
 
-  let face: SVGElement | null = $state(null)
-  let mouth: SVGElement | null = $state(null)
-  let eyeLeft: SVGElement | null = $state(null)
-  let eyeRight: SVGElement | null = $state(null)
-  let eyeBrownLeft: SVGElement | null = $state(null)
-  let eyeBrownRight: SVGElement | null = $state(null)
+  let face = $state<SVGElement>()
+  let mouth = $state<SVGElement>()
+  let eyeLeft = $state<SVGElement>()
+  let eyeRight = $state<SVGElement>()
+  let eyeBrownLeft = $state<SVGElement>()
+  let eyeBrownRight = $state<SVGElement>()
 
   const faceTransform = $derived.by(() => {
     if (!face) return ''

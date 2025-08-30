@@ -1,9 +1,9 @@
 
-#include "@/lib/shaders/transform.glsl"
-#include "@/lib/shaders/math.glsl"
-#include "@/lib/shaders/sdf/pie.glsl"
-#include "@/lib/shaders/sdf/segment.glsl"
-#include "@/lib/shaders/noises/snoise.glsl"
+#include "@/shaders/transform.glsl"
+#include "@/shaders/math.glsl"
+#include "@/shaders/sdf/pie.glsl"
+#include "@/shaders/sdf/segment.glsl"
+#include "@/shaders/noises/snoise.glsl"
 
 uniform float tick;
 uniform vec3 diffuseColor;

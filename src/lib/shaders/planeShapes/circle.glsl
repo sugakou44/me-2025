@@ -1,4 +1,4 @@
-#include "@/lib/shaders/math.glsl"
+#include "@/shaders/math.glsl"
 
 float circle(vec2 uv, float borderWidth, float shapeRatio)
 {

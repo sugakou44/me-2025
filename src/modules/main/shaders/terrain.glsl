@@ -1,5 +1,5 @@
-// #include "@/lib/shaders/math.glsl"
-// #include "@/lib/shaders/noises/snoise.glsl"
+// #include "@/shaders/math.glsl"
+// #include "@/shaders/noises/snoise.glsl"
 
 float getTerrainHeight(vec3 worldPos) {
     return 0.0;

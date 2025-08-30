@@ -1,6 +1,7 @@
 import { enhancedImages } from '@sveltejs/enhanced-img'
 import { sveltekit } from '@sveltejs/kit/vite'
 import { defineConfig } from 'vite'
+import { analyzer } from 'vite-bundle-analyzer'
 
 import glsl from './vite_plugins/glsl'
 import svgr from './vite_plugins/svgr'
@@ -25,5 +26,6 @@ export default defineConfig({
       root: '.',
     }),
     sveltekit(),
+    analyzer(),
   ],
 })

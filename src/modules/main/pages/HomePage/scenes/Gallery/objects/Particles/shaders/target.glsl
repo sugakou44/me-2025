@@ -1,4 +1,4 @@
-#include "@/lib/shaders/math.glsl"
+#include "@/shaders/math.glsl"
 
 uniform float tick;
 uniform float dt;

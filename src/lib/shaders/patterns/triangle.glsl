@@ -1,4 +1,4 @@
-#include "@/lib/shaders/math.glsl"
+#include "@/shaders/math.glsl"
 
 float trianglePattern(vec2 uv, float patternCount, float patternScaleRatio)
 {

@@ -1,16 +1,16 @@
-#include "@/lib/shaders/math.glsl"
+#include "@/shaders/math.glsl"
 
-#include "@/lib/shaders/planeShapes/circle.glsl"
-#include "@/lib/shaders/planeShapes/rectangle.glsl"
-#include "@/lib/shaders/planeShapes/triangle.glsl"
-#include "@/lib/shaders/planeShapes/octagon.glsl"
-#include "@/lib/shaders/planeShapes/hexagon.glsl"
+#include "@/shaders/planeShapes/circle.glsl"
+#include "@/shaders/planeShapes/rectangle.glsl"
+#include "@/shaders/planeShapes/triangle.glsl"
+#include "@/shaders/planeShapes/octagon.glsl"
+#include "@/shaders/planeShapes/hexagon.glsl"
 
-#include "@/lib/shaders/patterns/circle.glsl"
-#include "@/lib/shaders/patterns/square.glsl"
-#include "@/lib/shaders/patterns/plus.glsl"
-#include "@/lib/shaders/patterns/stripe.glsl"
-#include "@/lib/shaders/patterns/triangle.glsl"
+#include "@/shaders/patterns/circle.glsl"
+#include "@/shaders/patterns/square.glsl"
+#include "@/shaders/patterns/plus.glsl"
+#include "@/shaders/patterns/stripe.glsl"
+#include "@/shaders/patterns/triangle.glsl"
 
 uniform float opacity;
 

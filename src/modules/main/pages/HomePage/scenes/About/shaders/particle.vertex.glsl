@@ -1,6 +1,6 @@
-#include "@/lib/shaders/transform.glsl"
-#include "@/lib/shaders/noises/snoise.glsl"
-#include "@/lib/shaders/noises/curl.glsl"
+#include "@/shaders/transform.glsl"
+#include "@/shaders/noises/snoise.glsl"
+#include "@/shaders/noises/curl.glsl"
 
 uniform float tick;
 uniform float opacity;

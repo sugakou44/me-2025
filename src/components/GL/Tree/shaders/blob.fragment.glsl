@@ -1,5 +1,5 @@
-#include "@/lib/shaders/noises/snoise.glsl"
-#include "@/lib/shaders/math.glsl"
+#include "@/shaders/noises/snoise.glsl"
+#include "@/shaders/math.glsl"
 
 uniform float tick;
 uniform vec3 diffuseColor;

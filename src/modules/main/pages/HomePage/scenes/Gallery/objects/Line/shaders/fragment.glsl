@@ -1,4 +1,4 @@
-#include "@/lib/shaders/gradients/rainbowGradient.glsl"
+#include "@/shaders/gradients/rainbowGradient.glsl"
 
 uniform sampler2D curveTexture;
 uniform float stretchRatio;

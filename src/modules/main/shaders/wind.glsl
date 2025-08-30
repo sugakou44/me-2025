@@ -1,5 +1,5 @@
-#include "@/lib/shaders/noises/snoise.glsl"
-#include "@/lib/shaders/math.glsl"
+#include "@/shaders/math.glsl"
+#include "@/shaders/noises/snoise.glsl"
 
 float getWindStrength(vec3 worldPos, float time) {
     return mapRangeUv(snoise(vec3(worldPos.xy * 2.0, 0.0) + time));

@@ -1,12 +1,12 @@
 #include <common>
 
-#include "@/lib/shaders/math.glsl"
-#include "@/lib/shaders/hash.glsl"
-#include "@/lib/shaders/easing.glsl"
-#include "@/lib/shaders/bezier2c.glsl"
-#include "@/lib/shaders/transform.glsl"
-#include "@/lib/shaders/bezierGradient.glsl"
-#include "@/lib/shaders/noises/snoise.glsl"
+#include "@/shaders/math.glsl"
+#include "@/shaders/hash.glsl"
+#include "@/shaders/easing.glsl"
+#include "@/shaders/bezier2c.glsl"
+#include "@/shaders/transform.glsl"
+#include "@/shaders/bezierGradient.glsl"
+#include "@/shaders/noises/snoise.glsl"
 
 #include "@/modules/main/shaders/terrain.glsl"
 #include "@/modules/main/shaders/wind.glsl"

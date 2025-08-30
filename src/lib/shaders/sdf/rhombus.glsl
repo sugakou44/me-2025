@@ -1,4 +1,4 @@
-#include "@/lib/shaders/math.glsl"
+#include "@/shaders/math.glsl"
 
 // la,lb=semi axis, h=height, ra=corner
 float rhombus(vec3 p, float la, float lb, float h, float ra)

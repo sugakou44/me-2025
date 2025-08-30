@@ -1,5 +1,5 @@
-#include "@/lib/shaders/math.glsl"
-#include "@/lib/shaders/noises/curl.glsl"
+#include "@/shaders/math.glsl"
+#include "@/shaders/noises/curl.glsl"
 
 uniform float tick;
 uniform float dt;
