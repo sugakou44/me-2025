@@ -25,7 +25,7 @@ void main()
 
     vec3 windAxis = getWindAxis(modelSectionOrigin.xyz, tick);
     float windStrength = getWindStrength(modelSectionOrigin.xyz, tick);
-    float windLeanAngle = windStrength * 0.005 * swayFactor * modelSectionOrigin.z;
+    float windLeanAngle = windStrength * 0.008 * swayFactor * modelSectionOrigin.z;
 
     localPosition = localPosition + windAxis * windLeanAngle;
 

@@ -2,9 +2,6 @@ import { utils } from 'animejs'
 import { CatmullRomCurve3, Vector3 } from 'three'
 
 import { windowState } from '@/lib/contexts/Window'
-import { useAspectRatio } from '@/lib/svelte/aspectRatio.svelte'
-
-const getAspectRatio = useAspectRatio()
 
 class Track {
   #POINTS: ArrayAsVector3[] = [
@@ -36,7 +33,7 @@ class Track {
   ]
 
   mapPoint = (point: ArrayAsVector3) => {
-    const aspectRatio = getAspectRatio()
+    const aspectRatio = windowState.aspectRatio
     const newPoint = new Vector3(point[0], point[1], point[2])
     newPoint.x *= aspectRatio
     newPoint.y *= aspectRatio

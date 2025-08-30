@@ -13,7 +13,7 @@
     DURATION_SLOW,
     DURATION_SLOWEST,
   } from '@/lib/animations/constants'
-  import { useAspectRatio } from '@/lib/svelte/aspectRatio.svelte'
+  import { windowState } from '@/lib/contexts/Window'
 
   import { COLORS, PATTERNS, SHAPES, TOTAL, VARIANTS } from './constants'
   import FragmentShader from './shaders/fragment.glsl'
@@ -43,8 +43,7 @@
     }
   })
 
-  const getAspectRatio = useAspectRatio()
-  const aspectRatio = $derived(Math.max(getAspectRatio() / 1.6, 0.5))
+  const aspectRatio = $derived(Math.max(windowState.aspectRatio / 1.6, 0.5))
 
   let count = TOTAL + 4
 

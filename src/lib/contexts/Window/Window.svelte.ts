@@ -25,6 +25,14 @@ class WindowState {
 
   windowWidth = $derived(innerWidth.current ?? 0)
   windowHeight = $derived(innerHeight.current ?? 0)
+  aspectRatio = $derived.by(() => {
+    if (!this.windowWidth || !this.windowHeight) {
+      return 0
+    }
+
+    return this.windowWidth / this.windowHeight
+  })
+
   scrollPosition = $derived.by(() => {
     const currentValue = scrollY.current ?? 0
 

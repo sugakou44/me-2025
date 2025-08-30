@@ -26,7 +26,7 @@ void main() {
     positionTexel.a = positionTexel.a + dt;
 
     if (positionTexel.a >= 1.01 && enabled > 0.0) {
-        positionTexel.xyz = origin;
+        positionTexel.xyz = random3(uv + tick) * 4.0;
         positionTexel.a = mod(positionTexel.a, 1.0);
     } else if (enabled == 0.0) {
         positionTexel = initialPosition;

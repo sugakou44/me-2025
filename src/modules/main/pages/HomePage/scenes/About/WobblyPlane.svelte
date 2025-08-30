@@ -3,7 +3,7 @@
   import { utils } from 'animejs'
   import { Color, Vector2 } from 'three'
 
-  import { useAspectRatio } from '@/lib/svelte/aspectRatio.svelte'
+  import { windowState } from '@/lib/contexts/Window'
   import { getTick } from '@/lib/three/frame'
 
   import PlaneFragmentShader from './shaders/wobblyPlane.fragment.glsl'
@@ -21,9 +21,7 @@
     rotationRad = utils.degToRad(45),
   }: Props = $props()
 
-  const aspectRatio = useAspectRatio()
-
-  const scaleX = $derived(Math.max(aspectRatio() / 1.4, 1.2))
+  const scaleX = $derived(Math.max(windowState.aspectRatio / 1.4, 1.2))
 
   const planeUniform = {
     diffuse: {

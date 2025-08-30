@@ -7,6 +7,7 @@
 
   import { AboutScene, AboutScenePerspective } from './About'
   import { ExperienceScene } from './Experience'
+  // import { GalleryScene } from './Gallery'
   import { HeroScene } from './Hero'
 
   import type { OrthographicCamera, PerspectiveCamera } from 'three'
@@ -111,6 +112,7 @@
   <T.Group>
     <HeroScene />
     <AboutScenePerspective />
+    <!-- <GalleryScene /> -->
   </T.Group>
 </T.Scene>
 

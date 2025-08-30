@@ -8,6 +8,11 @@ import svgr from './vite_plugins/svgr'
 const IS_DEV = process.env.NODE_ENV !== 'production'
 
 export default defineConfig({
+  build: {
+    minify: true,
+    cssMinify: true,
+    sourcemap: 'hidden',
+  },
   plugins: [
     enhancedImages(),
     svgr(),

@@ -1,11 +1,13 @@
 <script lang="ts">
   import { T, useStage, useTask, useThrelte } from '@threlte/core'
   import { Tween } from 'svelte/motion'
+  import { AdditiveBlending } from 'three'
 
   import {
     DEFAULT_ALPHA_TEST,
     DURATION_SLOWER,
   } from '@/lib/animations/constants'
+  import { windowState } from '@/lib/contexts/Window'
   import { getTick } from '@/lib/three/frame'
 
   import { COUNT, SIZE } from './constants'
@@ -14,7 +16,7 @@
   import FragmentShader from './shaders/particles.fragment.glsl'
   import VertexShader from './shaders/particles.vertex.glsl'
 
-  import type { ShaderMaterial } from 'three'
+  import type { Texture } from 'three'
 
   interface Props {
     isIn?: boolean
@@ -22,8 +24,6 @@
   }
 
   let { isIn, position = [0, 0, 0] }: Props = $props()
-
-  let materialRef: ShaderMaterial
 
   const geometry = new ParticleGeometry(COUNT, SIZE)
   const opacityTween = new Tween(1, { duration: DURATION_SLOWER })
@@ -38,7 +38,7 @@
       value: 0,
     },
     size: {
-      value: 220.0,
+      value: 100.0,
     },
     opacity: {
       value: 0,
@@ -47,7 +47,7 @@
       value: [SIZE, SIZE],
     },
     positionMap: {
-      value: null,
+      value: null as unknown as Texture,
     },
     count: {
       value: COUNT,
@@ -65,14 +65,14 @@
   const gpgpuStage = useStage('gpgpu')
 
   useTask(() => {
-    if (!materialRef || opacityTween.current === 0) {
+    if (opacityTween.current === 0) {
       return
     }
 
     geometry.setDrawRange(0, Math.round(opacityTween.current * COUNT))
 
-    materialRef.uniforms.tick.value = getTick()
-    materialRef.uniforms.positionMap.value = positionMap.renderTarget.texture
+    uniforms.tick.value = getTick()
+    uniforms.positionMap.value = positionMap.renderTarget.texture
   })
 
   useTask(
@@ -104,9 +104,10 @@
 
 <T.Points {geometry} frustumCulled={false}>
   <T.ShaderMaterial
-    bind:ref={materialRef}
     {uniforms}
     uniforms.opacity.value={opacityTween.current}
+    uniforms.size.value={100 /
+      Math.max(windowState.aspectRatio, 1 / windowState.aspectRatio)}
     vertexShader={VertexShader}
     fragmentShader={FragmentShader}
     transparent

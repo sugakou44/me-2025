@@ -17,7 +17,7 @@
   <div class={cn('circle absolute h-1/4 w-1/4 rounded-full')}>
     <div
       class={cn(
-        'circle__before relative h-full w-full border-1 border-accent-foreground bg-white',
+        'circle__before relative h-full w-full border-1 border-primary-foreground bg-white',
       )}
     >
       <div

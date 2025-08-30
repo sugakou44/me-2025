@@ -20,13 +20,13 @@ const DEFAULT_UNIFORMS = {
     value: 0,
   },
   forceAttenuation: {
-    value: 0.4,
+    value: 4.4,
   },
   forceFrequency: {
     value: Math.PI,
   },
   expandFactor: {
-    value: 1.2,
+    value: 1.5,
   },
   enabled: {
     value: 0,

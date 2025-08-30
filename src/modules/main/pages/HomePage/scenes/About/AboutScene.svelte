@@ -9,19 +9,17 @@
     FAST_SPRING_CONFIG,
   } from '@/lib/animations/constants'
   import { windowState } from '@/lib/contexts/Window'
-  import { useAspectRatio } from '@/lib/svelte/aspectRatio.svelte'
   import { gestures } from '@/lib/svelte/gestures.svelte'
   import { homeState } from '@/modules/main/contexts/HomeState'
 
   import Character from './Character.svelte'
   import WobblyPlane from './WobblyPlane.svelte'
 
-  const aspectRatio = useAspectRatio()
   const size = $derived(
     Math.max(windowState.windowWidth, windowState.windowHeight) * 3,
   )
   const minSize = $derived(
-    windowState.windowHeight * Math.max(aspectRatio(), 1) * 0.75,
+    windowState.windowHeight * Math.max(windowState.aspectRatio, 1) * 0.75,
   )
 
   const rotationRad = utils.degToRad(45)

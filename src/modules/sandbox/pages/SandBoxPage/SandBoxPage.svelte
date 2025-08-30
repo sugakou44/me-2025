@@ -4,9 +4,8 @@
   import { Canvas } from '@/components/Canvas'
   import Control from '@/components/Canvas/Control.svelte'
   import Interactivity from '@/components/GL/Interactivity/Interactivity.svelte'
-  import { MainChat } from '@/modules/main/components/Chat'
   import { storyState } from '@/modules/main/contexts/StoryState'
-  import { Experience } from '@/modules/main/pages/HomePage/sections/Experience'
+  import { GalleryScene } from '@/modules/main/pages/HomePage/scenes/Gallery'
 
   let isOpen = $state(false)
 
@@ -27,10 +26,9 @@
     <Interactivity>
       <World gravity={[0, 0, -10]}>
         <Debug />
+        <GalleryScene />
       </World>
     </Interactivity>
   </Canvas>
 </div>
-<Experience />
-<MainChat />
 <div class="min-h-[400vh]" bind:this={storyState.chapter2Container}></div>

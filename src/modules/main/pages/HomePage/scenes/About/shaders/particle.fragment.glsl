@@ -1,6 +1,4 @@
-
 #include "@/modules/main/shaders/color.glsl"
-#include "@/lib/shaders/colors.glsl"
 
 uniform float tick;
 uniform float opacity;
