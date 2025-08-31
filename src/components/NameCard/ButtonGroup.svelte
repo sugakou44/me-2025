@@ -7,13 +7,25 @@
 
   import { CONTACT } from '@/lib/constants/contact'
   import { ROUTES } from '@/lib/constants/routes'
+  import { cn } from '@/lib/utils/className'
 
   import MagnetButton from '../Buttons/MagnetButton.svelte'
 
-  const props = $props()
+  interface Props {
+    isIn?: boolean
+  }
+
+  const { isIn }: Props = $props()
 </script>
 
-<div {...props} class="flex items-center justify-center gap-0 md:justify-start">
+<div
+  class={cn(
+    'flex items-center justify-center gap-0 opacity-0 transition-opacity md:justify-start',
+    {
+      'opacity-100': isIn,
+    },
+  )}
+>
   <MagnetButton
     containerClassName="md:mt-5 button"
     class="h-10"

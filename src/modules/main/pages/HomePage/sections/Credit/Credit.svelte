@@ -12,14 +12,14 @@
 
   const CREDIT_ITEMS: CreditItem[] = [
     {
+      href: 'https://sketchfab.com/3d-models/box-man-3239592d03d849548e4563f07ad95614',
+      label: 'Box Man by 「 Zhang Shangbin 」',
+      group: 'Model',
+    },
+    {
       href: 'https://www.freepik.com/premium-photo/isolated-green-bamboo-leaves-element-3d-rendering_152768566.htm#fromView=search&page=2&position=14&uuid=3cdfaf1e-6c72-4a6d-a009-e01187116ab6&query=single+grass+blade',
       label: 'Grass blade by 「 vinkf 」',
       group: 'Texture',
-    },
-    {
-      href: 'https://sketchfab.com/3d-models/box-man-3239592d03d849548e4563f07ad95614',
-      label: 'Box Man by 「 Zhang Shangbin 」',
-      group: 'model',
     },
   ]
 </script>

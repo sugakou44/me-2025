@@ -17,6 +17,7 @@ Title: Box Man
   } from '@threlte/extras'
   import { utils } from 'animejs'
   import { AnimationUtils, Group } from 'three'
+  import { SkeletonUtils } from 'three/examples/jsm/Addons.js'
 
   import { windowState } from '@/lib/contexts/Window'
 
@@ -63,7 +64,7 @@ Title: Box Man
   }
 
   const gltf = suspend(
-    useGltf<GLTFResult>('/models/box-man-transformed2.glb', {
+    useGltf<GLTFResult>('/models/box-man-transformed.glb', {
       dracoLoader,
     }),
   )
@@ -133,6 +134,9 @@ Title: Box Man
       mixer.update(speed * 0.1 * dt)
     }
   })
+
+  let skinnedMesh: SkinnedMesh | undefined
+  let rootJoint: Bone | undefined
 </script>
 
 <T is={ref} dispose={false} {...props}>
@@ -140,23 +144,27 @@ Title: Box Man
   {#await gltf}
     {@render fallback?.()}
   {:then gltf}
-    <T.Group name="Sketchfab_Scene">
-      <T is={gltf.nodes._rootJoint} />
-      <T.SkinnedMesh
-        name="Object_7"
-        geometry={gltf.nodes.Object_7.geometry}
-        skeleton={gltf.nodes.Object_7.skeleton}
-        scale={0.01}
-      >
-        <T.MeshToonMaterial
-          transparent
-          {opacity}
-          map={gltf.materials.HeZiTou.map}
-          roughness={0}
-          metalness={0}
-        />
-      </T.SkinnedMesh>
-    </T.Group>
+    {@const clone = SkeletonUtils.clone(gltf.scene)}
+    {@const _ = clone.traverse((object: any) => {
+      if (object.name === 'Object_7') {
+        skinnedMesh = object as SkinnedMesh
+        const currentMaterial = skinnedMesh.material as MeshStandardMaterial
+        currentMaterial.dispose()
+      }
+      if (object.name === '_rootJoint') {
+        rootJoint = object
+      }
+    })}
+    <T is={rootJoint} />
+    <T is={skinnedMesh} scale={0.01}>
+      <T.MeshToonMaterial
+        transparent
+        {opacity}
+        map={gltf.materials.HeZiTou.map}
+        roughness={0}
+        metalness={0}
+      />
+    </T>
   {:catch err}
     {@render error?.({ error: err })}
   {/await}

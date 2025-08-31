@@ -57,114 +57,98 @@
   }
 </script>
 
-<!-- background -->
-<!-- <div
-  class={cn(
-    'roate-y-180 absolute inset-0 -translate-z-[2px] overflow-hidden rounded-xl text-white transition-shadow select-none',
-    {
-      'shadow-md delay-500': !forceOpen && !isOpen,
-    },
-  )}
-  {@attach squircleBackground({
-    cornerRadius: 32,
-    class: 'fill-white',
-  })}
-></div> -->
-<div
-  class={cn(
-    'absolute inset-0 -translate-z-[2px] overflow-hidden rounded-4xl  text-white transition-all duration-200 select-none',
-    {
-      'shadow-lg': !forceOpen && !isOpen,
-      'shadow-2xl': !forceOpen && isOpen,
-      'bg-white ': !forceOpen,
-    },
-  )}
-></div>
-
 <!-- content -->
 <div
-  class="relative container mx-auto aspect-[1/1.65] h-full w-full overflow-hidden rounded-[32px] transform-3d xl:max-w-5xl"
+  class={cn(
+    'relative container mx-auto aspect-[1/1.65] h-full w-full overflow-hidden rounded-[32px] bg-white transition-shadow duration-500 transform-3d xl:max-w-5xl',
+    {
+      'shadow-2xl': !forceOpen && isOpen,
+    },
+  )}
 >
-  {#await tick() then}
-    <div
-      in:scale={{
-        easing,
-        opacity: 0.001,
-        duration: animationDuration,
-        delay: animationDelay,
-      }}
-      class="absolute right-2 bottom-[15%] left-2 h-[25%] overflow-hidden rounded-lg will-change-transform"
-    >
-      <div class="halftone-stripe-isometric text-primary"></div>
-      <div class=" absolute inset-0"></div>
-    </div>
-    <figure
-      in:scale={{
-        easing,
-        opacity: 0.001,
-        duration: animationDuration,
-        delay: animationDelay * 0.5,
-      }}
-      class="absolute right-2 bottom-2 left-2 will-change-transform md:top-1/5 md:right-[unset] md:bottom-0 md:left-0 md:w-[calc(50%-16px)]"
-    >
-      <Avatar isIn={!!isOpen || !!forceOpen} />
-    </figure>
-    <div
-      class="relative top-[10%] right-2 bottom-2 left-2 flex flex-col gap-2 md:absolute md:top-2 md:left-1/2"
-    >
-      <div class="flex-[1]"></div>
-      <h1
-        in:fade={{
-          easing,
-          duration: animationDuration * 2,
-          delay: animationDelay * 3,
-        }}
-        class="text-center font-normal text-foreground will-change-opacity md:text-left"
-      >
-        Hi, I&apos;m
-        <span
-          class={cn(
-            'font-handwritting-heading text-[1.3em] font-bold tracking-wider whitespace-nowrap text-primary-foreground opacity-0 transition-opacity',
-            {
-              'opacity-100': isOpen || forceOpen,
-            },
-          )}
-        >
-          PAAN<span
-            in:scale|global={{
-              opacity: 0.001,
-              easing: eases.outElastic(2, 0.5),
-              duration: hasAnimated ? 0 : animationDuration * 2,
-              delay: hasAnimated ? 0 : animationDelay * 8,
-            }}
-            class="inline-block origin-center font-handwritting-heading font-bold tracking-wider text-primary-foreground will-change-transform"
-          >
-            .
-          </span>
-        </span>
-      </h1>
-      <h2
-        in:fade={{
-          easing,
-          duration: animationDuration * 2,
-          delay: animationDelay * 4,
-        }}
-        class="font-header text-center font-heading text-xl leading-tight font-light text-foreground will-change-opacity md:text-left md:text-2xl lg:text-3xl"
-      >
-        <span class="font-medium">Front-end developer</span>
-        <br />
-        based in Bangkok, Thailand
-      </h2>
+  <div
+    class={cn('transition-opacity duration-200', {
+      'opacity-0': !forceOpen && !isOpen,
+      'opacity-100': forceOpen || isOpen,
+      'shadow-2xl': !forceOpen && isOpen,
+    })}
+  >
+    {#await tick() then}
       <div
-        class={cn('opacity-0 transition-opacity', {
-          'opacity-100': isOpen || forceOpen,
-        })}
+        in:scale={{
+          easing,
+          opacity: 0.001,
+          duration: animationDuration,
+          delay: animationDelay,
+        }}
+        class="absolute right-2 bottom-[15%] left-2 h-[25%] overflow-hidden rounded-lg will-change-transform"
       >
-        <ButtonGroup {@attach buttonGroupAnimation} />
+        <div class="halftone-stripe-isometric text-primary"></div>
+        <div class=" absolute inset-0"></div>
       </div>
-      <div class="flex-[1]"></div>
-    </div>
-  {/await}
+      <figure
+        in:scale={{
+          easing,
+          opacity: 0.001,
+          duration: animationDuration,
+          delay: animationDelay * 0.5,
+        }}
+        class="absolute right-2 bottom-2 left-2 will-change-transform md:top-1/5 md:right-[unset] md:bottom-0 md:left-0 md:w-[calc(50%-16px)]"
+      >
+        <Avatar isIn={!!isOpen || !!forceOpen} />
+      </figure>
+      <div
+        class="relative top-[10%] right-2 bottom-2 left-2 flex flex-col gap-2 md:absolute md:top-2 md:left-1/2"
+      >
+        <h1
+          in:fade={{
+            easing,
+            duration: animationDuration * 2,
+            delay: animationDelay * 3,
+          }}
+          class="pt-[25%] text-center font-normal text-foreground will-change-opacity md:text-left"
+        >
+          Hi, I&apos;m
+          <span
+            class={cn(
+              'font-handwritting-heading text-[1.3em] font-bold tracking-wider whitespace-nowrap text-primary-foreground opacity-0 transition-opacity',
+              {
+                'opacity-100': isOpen || forceOpen,
+              },
+            )}
+          >
+            PAAN<span
+              in:scale|global={{
+                opacity: 0.001,
+                easing: eases.outElastic(2, 0.5),
+                duration: hasAnimated ? 0 : animationDuration * 2,
+                delay: hasAnimated ? 0 : animationDelay * 8,
+              }}
+              class="inline-block origin-center font-handwritting-heading font-bold tracking-wider text-primary-foreground will-change-transform"
+            >
+              .
+            </span>
+          </span>
+        </h1>
+        <h2
+          in:fade={{
+            easing,
+            duration: animationDuration * 2,
+            delay: animationDelay * 4,
+          }}
+          class="font-header text-center font-heading text-xl leading-tight font-light text-foreground will-change-opacity md:text-left md:text-2xl lg:text-3xl"
+        >
+          <span class="font-medium">Front-end developer</span>
+          <br />
+          based in Bangkok, Thailand
+        </h2>
+        <ButtonGroup
+          isIn={isOpen || forceOpen}
+          {@attach buttonGroupAnimation}
+        />
+      </div>
+    {/await}
+  </div>
 
   {#if !forceOpen && isOpen}
     <div

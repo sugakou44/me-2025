@@ -41,27 +41,20 @@
   })
 
   const contentTransform = $derived.by(() => {
-    const { isDesktop } = deviceType()
-
     const t = contentAnimation.current
 
-    if (isDesktop) {
-      return `translate3d(-50%, calc(${-45 * t}vh + -50% + 0px), 0) scale(${1 - 0.5 * t}) rotateY(${-180 * t}deg) rotateZ(${90 * t}deg) translate3d(calc(${-50 * t}% + ${96 * t}px), calc(0% + 0px), 0)
-		`
-    }
-
     return `
-		translate3d(-50%, calc(${-45 * t}vh + -50% + 0px), 0) scale(${1 - 0.5 * t}) rotateY(${-180 * t}deg) rotateZ(0deg) translate3d(calc(0% + 0px), calc(${-50 * t}% + ${96 * t}px), 0)
+		translate3d(-50%, calc(${-45 * t}vh + -50% + 0px), 0) scale(${1 - 0.5 * t}) rotateZ(0deg) translate3d(calc(0% + 0px), calc(${-50 * t}% + ${96 * t}px), 0)
 	`
   })
 
-  $effect.pre(() => {
+  $effect(() => {
     contentAnimation.set(isIn ? 0 : 1, {
       easing: isIn ? backOut : cubicOut,
     })
   })
 
-  $effect.pre(() => {
+  $effect(() => {
     if (
       !appState.isInHero &&
       untrack(() => appState.isOpenNameCard) &&
@@ -71,7 +64,7 @@
     }
   })
 
-  $effect.pre(() => {
+  $effect(() => {
     if (windowState.pathname && untrack(() => appState.isOpenNameCard)) {
       appState.isOpenNameCard = false
     }
@@ -79,7 +72,7 @@
 </script>
 
 {#if page.status < 400 && page.url.pathname !== ROUTES.sandbox.pathname}
-  {#await appState.forceOpenHero || tick() then}
+  {#await tick() then}
     <div
       in:fly={{
         y: initialIsIn ? 0 : -100,
@@ -102,7 +95,7 @@
       {/if}
       <div
         style:transform={contentTransform}
-        class="pointer-events-auto absolute top-[45%] left-[50%] container mx-auto aspect-[1/1.65] w-full will-change-transform transform-3d md:aspect-[1.65] md:max-h-none xl:max-w-5xl"
+        class="pointer-events-auto absolute top-[45%] left-[50%] container mx-auto aspect-[1/1.65] w-full transition-none will-change-transform transform-3d md:aspect-[1.65] md:max-h-none xl:max-w-5xl"
       >
         <Content
           bind:isOpen={appState.isOpenNameCard}
@@ -110,24 +103,26 @@
           {initialIsIn}
         />
         {#if !isIn}
-          <div class="absolute inset-1 -translate-z-1">
-            <div
-              class="absolute right-0 bottom-0 !h-[96px] w-full -scale-x-100 md:top-[50%] md:right-12 md:w-[calc(100%/1.65)] md:translate-x-[50%] md:translate-y-[-50%] md:-rotate-90"
+          <div
+            in:fade={{
+              duration: DURATION_SLOW,
+              easing: cubicOut,
+            }}
+            class="absolute right-0 -bottom-0 !h-[110px] w-full scale-x-100"
+          >
+            <Button
+              variant="puller"
+              class="!h-full w-full rounded-t-none rounded-b-3xl pt-4 text-2xl shadow-lg md:text-3xl [&:hover>span]:shadow-xl"
+              onclick={() => {
+                appState.isOpenNameCard = true
+              }}
             >
-              <Button
-                variant="puller"
-                class="!h-full w-full rounded-t-none rounded-b-3xl  text-2xl md:text-3xl [&:hover>span]:shadow-lg"
-                onclick={() => {
-                  appState.isOpenNameCard = true
-                }}
+              <span
+                class="pointer-events-none rounded-full bg-background px-10 py-5 text-primary-foreground"
               >
-                <span
-                  class="pointer-events-none rounded-full bg-background px-10 py-5 text-primary-foreground"
-                >
-                  CONTACT
-                </span>
-              </Button>
-            </div>
+                CONTACT
+              </span>
+            </Button>
           </div>
         {/if}
       </div>

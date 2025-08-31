@@ -17,6 +17,7 @@ Title: Box Man
     useSuspense,
   } from '@threlte/extras'
   import { AnimationUtils, Euler, Group } from 'three'
+  import { SkeletonUtils } from 'three/examples/jsm/Addons.js'
 
   import type { Props } from '@threlte/core'
   import type { Snippet } from 'svelte'
@@ -103,32 +104,38 @@ Title: Box Man
       joint.rotation.y += lookAt * 0.5
     }
   })
+
+  let skinnedMesh: SkinnedMesh | undefined
+  let rootJoint: Bone | undefined
 </script>
 
-<T is={ref} dispose={false} {...props}>
+<T is={ref} dispose={false} frustumCulled={false} {...props}>
   <!-- eslint-disable-next-line svelte/require-store-reactive-access  -->
   {#await gltf}
     {@render fallback?.()}
   {:then gltf}
-    <T.Group name="Sketchfab_Scene">
-      <T is={gltf.nodes._rootJoint} />
-      <T.SkinnedMesh
-        bind:ref={mesh}
-        name="Object_7"
-        geometry={gltf.nodes.Object_7.geometry}
-        skeleton={gltf.nodes.Object_7.skeleton}
-        scale={0.01}
-      >
-        <T.MeshToonMaterial
-          transparent
-          {opacity}
-          map={gltf.materials.HeZiTou.map}
-          roughness={0}
-          metalness={0}
-        />
-        <Outlines color="white" thickness={4} {opacity} transparent />
-      </T.SkinnedMesh>
-    </T.Group>
+    {@const clone = SkeletonUtils.clone(gltf.scene)}
+    {@const _ = clone.traverse((object: any) => {
+      if (object.name === 'Object_7') {
+        skinnedMesh = object as SkinnedMesh
+        const currentMaterial = skinnedMesh.material as MeshStandardMaterial
+        currentMaterial.dispose()
+      }
+      if (object.name === '_rootJoint') {
+        rootJoint = object
+      }
+    })}
+    <T is={rootJoint} />
+    <T bind:ref={mesh} is={skinnedMesh} scale={0.01}>
+      <T.MeshToonMaterial
+        transparent
+        {opacity}
+        map={gltf.materials.HeZiTou.map}
+        roughness={0}
+        metalness={0}
+      />
+      <Outlines color="white" thickness={4} {opacity} transparent />
+    </T>
   {:catch err}
     {@render error?.({ error: err })}
   {/await}
