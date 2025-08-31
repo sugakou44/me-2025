@@ -9,7 +9,6 @@
   import { ROUTES } from '@/lib/constants/routes'
   import { appState } from '@/lib/contexts/AppState'
   import { windowState } from '@/lib/contexts/Window'
-  import { useDeviceType } from '@/lib/svelte/breakpointValues.svelte'
   import { cn } from '@/lib/utils/className'
 
   import { Button } from '../Buttons'
@@ -33,8 +32,6 @@
       clearTimeout(timer)
     }
   })
-
-  const deviceType = useDeviceType()
 
   const contentAnimation = new Tween(untrack(() => isIn) ? 0 : 1, {
     duration: DURATION_SLOW,

@@ -59,8 +59,9 @@
 
 <!-- content -->
 <div
+  style:transition-property="shadow background"
   class={cn(
-    'relative container mx-auto aspect-[1/1.65] h-full w-full overflow-hidden rounded-[32px] bg-white transition-all duration-500 transform-3d xl:max-w-5xl',
+    'relative container mx-auto aspect-[1/1.65] h-full w-full overflow-hidden rounded-[32px] bg-white transition-shadow duration-300 transform-3d xl:max-w-5xl',
     {
       'shadow-2xl': !forceOpen && isOpen,
       'bg-transparent': forceOpen,
@@ -68,7 +69,7 @@
   )}
 >
   <div
-    class={cn('transition-opacity duration-400', {
+    class={cn('transition-opacity duration-300', {
       'opacity-0': !forceOpen && !isOpen,
       'opacity-100': forceOpen || isOpen,
       'shadow-2xl': !forceOpen && isOpen,
@@ -85,7 +86,6 @@
         class="absolute right-2 bottom-[15%] left-2 h-[25%] overflow-hidden rounded-lg will-change-transform"
       >
         <div class="halftone-stripe-isometric text-primary"></div>
-        <div class=" absolute inset-0"></div>
       </div>
       <figure
         in:scale={{
