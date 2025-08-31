@@ -3,7 +3,7 @@
   import { Suspense } from '@threlte/extras'
   import { NoToneMapping, SRGBColorSpace } from 'three'
 
-  import { PerfMonitor } from '@/components/GL/PerfMonitor'
+  // import { PerfMonitor } from '@/components/GL/PerfMonitor'
 
   import type { Snippet } from 'svelte'
 
@@ -21,7 +21,7 @@
   toneMapping={NoToneMapping}
   {renderMode}
 >
-  <PerfMonitor />
+  <!-- <PerfMonitor /> -->
   <Suspense>
     {#snippet fallback()}
       {@render loadingFallback?.()}
