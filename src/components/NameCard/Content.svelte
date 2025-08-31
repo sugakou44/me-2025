@@ -72,10 +72,11 @@
 ></div> -->
 <div
   class={cn(
-    'absolute inset-0 -translate-z-[2px] overflow-hidden rounded-xl  text-white transition-all duration-200 select-none',
+    'absolute inset-0 -translate-z-[2px] overflow-hidden rounded-4xl  text-white transition-all duration-200 select-none',
     {
       'shadow-lg': !forceOpen && !isOpen,
-      'bg-white': !forceOpen,
+      'shadow-2xl': !forceOpen && isOpen,
+      'bg-white ': !forceOpen,
     },
   )}
 ></div>

@@ -39,8 +39,8 @@
 {/snippet}
 
 <Footer haveGhost class="">
-  <h4 class="text-center text-white md:text-start">Special Thanks</h4>
-  <ul>
+  <h4 class="text-center text-white">Special Thanks</h4>
+  <ul class="self-center">
     {#each CREDIT_ITEMS as item, index (index)}
       {@render creditItem(item)}
     {/each}

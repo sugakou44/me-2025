@@ -116,7 +116,7 @@
             >
               <Button
                 variant="puller"
-                class="!h-full w-full rounded-t-none rounded-b-xl  text-2xl md:text-3xl [&:hover>span]:shadow-lg"
+                class="!h-full w-full rounded-t-none rounded-b-3xl  text-2xl md:text-3xl [&:hover>span]:shadow-lg"
                 onclick={() => {
                   appState.isOpenNameCard = true
                 }}

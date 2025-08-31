@@ -119,9 +119,9 @@
 <T.Scene bind:ref={homeState.orthographicScene}>
   <T.OrthographicCamera
     position.y={-windowState.scrollPosition}
-    position.z={200}
+    position.z={50}
     near={0}
-    far={400}
+    far={200}
     bind:ref={orthographicCamera}
   />
   <T.Group>
