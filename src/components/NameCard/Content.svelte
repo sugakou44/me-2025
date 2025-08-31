@@ -149,7 +149,7 @@
           duration: animationDuration * 2,
           delay: animationDelay * 4,
         }}
-        class="font-header text-center leading-tight font-light will-change-opacity md:text-left"
+        class="font-header text-center font-heading text-xl leading-tight font-light text-foreground will-change-opacity md:text-left md:text-2xl lg:text-3xl"
       >
         <span class="font-medium">Front-end developer</span>
         <br />
