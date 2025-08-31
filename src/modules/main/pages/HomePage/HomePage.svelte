@@ -16,6 +16,7 @@
   import { About } from './sections/About'
   import { Credit } from './sections/Credit'
   import { Experience } from './sections/Experience'
+  import { Hero } from './sections/Hero'
   import Spacer from './Spacer.svelte'
 
   let container = $state<HTMLDivElement>()
@@ -84,7 +85,6 @@
     </div>
   </div>
 {/if}
-
 {#if chatLoader && appState.isIntroAnimationEnded}
   {#await chatLoader then { MainChat }}
     <MainChat />
@@ -96,6 +96,8 @@
     'fixed inset-0 -z-50 block': !appState.isReady,
   })}
 >
+  <Hero />
+
   <div in:fade class="z-50 min-h-dvh w-full">
     <div class="z-50 min-h-dvh w-full"></div>
     <Spacer />

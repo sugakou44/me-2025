@@ -26,7 +26,7 @@
   }
 
   let { forceOpen, isOpen = $bindable(false), initialIsIn }: Props = $props()
-  let hasAnimated = $state(false)
+  let hasAnimated = false
 
   const animationDuration = $derived(initialIsIn ? DURATION_SLOW : 0)
   const animationDelay = $derived(initialIsIn ? DURATION_NORMAL : 0)
