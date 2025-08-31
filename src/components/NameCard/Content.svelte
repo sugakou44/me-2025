@@ -143,7 +143,7 @@
           </span>
         </span>
       </h1>
-      <h4
+      <h2
         in:fade={{
           easing,
           duration: animationDuration * 2,
@@ -154,7 +154,7 @@
         <span class="font-medium">Front-end developer</span>
         <br />
         based in Bangkok, Thailand
-      </h4>
+      </h2>
       <div
         class={cn('opacity-0 transition-opacity', {
           'opacity-100': isOpen || forceOpen,
