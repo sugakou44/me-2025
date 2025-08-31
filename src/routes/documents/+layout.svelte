@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { DocumentsHead } from '@/components/Head'
+  import { DocumentsHead } from '@/components/Head/DocumentsHead'
   import HintText from '@/components/Text/HintText.svelte'
 
   let { children } = $props()
@@ -7,7 +7,7 @@
 
 <DocumentsHead />
 
-<div class="document container mx-auto full-h max-w-4xl p-4 md:p-8">
+<div class="document-container container mx-auto full-h max-w-4xl p-4 md:p-8">
   <div
     class="print:pt:4 h-full bg-white px-4 pt-10 pb-20 md:px-8 print:px-4 print:pb-4"
   >
@@ -19,32 +19,32 @@
 
 <style>
   :global(
-    .document h1,
-    .document h2,
-    .document h3,
-    .document h4,
-    .document p,
-    .document li
+    .document-container h1,
+    .document-container h2,
+    .document-container h3,
+    .document-container h4,
+    .document-container p,
+    .document-container li
   ) {
     font-family: var(--font-document);
   }
 
-  :global(.document h1) {
+  :global(.document-container h1) {
     font-size: var(--text-3xl);
   }
-  :global(.document h2) {
+  :global(.document-container h2) {
     font-size: var(--text-2xl);
   }
-  :global(.document h3) {
+  :global(.document-container h3) {
     font-size: var(--text-xl);
   }
-  :global(.document h4) {
+  :global(.document-container h4) {
     font-size: var(--text-lg);
   }
-  :global(.document p, .document li) {
+  :global(.document-container p, .document-container li) {
     font-size: var(--text-md);
   }
-  :global(.document li) {
+  :global(.document-container li) {
     list-style-type: disc;
     list-style-position: inside;
     font-size: var(--text-sm);

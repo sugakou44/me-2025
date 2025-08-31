@@ -1,0 +1,13 @@
+@font-face {
+  font-family: 'Sono';
+  font-display: block;
+  font-weight: 100 900;
+  src: url('/fonts/Sono/Sono-VariableFont_MONO,wght.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Caveat Brush';
+  font-display: block;
+  font-weight: 100 900;
+  src: url('/fonts/Caveat_Brush/CaveatBrush-Regular.ttf') format('truetype');
+}

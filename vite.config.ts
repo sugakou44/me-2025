@@ -30,7 +30,13 @@ export default ({ mode }: { mode: string }) => {
         root: '.',
       }),
       sveltekit(),
-      ...(ANALYZE_BUNDLE ? [visualizer()] : []),
+      ...(ANALYZE_BUNDLE
+        ? [
+            visualizer({
+              open: true,
+            }),
+          ]
+        : []),
     ],
   })
 }

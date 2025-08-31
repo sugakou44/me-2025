@@ -1,6 +1,4 @@
 <script lang="ts">
-  import { Debug, World } from '@threlte/rapier'
-
   import { Canvas } from '@/components/Canvas'
   import Control from '@/components/Canvas/Control.svelte'
   import Interactivity from '@/components/GL/Interactivity/Interactivity.svelte'
@@ -24,10 +22,10 @@
   <Canvas renderMode="always">
     <Control />
     <Interactivity>
-      <World gravity={[0, 0, -10]}>
-        <Debug />
-        <GalleryScene />
-      </World>
+      <!-- <World gravity={[0, 0, -10]}>
+        <Debug /> -->
+      <GalleryScene />
+      <!-- </World> -->
     </Interactivity>
   </Canvas>
 </div>

@@ -79,7 +79,7 @@
 </script>
 
 {#if page.status < 400 && page.url.pathname !== ROUTES.sandbox.pathname}
-  {#await tick() then}
+  {#await appState.forceOpenHero || tick() then}
     <div
       in:fly={{
         y: initialIsIn ? 0 : -100,

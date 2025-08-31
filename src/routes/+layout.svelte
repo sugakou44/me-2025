@@ -2,8 +2,9 @@
   import SvelteSeo from 'svelte-seo'
 
   import { SideFooter } from '@/components/Footer'
-  import { MainHead } from '@/components/Head'
+  import { MainHead } from '@/components/Head/MainHead'
   import { NameCard } from '@/components/NameCard'
+  import { ROUTES } from '@/lib/constants/routes'
   import {
     DEFAULT_DESCRIPTION,
     DEFAULT_TITLE,
@@ -13,8 +14,6 @@
 
   import '@/lib/svelte/lenis.svelte'
   import '../app.css'
-
-  import { ROUTES } from '@/lib/constants/routes'
 
   let { children } = $props()
 
@@ -50,6 +49,7 @@
 </svelte:head>
 
 <MainHead />
+
 <main>
   <svelte:boundary>
     <NameCard />

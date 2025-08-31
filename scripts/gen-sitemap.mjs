@@ -15,5 +15,6 @@ const sitemap = new SitemapStream({ hostname: HOSTNAME })
 const writeStream = createWriteStream(FILE_PATH)
 sitemap.pipe(writeStream)
 sitemap.write({ url: '/', priority: 1 })
+sitemap.write({ url: '/archives/projects', priority: 0.5 })
 
 sitemap.end()
