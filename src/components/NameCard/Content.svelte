@@ -33,6 +33,10 @@
   const easing = eases.outBack(1.2)
 
   function buttonGroupAnimation(node: HTMLDivElement) {
+    if (hasAnimated) {
+      return
+    }
+
     const animation = animate(node.children, {
       scale: [0, 1],
       opacity: [0, 1],

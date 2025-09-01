@@ -15,10 +15,11 @@
     isIn?: boolean
   }
 
-  const { isIn }: Props = $props()
+  const { isIn, ...props }: Props = $props()
 </script>
 
 <div
+  {...props}
   class={cn(
     'flex items-center justify-center gap-0 opacity-0 transition-opacity md:justify-start',
     {
