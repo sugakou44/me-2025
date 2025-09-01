@@ -70,13 +70,11 @@
       style:transform={`translateY(${100 * (1 - homeState.aboutScrollProgress2) * 1.25}%)`}
     >
       <Paragraph class="text-primary-foreground">
-        Hello again
-        <br />
-        I'm frontend developer with 5 years of experience.
+        Here are some of the tech I used
         <br />
         <br />
         I mostly working with
-        <HighlightText>Next.js</HighlightText>, with recent interested in
+        <HighlightText>Next.js</HighlightText>, with recent interest in
         <HighlightText>Svelte</HighlightText>
       </Paragraph>
       <!-- <BouncingText

@@ -53,7 +53,7 @@
 
   <T.Group
     dispose={false}
-    position.y={(windowState.scrollPosition - windowState.windowHeight * 1.55) *
+    position.y={(windowState.scrollPosition - windowState.windowHeight * 1.65) *
       0.01}
   >
     <T.Group position.y={(1 - opacityTween.current) * -4}>

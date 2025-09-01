@@ -17,6 +17,8 @@ Title: Box Man
   } from '@threlte/extras'
   import { AnimationUtils, Euler, Group } from 'three'
 
+  import { DEFAULT_ALPHA_TEST } from '@/lib/animations/constants'
+
   import CharacterClone from './CharacterClone.svelte'
 
   import type { Props } from '@threlte/core'
@@ -106,7 +108,7 @@ Title: Box Man
   })
 </script>
 
-<T is={ref} dispose={false} frustumCulled={false} {...props}>
+<T is={ref} dispose={false} visible={opacity >= DEFAULT_ALPHA_TEST} {...props}>
   <!-- eslint-disable-next-line svelte/require-store-reactive-access  -->
   {#await gltf}
     {@render fallback?.()}

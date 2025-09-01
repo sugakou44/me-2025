@@ -18,6 +18,7 @@ Title: Box Man
   import { utils } from 'animejs'
   import { AnimationUtils, Group } from 'three'
 
+  import { DEFAULT_ALPHA_TEST } from '@/lib/animations/constants'
   import { windowState } from '@/lib/contexts/Window'
 
   import CharacterClone from './CharacterClone.svelte'
@@ -137,7 +138,7 @@ Title: Box Man
   })
 </script>
 
-<T is={ref} dispose={false} {...props}>
+<T is={ref} dispose={false} visible={opacity >= DEFAULT_ALPHA_TEST} {...props}>
   <!-- eslint-disable-next-line svelte/require-store-reactive-access  -->
   {#await gltf}
     {@render fallback?.()}
