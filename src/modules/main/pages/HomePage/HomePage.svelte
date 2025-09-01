@@ -42,7 +42,7 @@
 
 <div
   bind:this={container}
-  class="canvas-container fixed top-0 h-[100lvh] w-full"
+  class="canvas-container fixed inset-0 w-full"
   style:--scroll-y={appState.creditScrollProgress}
 >
   <Canvas {loadingFallback}>
@@ -98,8 +98,8 @@
 >
   <Hero />
 
-  <div in:fade class="z-50 min-h-dvh w-full">
-    <div class="z-50 min-h-dvh w-full"></div>
+  <div in:fade class="z-50 min-h-screen w-full">
+    <div class="z-50 min-h-screen w-full"></div>
     <Spacer />
     <About />
     <Experience />
