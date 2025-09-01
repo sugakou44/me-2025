@@ -57,8 +57,6 @@
   })
 
   const posY = $derived(rect.bottom + untrack(() => windowState.scrollPosition))
-
-  $inspect(rect.y)
 </script>
 
 <svelte:window
