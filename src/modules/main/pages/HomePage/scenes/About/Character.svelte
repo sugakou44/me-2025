@@ -10,14 +10,14 @@ Title: Box Man
 <script lang="ts">
   import { T, useTask } from '@threlte/core'
   import {
-    Outlines,
     useDraco,
     useGltf,
     useGltfAnimations,
     useSuspense,
   } from '@threlte/extras'
   import { AnimationUtils, Euler, Group } from 'three'
-  import { SkeletonUtils } from 'three/examples/jsm/Addons.js'
+
+  import CharacterClone from './CharacterClone.svelte'
 
   import type { Props } from '@threlte/core'
   import type { Snippet } from 'svelte'
@@ -40,7 +40,7 @@ Title: Box Man
     lookAt?: number
   } = $props()
 
-  const dracoLoader = useDraco()
+  const dracoLoader = useDraco('/draco/')
   const suspend = useSuspense()
 
   ref = new Group()
@@ -104,9 +104,6 @@ Title: Box Man
       joint.rotation.y += lookAt * 0.5
     }
   })
-
-  let skinnedMesh: SkinnedMesh | undefined
-  let rootJoint: Bone | undefined
 </script>
 
 <T is={ref} dispose={false} frustumCulled={false} {...props}>
@@ -114,31 +111,7 @@ Title: Box Man
   {#await gltf}
     {@render fallback?.()}
   {:then gltf}
-    {@const clone = SkeletonUtils.clone(gltf.scene)}
-    {@const _ = clone.traverse((object: any) => {
-      if (object.name === 'Object_7') {
-        skinnedMesh = object as SkinnedMesh
-        const currentMaterial = skinnedMesh.material as MeshStandardMaterial
-        currentMaterial.dispose()
-      }
-      if (object.name === '_rootJoint') {
-        rootJoint = object
-      }
-    })}
-    {#if rootJoint}
-      <T is={rootJoint} />
-    {/if}
-    {#if skinnedMesh}
-      <T bind:ref={mesh} is={skinnedMesh} scale={0.001}>
-        <T.MeshToonMaterial
-          transparent
-          {opacity}
-          map={gltf.materials.HeZiTou.map}
-          roughness={0}
-          metalness={0}
-        />
-      </T>
-    {/if}
+    <CharacterClone bind:ref={mesh} {gltf} {opacity} />
   {:catch err}
     {@render error?.({ error: err })}
   {/await}
