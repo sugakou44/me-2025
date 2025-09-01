@@ -27,7 +27,7 @@
   )}
 >
   <MagnetButton
-    containerClassName="md:mt-5 button"
+    containerClassName="namecard-button"
     class="h-10"
     href={ROUTES.resume.pathname}
     isExternal
@@ -35,7 +35,7 @@
     Resume
   </MagnetButton>
   <MagnetButton
-    containerClassName="md:mt-10 button"
+    containerClassName="md:mt-5 namecard-button"
     size="icon"
     href={CONTACT.email.href}
     aria-label={CONTACT.email.ariaLabel}
@@ -44,7 +44,7 @@
     <IconMailFilled class="md:h-7 md:w-7" />
   </MagnetButton>
   <MagnetButton
-    containerClassName="md:mt-30 button"
+    containerClassName="md:mt-25 namecard-button"
     size="icon"
     href={CONTACT.github.href}
     aria-label={CONTACT.github.ariaLabel}
@@ -53,7 +53,7 @@
     <IconBrandGithubFilled class="md:h-7 md:w-7" />
   </MagnetButton>
   <MagnetButton
-    containerClassName="md:mt-20 button"
+    containerClassName="md:mt-15 namecard-button"
     size="icon"
     href={CONTACT.linkedin.href}
     aria-label={CONTACT.linkedin.ariaLabel}
@@ -64,7 +64,7 @@
 </div>
 
 <style>
-  div > :global(.button) {
+  div > :global(.namecard-button) {
     background-image: radial-gradient(
       var(--color-background) 50%,
       transparent 70%
