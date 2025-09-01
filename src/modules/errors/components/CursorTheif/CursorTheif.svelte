@@ -93,6 +93,12 @@
       })
     }
   })
+
+  $effect(() => {
+    return () => {
+      window.document.body.classList.toggle('!cursor-none', false)
+    }
+  })
 </script>
 
 <svelte:window

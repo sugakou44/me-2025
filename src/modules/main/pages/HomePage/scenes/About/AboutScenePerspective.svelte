@@ -41,9 +41,9 @@
     easing: eases.inOutSine,
   })
 
-  const inIn = $derived(homeState.aboutScrollProgress < 1)
+  const inIn = $derived(homeState.aboutScrollProgress2 < 1)
 
-  $effect(() => {
+  $effect.pre(() => {
     opacityTween.set(inIn && !appState.forceOpenHero ? 1 : 0)
   })
 </script>
@@ -53,7 +53,7 @@
 
   <T.Group
     dispose={false}
-    position.y={(windowState.scrollPosition - windowState.windowHeight * 0.95) *
+    position.y={(windowState.scrollPosition - windowState.windowHeight * 1.55) *
       0.01}
   >
     <T.Group position.y={(1 - opacityTween.current) * -4}>

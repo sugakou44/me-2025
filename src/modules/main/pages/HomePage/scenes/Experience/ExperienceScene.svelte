@@ -20,10 +20,11 @@
     easing: eases.inOutSine,
   })
 
-  $effect(() => {
+  $effect.pre(() => {
     opacityTween.set(homeState.experienceVisibility ? 1 : 0)
   })
-  $effect(() => {
+
+  $effect.pre(() => {
     rotationTween.set(windowState.scrollDirection > 0 ? 0 : 1, {
       duration: !homeState.experienceVisibility ? 0 : DURATION_FASTER,
     })

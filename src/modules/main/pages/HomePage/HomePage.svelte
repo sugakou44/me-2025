@@ -17,7 +17,6 @@
   import { Credit } from './sections/Credit'
   import { Experience } from './sections/Experience'
   import { Hero } from './sections/Hero'
-  import Spacer from './Spacer.svelte'
 
   let container = $state<HTMLDivElement>()
   let gameLoader = $state<Promise<any>>()
@@ -100,7 +99,6 @@
 
   <div in:fade class="z-50 min-h-screen w-full">
     <div class="z-50 min-h-screen w-full"></div>
-    <Spacer />
     <About />
     <Experience />
     <Credit />

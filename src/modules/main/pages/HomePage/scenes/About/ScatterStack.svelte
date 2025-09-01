@@ -21,7 +21,7 @@
 
   let { textures, offset = 0, count = 0, opacity = 1 }: Props = $props()
 
-  let _count = count * 4
+  let _count = count * 3
 
   const colors = new Float32Array(_count * 3)
   const positions = new Float32Array(_count * 3)

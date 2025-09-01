@@ -1,6 +1,7 @@
 <script lang="ts">
   import { T } from '@threlte/core'
   import { eases, utils } from 'animejs'
+  import { untrack } from 'svelte'
   import { Spring, Tween } from 'svelte/motion'
 
   import {
@@ -14,8 +15,19 @@
   import Character from './Character.svelte'
   import WobblyPlane from './WobblyPlane.svelte'
 
+  let rect = $state.raw<DOMRect>({
+    width: 0,
+    height: 0,
+    bottom: 0,
+    top: 0,
+    right: 0,
+    left: 0,
+    x: 0,
+    y: 0,
+  } as DOMRect)
+
   const size = $derived(
-    Math.max(windowState.windowWidth, windowState.windowHeight) * 3,
+    Math.max(windowState.windowWidth, windowState.windowHeight) * 2,
   )
   const minSize = $derived(
     windowState.windowHeight * Math.max(windowState.aspectRatio, 1) * 0.75,
@@ -30,33 +42,55 @@
 
   const lookAt = new Spring(0, FAST_SPRING_CONFIG)
 
-  const isVisible = $derived(homeState.aboutScrollProgress < 1)
+  const isVisible = $derived(homeState.aboutScrollProgress2 < 1)
 
-  $effect(() => {
+  $effect.pre(() => {
     opacityTween.set(isVisible ? 1 : 0)
   })
+
+  $effect(() => {
+    if (!homeState.aboutContainer1) {
+      return
+    }
+
+    rect = homeState.aboutContainer1.getBoundingClientRect()
+  })
+
+  const posY = $derived(rect.bottom + untrack(() => windowState.scrollPosition))
+
+  $inspect(rect.y)
 </script>
 
 <svelte:window
+  onresize={() => {
+    if (!homeState.aboutContainer1) {
+      return
+    }
+
+    rect = homeState.aboutContainer1.getBoundingClientRect()
+  }}
   {@attach gestures({
     onMove: ({ percentage: [x] }) => {
       lookAt.set(x * 2.0 - 1.0)
     },
   })}
 />
-<T.AmbientLight intensity={4.5} color={0xffffff} />
-<T.Group
-  position.y={-(windowState.windowHeight * 1.4) + size * Math.cos(rotationRad)}
->
+<T.Mesh>
+  <T.BoxGeometry
+    args={[windowState.windowWidth, windowState.windowHeight, 1, 1]}
+  />
+  <T.MeshBasicMaterial color="white" opacity={opacityTween.current} />sc
+</T.Mesh>
+<T.Group position.y={-posY + size * 0.7}>
   <T.Group scale.x={opacityTween.current}>
     <WobblyPlane {size} {rotationRad} />
   </T.Group>
-  <T.Group position.y={(1 - opacityTween.current) * -size * 0.5}>
+  <T.Group position.y={(1 - opacityTween.current) * -size * 0.25}>
     <Character
-      position.y={-minSize * 3.25}
+      position.y={-size * 0.85}
       position.z={2}
-      scale.x={minSize * 0.75}
-      scale.y={minSize * 0.75}
+      scale.x={minSize * 0.7}
+      scale.y={minSize * 0.7}
       opacity={opacityTween.current}
       lookAt={lookAt.current}
     />

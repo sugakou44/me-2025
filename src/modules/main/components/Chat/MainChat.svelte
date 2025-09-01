@@ -18,7 +18,7 @@
     in:fade={{ duration: DURATION_FAST }}
     class="right-8 bottom-8 z-[100] hidden items-center gap-3 md:fixed md:flex"
   >
-    {#if appState.isInHero}
+    {#if appState.isInHero || homeState.aboutVisibility1}
       <div in:fade|global={{ duration: DURATION_FAST, delay: DURATION_FAST }}>
         <Button
           size="default"
@@ -32,7 +32,7 @@
           {@render greeting.hello()}
         </Button>
       </div>
-    {:else if homeState.aboutVisibility}
+    {:else if homeState.aboutVisibility2}
       <div in:fade={{ duration: DURATION_FAST }}>
         <Button
           size="default"

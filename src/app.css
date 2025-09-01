@@ -245,7 +245,7 @@
   }
 
   .page {
-    @apply container max-w-screen md:max-w-[44vw] lg:max-w-4xl xl:max-w-4xl;
+    @apply container max-w-screen lg:max-w-4xl xl:max-w-4xl;
   }
 
   .halftone-alternate,

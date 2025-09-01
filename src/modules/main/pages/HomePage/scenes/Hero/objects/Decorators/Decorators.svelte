@@ -25,7 +25,7 @@
 
   const animationState = new Tween(1)
 
-  $effect(() => {
+  $effect.pre(() => {
     if (isIn) {
       animationState.set(1, {
         duration: DURATION_SLOWEST,

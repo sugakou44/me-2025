@@ -10,16 +10,28 @@ class HomeState {
   perspectiveScene = $state<Scene | undefined>()
   orthographicScene = $state<Scene | undefined>()
 
-  aboutContainer = $state<HTMLElement>()
-  aboutScrollProgress = $derived.by(() => {
+  aboutContainer1 = $state<HTMLElement>()
+  aboutScrollProgress1 = $derived.by(() => {
     return getSectionScrollProgress(
       windowState.scrollPosition,
       windowState.windowHeight,
-      this.aboutContainer,
+      this.aboutContainer1,
     )
   })
-  aboutVisibility = $derived.by(() => {
-    return checkScrollWithinSection(this.aboutScrollProgress)
+  aboutVisibility1 = $derived.by(() => {
+    return checkScrollWithinSection(this.aboutScrollProgress1)
+  })
+
+  aboutContainer2 = $state<HTMLElement>()
+  aboutScrollProgress2 = $derived.by(() => {
+    return getSectionScrollProgress(
+      windowState.scrollPosition,
+      windowState.windowHeight,
+      this.aboutContainer2,
+    )
+  })
+  aboutVisibility2 = $derived.by(() => {
+    return checkScrollWithinSection(this.aboutScrollProgress2)
   })
 
   experienceContainer = $state<HTMLElement>()
