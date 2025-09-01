@@ -13,8 +13,8 @@
   import { appState } from '@/lib/contexts/AppState'
   import { windowState } from '@/lib/contexts/Window'
   import { squircleBackground } from '@/lib/svelte/backgroundSquircle.svelte'
+  import { useInView } from '@/lib/svelte/intersectionObserver.svelte'
   import { cn } from '@/lib/utils/className'
-  import { CursorTheif } from '@/modules/main/components/CursorTheif'
 
   import BackButton from '../Buttons/BackButton.svelte'
 
@@ -25,7 +25,6 @@
     haveGhost?: boolean
     class?: string
     contentContainerClass?: string
-    ref?: HTMLElement
   }
 
   let {
@@ -33,12 +32,21 @@
     haveGhost = false,
     contentContainerClass,
     class: className,
-    ref = $bindable(),
   }: Props = $props()
+
+  const [ref, isInView] = useInView()
+
+  let ghostLoader = $state<Promise<any>>()
+
+  $effect.pre(() => {
+    if (isInView() && haveGhost) {
+      ghostLoader = import('@/modules/main/components/CursorTheif')
+    }
+  })
 </script>
 
 <footer
-  bind:this={ref}
+  bind:this={ref.current}
   class={cn('relative z-40 flex overflow-hidden', className)}
   {@attach squircleBackground({
     cornerRadius:
@@ -103,9 +111,11 @@
       </div>
     </div>
   </section>
-  {#if appState.isInCredit && haveGhost}
-    <figure class="absolute right-1/5 bottom-2/5 hidden md:block">
-      <CursorTheif />
-    </figure>
+  {#if isInView() && haveGhost && ghostLoader}
+    {#await ghostLoader then { CursorTheif }}
+      <figure class="absolute right-1/5 bottom-2/5 hidden md:block">
+        <CursorTheif />
+      </figure>
+    {/await}
   {/if}
 </footer>

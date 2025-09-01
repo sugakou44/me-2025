@@ -67,6 +67,12 @@
   })
 
   $effect(() => {
+    return () => {
+      window.document.body.classList.toggle('!cursor-none', false)
+    }
+  })
+
+  $effect(() => {
     if (gotCursor) {
       bodySpring.set({
         x: 0,
