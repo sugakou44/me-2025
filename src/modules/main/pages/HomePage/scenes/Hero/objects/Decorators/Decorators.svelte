@@ -8,11 +8,7 @@
     Instance,
     InstancedMesh,
   } from '@/components/GL/InstancedUniformsMesh'
-  import {
-    DEFAULT_ALPHA_TEST,
-    DURATION_SLOW,
-    DURATION_SLOWEST,
-  } from '@/lib/animations/constants'
+  import { DURATION_SLOW, DURATION_SLOWEST } from '@/lib/animations/constants'
   import { windowState } from '@/lib/contexts/Window'
 
   import { COLORS, PATTERNS, SHAPES, TOTAL, VARIANTS } from './constants'
@@ -182,13 +178,7 @@
   }
 </script>
 
-<T.Group
-  bind:ref
-  {...props}
-  visible={animationState.current > DEFAULT_ALPHA_TEST}
-  frustumCulled={false}
-  dispose={false}
->
+<T.Group bind:ref {...props} frustumCulled={false} dispose={false}>
   <InstancedMesh {count} limit={count}>
     <T.PlaneGeometry args={[1, 1, 1, 1]}>
       <T.InstancedBufferAttribute

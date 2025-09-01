@@ -4,7 +4,6 @@
   import { Spring, Tween } from 'svelte/motion'
 
   import {
-    DEFAULT_ALPHA_TEST,
     DURATION_NORMAL,
     FAST_SPRING_CONFIG,
   } from '@/lib/animations/constants'
@@ -48,7 +47,6 @@
 <T.AmbientLight intensity={4.5} color={0xffffff} />
 <T.Group
   position.y={-(windowState.windowHeight * 1.4) + size * Math.cos(rotationRad)}
-  visible={opacityTween.current > DEFAULT_ALPHA_TEST}
 >
   <T.Group scale.x={opacityTween.current}>
     <WobblyPlane {size} {rotationRad} />

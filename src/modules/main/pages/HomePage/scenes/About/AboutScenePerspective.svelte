@@ -5,10 +5,7 @@
   import { eases } from 'animejs'
   import { Tween } from 'svelte/motion'
 
-  import {
-    DEFAULT_ALPHA_TEST,
-    DURATION_NORMAL,
-  } from '@/lib/animations/constants'
+  import { DURATION_NORMAL } from '@/lib/animations/constants'
   import { appState } from '@/lib/contexts/AppState'
   import { windowState } from '@/lib/contexts/Window'
   import { prepareDataTextureArray } from '@/lib/three/textures'
@@ -58,7 +55,6 @@
     dispose={false}
     position.y={(windowState.scrollPosition - windowState.windowHeight * 0.95) *
       0.01}
-    visible={opacityTween.current > DEFAULT_ALPHA_TEST}
   >
     <T.Group position.y={(1 - opacityTween.current) * -4}>
       <InnerCircle

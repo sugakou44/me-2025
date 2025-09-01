@@ -41,7 +41,7 @@
     const t = contentAnimation.current
 
     return `
-		translate3d(-50%, calc(${-45 * t}vh + -50% + 0px), 0) scale(${1 - 0.5 * t}) rotateZ(0deg) translate3d(calc(0% + 0px), calc(${-50 * t}% + ${96 * t}px), 0)
+		translate3d(-50%, calc(${-45 * t}vh + -50% + 0px), 0) scale(${1 - 0.5 * t}) translateY(calc(${-50 * t}% + ${96 * t}px))
 	`
   })
 

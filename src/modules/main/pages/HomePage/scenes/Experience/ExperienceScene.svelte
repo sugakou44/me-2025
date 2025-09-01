@@ -3,11 +3,7 @@
   import { eases, utils } from 'animejs'
   import { Tween } from 'svelte/motion'
 
-  import {
-    DEFAULT_ALPHA_TEST,
-    DURATION_FASTER,
-    DURATION_SLOW,
-  } from '@/lib/animations/constants'
+  import { DURATION_FASTER, DURATION_SLOW } from '@/lib/animations/constants'
   import { windowState } from '@/lib/contexts/Window'
   import { homeState } from '@/modules/main/contexts/HomeState'
 
@@ -38,7 +34,6 @@
 
 <T.Group
   position.y={-windowState.windowHeight * 0.5 - windowState.scrollPosition}
-  visible={opacityTween.current > DEFAULT_ALPHA_TEST}
   dispose={false}
 >
   <T.Group
