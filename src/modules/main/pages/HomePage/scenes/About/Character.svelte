@@ -125,17 +125,20 @@ Title: Box Man
         rootJoint = object
       }
     })}
-    <T is={rootJoint} />
-    <T bind:ref={mesh} is={skinnedMesh} scale={0.01}>
-      <T.MeshToonMaterial
-        transparent
-        {opacity}
-        map={gltf.materials.HeZiTou.map}
-        roughness={0}
-        metalness={0}
-      />
-      <Outlines color="white" thickness={4} {opacity} transparent />
-    </T>
+    {#if rootJoint}
+      <T is={rootJoint} />
+    {/if}
+    {#if skinnedMesh}
+      <T bind:ref={mesh} is={skinnedMesh} scale={0.001}>
+        <T.MeshToonMaterial
+          transparent
+          {opacity}
+          map={gltf.materials.HeZiTou.map}
+          roughness={0}
+          metalness={0}
+        />
+      </T>
+    {/if}
   {:catch err}
     {@render error?.({ error: err })}
   {/await}
