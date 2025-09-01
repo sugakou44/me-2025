@@ -65,7 +65,7 @@
 <div
   style:transition-property="shadow background"
   class={cn(
-    'relative container mx-auto aspect-[1/1.65] h-full w-full overflow-hidden rounded-[32px] bg-white transition-shadow duration-300 transform-3d xl:max-w-5xl',
+    'relative container mx-auto aspect-[1/1.65] h-full w-full overflow-hidden rounded-[32px] bg-white duration-300 transform-3d xl:max-w-5xl',
     {
       'shadow-2xl': !forceOpen && isOpen,
       'bg-transparent': forceOpen,

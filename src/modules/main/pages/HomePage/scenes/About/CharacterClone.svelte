@@ -42,6 +42,6 @@
       roughness={0}
       metalness={0}
     />
-    <Outlines color="white" thickness={4} {opacity} transparent />
+    <Outlines color="white" thickness={22} {opacity} transparent />
   </T>
 {/if}
