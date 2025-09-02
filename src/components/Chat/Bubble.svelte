@@ -4,7 +4,7 @@
 
   import type { Message } from './types'
 
-  const BORDER_RADIUS = 12
+  const BORDER_RADIUS = 24
 
   const { byUser, content }: Message = $props()
 </script>

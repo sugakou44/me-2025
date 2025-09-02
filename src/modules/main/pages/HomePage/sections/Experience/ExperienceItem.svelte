@@ -39,7 +39,14 @@
         <h4>{role}</h4>
       </div>
 
-      <p>{paragraph}</p>
+      <p>
+        {#if typeof paragraph === 'string'}
+          <!-- eslint-disable-next-line  svelte/no-at-html-tags -->
+          {@html paragraph}
+        {:else}
+          {@render paragraph()}
+        {/if}
+      </p>
     </div>
 
     <div class="flex flex-wrap gap-2">

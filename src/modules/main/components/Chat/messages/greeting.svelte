@@ -11,13 +11,16 @@
   }
 </script>
 
-{#snippet hello()}
-  Hey
+{#snippet handwaving()}
   <span class="hand-waving inline-block origin-bottom-right"> 👋 </span>
 {/snippet}
 
+{#snippet hello()}
+  Hey {@render handwaving()}
+{/snippet}
+
 {#snippet helloMe()}
-  {@render hello()}, Thank you for visiting
+  Hi {@render handwaving()}
 {/snippet}
 
 {#snippet gameInvite()}

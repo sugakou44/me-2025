@@ -26,7 +26,7 @@
     <RevealingText
       as="span"
       class="text-[1.5em] 2xl:text-[1.25em]"
-      percent={utils.mapRange(homeState.aboutScrollProgress1, 0, 0.9, 0, 1)}
+      percent={utils.mapRange(homeState.aboutScrollProgress1, 0.25, 0.9, 0, 1)}
     >
       I’m a frontend developer who likes making things move — buttons, text,
       whole pages — anything that feels a little more alive than just sitting
@@ -70,12 +70,10 @@
       style:transform={`translateY(${100 * (1 - homeState.aboutScrollProgress2) * 1.25}%)`}
     >
       <Paragraph class="text-primary-foreground">
-        Here are some of the tech I used
-        <br />
-        <br />
-        I mostly working with
-        <HighlightText>Next.js</HighlightText>, with recent interest in
-        <HighlightText>Svelte</HighlightText>
+        I’ve mostly been building things with
+        <HighlightText>Next.js</HighlightText>, but lately I’ve been getting
+        into
+        <HighlightText>Svelte</HighlightText> and I am loving it.
       </Paragraph>
       <!-- <BouncingText
         charClass="animate-"

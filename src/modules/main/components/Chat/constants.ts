@@ -15,18 +15,21 @@ export const HELLO_MESSAGES: MessageWithoutID[] = [
     content: greeting.helloMe,
   },
   {
+    content: 'Welcome',
+  },
+  {
     delay: 10_000,
     content: greeting.gameInvite,
   },
   {
     delay: 10,
-    content: 'left click to reveal, right click to mark as 🍪',
+    content: 'how to play: left click to reveal, right click to mark as 🍪',
   },
 ]
 
 export const TECHSTACK_MESSAGES: MessageWithoutID[] = [
   {
-    content: 'I want to know more',
+    content: 'Tell me more',
     byUser: true,
   },
   {
@@ -48,11 +51,15 @@ export const TECHSTACK_MESSAGES: MessageWithoutID[] = [
 
 export const EXPERIENCE_MESSAGES: MessageWithoutID[] = [
   {
-    content: 'Do you have show cases of your work?',
+    content: 'Can you show me some of your works?',
     byUser: true,
   },
   {
-    content: "Unfortunately I haven't finihsed that section yet.",
+    content:
+      "Unfortunately I haven't come up with ideas to corporate screenshots with the current aesthetic of the site.",
+  },
+  {
+    content: 'In the mean time, please check out the projects list',
   },
   {
     content: experience.projectArchiveLink,

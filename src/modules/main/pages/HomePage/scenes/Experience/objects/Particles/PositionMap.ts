@@ -20,7 +20,7 @@ const DEFAULT_UNIFORMS = {
     value: 0,
   },
   forceAttenuation: {
-    value: 4.4,
+    value: 1.5,
   },
   forceFrequency: {
     value: Math.PI,

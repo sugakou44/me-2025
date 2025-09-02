@@ -24,7 +24,7 @@ void main()
     float sizeOut = 1.0 - smoothstep(0.7, 1.0, particle.a);
 
     gl_PointSize = min(sizeIn, sizeOut) * pointSize * size;
-    gl_PointSize *= (1.0 / -mvPosition.z);
+    // gl_PointSize *= (1.0 / -mvPosition.z);
 
     // Varyings
     vColor = vec4(color, max(sizeIn, sizeOut));

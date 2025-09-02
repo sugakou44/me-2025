@@ -5,7 +5,10 @@
   import { eases } from 'animejs'
   import { Tween } from 'svelte/motion'
 
-  import { DURATION_NORMAL } from '@/lib/animations/constants'
+  import {
+    DEFAULT_ALPHA_TEST,
+    DURATION_NORMAL,
+  } from '@/lib/animations/constants'
   import { appState } from '@/lib/contexts/AppState'
   import { windowState } from '@/lib/contexts/Window'
   import { prepareDataTextureArray } from '@/lib/three/textures'
@@ -41,10 +44,10 @@
     easing: eases.inOutSine,
   })
 
-  const inIn = $derived(homeState.aboutScrollProgress2 < 1)
+  const isIn = $derived(homeState.aboutScrollProgress2 < 1)
 
   $effect.pre(() => {
-    opacityTween.set(inIn && !appState.forceOpenHero ? 1 : 0)
+    opacityTween.set(isIn && !appState.forceOpenHero ? 1 : 0)
   })
 </script>
 
@@ -53,8 +56,10 @@
 
   <T.Group
     dispose={false}
+    visible={opacityTween.current >= DEFAULT_ALPHA_TEST}
     position.y={(windowState.scrollPosition - windowState.windowHeight * 1.65) *
       0.01}
+    frustumCulled={false}
   >
     <T.Group position.y={(1 - opacityTween.current) * -4}>
       <InnerCircle
@@ -67,11 +72,6 @@
         textures={dataTextureArray}
         count={textures.length}
       />
-      <!-- <Character
-        position.z={2}
-        position.y={-5 * (positionTween.current)}
-        scale={5}
-      /> -->
     </T.Group>
   </T.Group>
 {/await}

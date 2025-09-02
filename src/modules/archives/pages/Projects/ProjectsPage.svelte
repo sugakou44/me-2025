@@ -4,13 +4,12 @@
   import BackButton from '@/components/Buttons/BackButton.svelte'
   import Link from '@/components/Links/Link.svelte'
   import PageTitle from '@/components/Text/PageTitle.svelte'
+  import { SORTED_PROJECTS } from '@/lib/constants/content'
   import { roughBackground } from '@/lib/svelte/backgroundRough.svelte'
   import { useInView } from '@/lib/svelte/intersectionObserver.svelte'
   import { cn } from '@/lib/utils/className'
 
-  import { SORTED_PROJECTS } from './constants'
-
-  import type { Project } from './constants'
+  import type { Project } from '@/lib/constants/content'
 
   let [titleRef, isInView] = useInView()
 </script>
@@ -81,7 +80,7 @@
     <div
       class="grid grid-cols-[3fr_4fr_1fr] gap-x-3 gap-y-2 md:grid-cols-[1fr_1fr_2fr_3fr_1fr]"
     >
-      {@render header('Start year', true)}
+      {@render header('Year', true)}
       {@render header('Made at', true)}
       {@render header('Project')}
       {@render header('Built with')}

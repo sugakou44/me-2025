@@ -4,6 +4,7 @@ import {
   getSectionScrollProgress,
 } from '@/lib/utils/context'
 
+import type { CompanyKey } from '@/lib/constants/content'
 import type { Scene } from 'three'
 
 class HomeState {
@@ -46,17 +47,9 @@ class HomeState {
     return checkScrollWithinSection(this.experienceScrollProgress, 2)
   })
 
-  testimonialContainer = $state<HTMLElement>()
-  testimonialScrollProgress = $derived.by(() => {
-    return getSectionScrollProgress(
-      windowState.scrollPosition,
-      windowState.windowHeight,
-      this.testimonialContainer,
-      {
-        offset: 0.44,
-      },
-    )
-  })
+  hasClickedAllProject = $state(false)
+  projectsKey = $state<CompanyKey | null>(null)
+  projectsIndex = $state(0)
 }
 
 export const homeState = new HomeState()

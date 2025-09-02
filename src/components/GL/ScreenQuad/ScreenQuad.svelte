@@ -25,6 +25,6 @@
   } = $props()
 </script>
 
-<T.Mesh bind:ref frustumCulled={false} {geometry} {...props}>
+<T.Mesh bind:ref {geometry} {...props}>
   {@render children?.()}
 </T.Mesh>

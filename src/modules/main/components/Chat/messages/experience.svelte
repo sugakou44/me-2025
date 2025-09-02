@@ -8,6 +8,6 @@
 </script>
 
 {#snippet projectArchiveLink()}
-  But for now you can go to
+  here
   <Link href={ROUTES.projectArchives.pathname} isExternal>project archive</Link>
 {/snippet}

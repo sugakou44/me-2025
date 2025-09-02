@@ -1,2 +1,2 @@
-export const SIZE = 16
+export const SIZE = 32
 export const COUNT = SIZE * SIZE

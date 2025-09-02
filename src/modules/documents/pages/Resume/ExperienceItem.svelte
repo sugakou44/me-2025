@@ -54,7 +54,7 @@
           <li>Implements room detection from floor plan using openCV.</li>
           <li>Integrated gitlab-runner for CI/CD pipeline.</li>
         </ul>
-      {:else if id === 'freelance'}
+      {:else if id === 'other'}
         <ul>
           <li>
             Created 360°/3D spatial experiences for exhibitions using Threejs.

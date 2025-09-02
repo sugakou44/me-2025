@@ -112,7 +112,7 @@
   <T.Group>
     <HeroScene />
     <AboutScenePerspective />
-    <!-- <GalleryScene /> -->
+    <!-- <ExperienceScenePerspective /> -->
   </T.Group>
 </T.Scene>
 
@@ -128,5 +128,6 @@
     <T.AmbientLight intensity={4.5} color={0xffffff} />
     <AboutScene />
     <ExperienceScene />
+    <!-- <GalleryScene /> -->
   </T.Group>
 </T.Scene>

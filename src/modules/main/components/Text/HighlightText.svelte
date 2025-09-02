@@ -21,9 +21,10 @@
   class={className}
   {@attach annotate({
     visible: true,
-    color: 'var(--secondary)',
-    iterations: 4,
+    color: 'var(--secondary-foreground)',
+    iterations: 2,
     type,
+    padding: 2,
     ...restProps,
   })}
 >

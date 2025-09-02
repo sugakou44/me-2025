@@ -5,6 +5,7 @@
   import { Spring, Tween } from 'svelte/motion'
 
   import {
+    DEFAULT_ALPHA_TEST,
     DURATION_NORMAL,
     FAST_SPRING_CONFIG,
   } from '@/lib/animations/constants'
@@ -79,7 +80,10 @@
   />
   <T.MeshBasicMaterial color="white" opacity={opacityTween.current} />sc
 </T.Mesh>
-<T.Group position.y={-posY + size * 0.7}>
+<T.Group
+  position.y={-posY + size * 0.7}
+  visible={opacityTween.current >= DEFAULT_ALPHA_TEST}
+>
   <T.Group scale.x={opacityTween.current}>
     <WobblyPlane {size} {rotationRad} />
   </T.Group>

@@ -3,7 +3,11 @@
   import { eases, utils } from 'animejs'
   import { Tween } from 'svelte/motion'
 
-  import { DURATION_FASTER, DURATION_SLOW } from '@/lib/animations/constants'
+  import {
+    DEFAULT_ALPHA_TEST,
+    DURATION_FASTER,
+    DURATION_SLOW,
+  } from '@/lib/animations/constants'
   import { windowState } from '@/lib/contexts/Window'
   import { homeState } from '@/modules/main/contexts/HomeState'
 
@@ -34,6 +38,7 @@
 </script>
 
 <T.Group
+  visible={opacityTween.current >= DEFAULT_ALPHA_TEST}
   position.y={-windowState.windowHeight * 0.5 - windowState.scrollPosition}
   dispose={false}
 >
@@ -47,7 +52,6 @@
       <Grass opacity={opacityTween.current} position={[0, 0, -0.05]} />
     </T.Group>
   </T.Group>
-
   <T.Group
     position.x={-1 * Math.min(800, windowState.windowWidth / 3)}
     scale.y={size * 1.2}

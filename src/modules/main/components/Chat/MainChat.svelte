@@ -5,6 +5,7 @@
   import { Button } from '@/components/Buttons'
   import { Chat } from '@/components/Chat'
   import { DURATION_FAST, DURATION_FASTER } from '@/lib/animations/constants'
+  import { scaleY } from '@/lib/animations/transition'
   import { appState } from '@/lib/contexts/AppState'
 
   import { homeState } from '../../contexts/HomeState'
@@ -71,9 +72,19 @@
       }}
     >
       {#if mainChatContext.isOpen}
-        <IconX class="xl:h-8 xl:w-8" />
+        <span
+          transition:scaleY={{ opacity: 0 }}
+          class="absolute inset-0 flex items-center justify-center"
+        >
+          <IconX class="xl:h-8 xl:w-8 " />
+        </span>
       {:else}
-        <IconMessageChatbotFilled class="xl:h-8 xl:w-8" />
+        <span
+          transition:scaleY={{ opacity: 0 }}
+          class="absolute inset-0 flex items-center justify-center"
+        >
+          <IconMessageChatbotFilled class="xl:h-8 xl:w-8" />
+        </span>
       {/if}
     </Button>
   </div>

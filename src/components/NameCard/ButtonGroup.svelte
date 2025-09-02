@@ -21,7 +21,7 @@
 <div
   {...props}
   class={cn(
-    'flex items-center justify-center gap-0 opacity-0 transition-opacity md:justify-start',
+    'flex items-center justify-center gap-0 opacity-0 transition-opacity lg:justify-start',
     {
       'opacity-100': isIn,
     },
@@ -36,31 +36,31 @@
     Resume
   </MagnetButton>
   <MagnetButton
-    containerClassName="md:mt-5 namecard-button"
+    containerClassName="lg:mt-5 namecard-button"
     size="icon"
     href={CONTACT.email.href}
     aria-label={CONTACT.email.ariaLabel}
     isExternal
   >
-    <IconMailFilled class="md:h-7 md:w-7" />
+    <IconMailFilled class="lg:h-7 lg:w-7" />
   </MagnetButton>
   <MagnetButton
-    containerClassName="md:mt-25 namecard-button"
+    containerClassName="lg:mt-25 namecard-button"
     size="icon"
     href={CONTACT.github.href}
     aria-label={CONTACT.github.ariaLabel}
     isExternal
   >
-    <IconBrandGithubFilled class="md:h-7 md:w-7" />
+    <IconBrandGithubFilled class="lg:h-7 lg:w-7" />
   </MagnetButton>
   <MagnetButton
-    containerClassName="md:mt-15 namecard-button"
+    containerClassName="lg:mt-15 namecard-button"
     size="icon"
     href={CONTACT.linkedin.href}
     aria-label={CONTACT.linkedin.ariaLabel}
     isExternal
   >
-    <IconBrandLinkedinFilled class="md:h-7 md:w-7" />
+    <IconBrandLinkedinFilled class="lg:h-7 lg:w-7" />
   </MagnetButton>
 </div>
 
