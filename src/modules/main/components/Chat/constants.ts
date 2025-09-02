@@ -56,7 +56,7 @@ export const EXPERIENCE_MESSAGES: MessageWithoutID[] = [
   },
   {
     content:
-      "Unfortunately I haven't come up with ideas to corporate screenshots with the current aesthetic of the site.",
+      "Unfortunately I haven't come up with ideas to incorporate screenshots with the current aesthetic of the site.",
   },
   {
     content: 'In the mean time, please check out the projects list',
