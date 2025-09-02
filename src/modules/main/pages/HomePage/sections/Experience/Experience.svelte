@@ -33,5 +33,4 @@
   >
     see all projects <IconExternalLink class="ml-2" />
   </Button>
-  <div class=""></div>
 </section>
