@@ -28,6 +28,9 @@ export class MinesSweeper extends BoardGame {
   bombState: Map<number, boolean> = new Map()
   bombMap: Map<number, number> = new Map()
   bombLeft = $derived.by(() => {
+    if (this.winner) {
+      return 0
+    }
     return (
       this.bombCount -
       Array.from(this.state.values()).reduce((acc, cell) => {
