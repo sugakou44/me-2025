@@ -66,14 +66,16 @@
       transition:fade={{
         duration: DURATION_FAST,
       }}
-      class="page fixed top-[unset] bottom-8 left-1/2 max-w-xl -translate-x-1/2 -translate-y-1/2 will-change-transform xl:left-1/4"
+      class="page fixed top-[unset] bottom-4 left-1/2 max-w-xl -translate-x-1/2 -translate-y-1/2 p-4 will-change-transform xl:left-1/4"
       style:transform={`translateY(${100 * (1 - homeState.aboutScrollProgress2) * 1.25}%)`}
     >
-      <Paragraph class="text-primary-foreground">
+      <Paragraph class="p-6 text-primary-foreground" cornerRadius={32}>
         I’ve mostly been building things with
         <HighlightText>Next.js</HighlightText>, but lately I’ve been getting
         into
-        <HighlightText>Svelte</HighlightText> and I am loving it.
+        <HighlightText>Svelte</HighlightText>
+        <br />
+        and I am loving it.
       </Paragraph>
       <!-- <BouncingText
         charClass="animate-"
