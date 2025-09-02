@@ -61,7 +61,7 @@
 <!-- <canvas bind:this={confettiCanvas} class="fixed top-0"></canvas> -->
 <DrawingText
   as="h2"
-  content="Cookies sweeper"
+  content="Cookiessweeper"
   isIn={isOpen}
   class="mx-auto  leading-[1.1]"
   animationOptions={{

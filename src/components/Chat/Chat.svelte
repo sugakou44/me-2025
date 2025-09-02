@@ -31,7 +31,7 @@
         'opacity-100': isLoading,
       })}
     >
-      <BouncingText content="..." class="pt-4 text-primary-foreground" />
+      <BouncingText content="..." class="pt-4 text-secondary-foreground" />
     </div>
     {#each messages as message (message.id)}
       <div

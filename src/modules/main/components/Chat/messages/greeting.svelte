@@ -24,7 +24,7 @@
 {/snippet}
 
 {#snippet gameInvite()}
-  Wanna play game with me?
+  Want to spend more time here and not be bored by all the reading?
   <br />
   <Button
     size="sm"
