@@ -71,77 +71,79 @@
     },
   )}
 >
-  {#await tick() then}
-    <div
-      in:scale={{
-        easing,
-        opacity: 0.001,
-        duration: animationDuration,
-        delay: animationDelay,
-      }}
-      class="absolute right-2 bottom-[15%] left-2 h-[25%] overflow-hidden rounded-lg will-change-transform"
-    >
-      <div class="halftone-stripe-isometric text-primary"></div>
-    </div>
-    <figure
-      in:scale={{
-        easing,
-        opacity: 0.001,
-        duration: animationDuration,
-        delay: animationDelay * 0.5,
-      }}
-      class="absolute right-2 bottom-2 left-2 will-change-transform lg:top-1/5 lg:right-[unset] lg:bottom-0 lg:left-0 lg:w-[calc(50%-16px)]"
-    >
-      <Avatar isIn={!!isOpen || !!forceOpen} />
-    </figure>
-    <div
-      class="relative top-[10%] right-2 bottom-2 left-2 flex flex-col gap-2 lg:absolute lg:top-2 lg:left-1/2"
-    >
-      <h1
-        in:fade={{
+  <div>
+    {#await tick() then}
+      <div
+        in:scale={{
           easing,
-          duration: animationDuration * 2,
-          delay: animationDelay * 3,
+          opacity: 0.001,
+          duration: animationDuration,
+          delay: animationDelay,
         }}
-        class="pt-[25%] text-center font-normal text-foreground will-change-opacity lg:text-left"
+        class="absolute right-2 bottom-[15%] left-2 h-[25%] overflow-hidden rounded-lg will-change-transform"
       >
-        Hi, I&apos;m
-        <span
-          class={cn(
-            'font-handwritting-heading text-[1.3em] font-bold tracking-wider whitespace-nowrap text-primary-foreground opacity-0 transition-opacity',
-            {
-              'opacity-100': isOpen || forceOpen,
-            },
-          )}
+        <div class="halftone-stripe-isometric text-primary"></div>
+      </div>
+      <figure
+        in:scale={{
+          easing,
+          opacity: 0.001,
+          duration: animationDuration,
+          delay: animationDelay * 0.5,
+        }}
+        class="absolute right-2 bottom-2 left-2 will-change-transform lg:top-1/5 lg:right-[unset] lg:bottom-0 lg:left-0 lg:w-[calc(50%-16px)]"
+      >
+        <Avatar isIn={!!isOpen || !!forceOpen} />
+      </figure>
+      <div
+        class="relative top-[10%] right-2 bottom-2 left-2 flex flex-col gap-2 lg:absolute lg:top-2 lg:left-1/2"
+      >
+        <h1
+          in:fade={{
+            easing,
+            duration: animationDuration * 2,
+            delay: animationDelay * 3,
+          }}
+          class="pt-[25%] text-center font-normal text-foreground will-change-opacity lg:text-left"
         >
-          PAAN<span
-            in:scale|global={{
-              opacity: 0.001,
-              easing: eases.outElastic(2, 0.5),
-              duration: hasAnimated ? 0 : animationDuration * 2,
-              delay: hasAnimated ? 0 : animationDelay * 8,
-            }}
-            class="inline-block origin-center font-handwritting-heading font-bold tracking-wider text-primary-foreground will-change-transform"
+          Hi, I&apos;m
+          <span
+            class={cn(
+              'font-handwritting-heading text-[1.3em] font-bold tracking-wider whitespace-nowrap text-primary-foreground opacity-0 transition-opacity',
+              {
+                'opacity-100': isOpen || forceOpen,
+              },
+            )}
           >
-            .
+            PAAN<span
+              in:scale|global={{
+                opacity: 0.001,
+                easing: eases.outElastic(2, 0.5),
+                duration: hasAnimated ? 0 : animationDuration * 2,
+                delay: hasAnimated ? 0 : animationDelay * 8,
+              }}
+              class="inline-block origin-center font-handwritting-heading font-bold tracking-wider text-primary-foreground will-change-transform"
+            >
+              .
+            </span>
           </span>
-        </span>
-      </h1>
-      <h2
-        in:fade={{
-          easing,
-          duration: animationDuration * 2,
-          delay: animationDelay * 4,
-        }}
-        class="font-header text-center font-heading text-xl leading-tight font-light text-foreground will-change-opacity lg:text-left lg:text-3xl"
-      >
-        <span class="font-medium">Front-end developer</span>
-        <br />
-        based in Bangkok, Thailand
-      </h2>
-      <ButtonGroup isIn {@attach buttonGroupAnimation} />
-    </div>
-  {/await}
+        </h1>
+        <h2
+          in:fade={{
+            easing,
+            duration: animationDuration * 2,
+            delay: animationDelay * 4,
+          }}
+          class="font-header text-center font-heading text-xl leading-tight font-light text-foreground will-change-opacity lg:text-left lg:text-3xl"
+        >
+          <span class="font-medium">Front-end developer</span>
+          <br />
+          based in Bangkok, Thailand
+        </h2>
+        <ButtonGroup isIn {@attach buttonGroupAnimation} />
+      </div>
+    {/await}
+  </div>
 
   {#if !forceOpen && isOpen}
     <div
