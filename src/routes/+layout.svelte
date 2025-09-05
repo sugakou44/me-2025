@@ -1,9 +1,11 @@
 <script lang="ts">
+  import { injectAnalytics } from '@vercel/analytics/sveltekit'
   import SvelteSeo from 'svelte-seo'
 
   import { SideFooter } from '@/components/Footer'
   import { MainHead } from '@/components/Head/MainHead'
   import { NameCard } from '@/components/NameCard'
+  import { IS_DEV } from '@/lib/constants'
   import { ROUTES } from '@/lib/constants/routes'
   import {
     DEFAULT_DESCRIPTION,
@@ -18,6 +20,10 @@
   let { children } = $props()
 
   const OG_IMAGE = `${ROUTES.home.href}/og.png`
+
+  if (!IS_DEV) {
+    injectAnalytics({ mode: 'production' })
+  }
 </script>
 
 <SvelteSeo

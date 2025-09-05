@@ -57,7 +57,9 @@
     rect = homeState.aboutContainer1.getBoundingClientRect()
   })
 
-  const posY = $derived(rect.bottom + untrack(() => windowState.scrollPosition))
+  const posY = $derived(
+    rect.bottom + untrack(() => Math.floor(windowState.scrollPosition / 2) * 2),
+  )
 </script>
 
 <svelte:window
