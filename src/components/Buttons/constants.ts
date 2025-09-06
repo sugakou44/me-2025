@@ -55,7 +55,7 @@ export const buttonVariants = tv({
         'text-destructive-foreground bg-destructive hover:bg-destructive/90',
     },
     size: {
-      default: 'h-8 px-6 py-2 md:h-10',
+      default: 'h-6 px-4 py-2 text-sm sm:h-8 sm:px-6 md:h-10 md:text-md',
       sm: 'h-8 px-3 text-sm md:h-10',
       lg: 'h-10 px-4 py-2 md:h-12 md:text-lg lg:text-xl',
       xl: 'h-12 px-8 md:h-14 md:text-lg lg:text-xl',

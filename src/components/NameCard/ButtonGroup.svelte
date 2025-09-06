@@ -42,7 +42,7 @@
     aria-label={CONTACT.email.ariaLabel}
     isExternal
   >
-    <IconMailFilled class="lg:h-7 lg:w-7" />
+    <IconMailFilled class="h-5 w-5 sm:h-6 sm:w-6 lg:h-7 lg:w-7" />
   </MagnetButton>
   <MagnetButton
     containerClassName="lg:mt-25 namecard-button"
@@ -51,7 +51,7 @@
     aria-label={CONTACT.github.ariaLabel}
     isExternal
   >
-    <IconBrandGithubFilled class="lg:h-7 lg:w-7" />
+    <IconBrandGithubFilled class="h-5 w-5 sm:h-6 sm:w-6 lg:h-7 lg:w-7" />
   </MagnetButton>
   <MagnetButton
     containerClassName="lg:mt-15 namecard-button"
@@ -60,7 +60,7 @@
     aria-label={CONTACT.linkedin.ariaLabel}
     isExternal
   >
-    <IconBrandLinkedinFilled class="lg:h-7 lg:w-7" />
+    <IconBrandLinkedinFilled class="h-5 w-5 sm:h-6 sm:w-6 lg:h-7 lg:w-7" />
   </MagnetButton>
 </div>
 
