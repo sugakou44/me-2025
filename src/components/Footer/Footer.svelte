@@ -75,7 +75,7 @@
     </div>
     <hr class="w-[calc(100vw-88px)] self-center" />
     <div
-      class="flex flex-wrap justify-center gap-4 text-sm sm:justify-between md:text-md"
+      class="flex flex-col items-center justify-between gap-4 text-sm sm:flex-row md:text-md"
     >
       <div class="flex gap-4">
         {#if page.url.pathname !== ROUTES.projectArchives.pathname}
