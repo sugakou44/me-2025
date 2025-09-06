@@ -74,7 +74,9 @@
       {@render children?.()}
     </div>
     <hr class="w-[calc(100vw-88px)] self-center" />
-    <div class="flex justify-between gap-4 text-sm md:text-md">
+    <div
+      class="flex flex-wrap justify-center gap-4 text-sm sm:justify-between md:text-md"
+    >
       <div class="flex gap-4">
         {#if page.url.pathname !== ROUTES.projectArchives.pathname}
           <Link class="no-underline" href={ROUTES.projectArchives.pathname}
@@ -85,7 +87,6 @@
           Playground
         </Link>
       </div>
-
       <div class="flex gap-4">
         <Link
           isExternal
