@@ -41,11 +41,7 @@
   <SuspenseFallback />
 {/snippet}
 
-<div
-  bind:this={container}
-  class="canvas-container fixed inset-0 w-full"
-  style:--scroll-y={appState.creditScrollProgress}
->
+<div bind:this={container} class="fixed inset-0 w-full">
   <Canvas {loadingFallback}>
     <Scenes {container} />
   </Canvas>
@@ -111,10 +107,3 @@
 {#if !appState.isReady}
   <PageSpinner />
 {/if}
-
-<style>
-  .canvas-container {
-    --scroll-y: 0;
-    transform: translateY(calc(max(var(--scroll-y), 0) * -20vh));
-  }
-</style>
