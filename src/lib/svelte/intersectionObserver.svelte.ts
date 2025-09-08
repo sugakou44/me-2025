@@ -1,3 +1,5 @@
+import { explicitEffect } from './explicitEffect.svelte'
+
 interface Params {
   isInView: boolean
   target: Element
@@ -24,8 +26,6 @@ export function intersectionObserver(
           return
         }
 
-        hasTriggered = true
-
         callback({
           isInView: entry.isIntersecting,
           target: entry.target,
@@ -33,7 +33,8 @@ export function intersectionObserver(
           entry,
         })
 
-        if (once) {
+        if (once && entry.isIntersecting) {
+          hasTriggered = true
           return clear()
         }
       },
@@ -66,46 +67,46 @@ export function useInView({
 } = {}) {
   let node = $state<HTMLElement>()
   let isInView = $state(initialInView)
-  let hasTriggered = false
 
-  $effect(() => {
-    if (!node) return
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const entry = entries[0]
-
-        if (hasTriggered && once) {
-          return
-        }
-
-        hasTriggered = true
-
-        isInView = entry.isIntersecting
-
-        if (once) {
-          return clear()
-        }
-      },
-      {
-        threshold,
-        ...options,
-      },
-    )
-
-    const clear = () => {
+  explicitEffect(
+    () => {
       if (!node) return
 
-      observer.unobserve(node)
-      observer.disconnect()
-    }
+      const observer = new IntersectionObserver(
+        (entries) => {
+          const entry = entries[0]
 
-    observer.observe(node)
+          if (isInView && once) {
+            return
+          }
 
-    return () => {
-      clear()
-    }
-  })
+          isInView = entry.isIntersecting
+
+          if (once && isInView) {
+            return clear()
+          }
+        },
+        {
+          threshold,
+          ...options,
+        },
+      )
+
+      const clear = () => {
+        if (!node) return
+
+        observer.unobserve(node)
+        observer.disconnect()
+      }
+
+      observer.observe(node)
+
+      return () => {
+        clear()
+      }
+    },
+    () => [node, once],
+  )
 
   return [
     {
