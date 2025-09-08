@@ -39,6 +39,7 @@
 
   $effect.pre(() => {
     renderer.setClearColor(0xfdfdfd)
+    renderer.setClearAlpha(0)
   })
 
   useTask(() => {
