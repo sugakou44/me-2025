@@ -9,7 +9,7 @@
   import { appState } from '@/lib/contexts/AppState'
 
   import { homeState } from '../../contexts/HomeState'
-  import { EXPERIENCE_MESSAGES, TECHSTACK_MESSAGES } from './constants'
+  import { TECHSTACK_MESSAGES } from './constants'
   import { mainChatContext } from './context.svelte'
   import { messages as greeting } from './messages/greeting.svelte'
 </script>
@@ -19,7 +19,7 @@
     in:fade={{ duration: DURATION_FAST }}
     class="right-8 bottom-8 z-[100] hidden items-center gap-3 md:fixed md:flex"
   >
-    {#if appState.isInHero || homeState.aboutVisibility1}
+    {#if appState.isInHero}
       <div in:fade|global={{ duration: DURATION_FAST, delay: DURATION_FAST }}>
         <Button
           size="default"
@@ -33,7 +33,7 @@
           {@render greeting.hello()}
         </Button>
       </div>
-    {:else if homeState.aboutVisibility2}
+    {:else if homeState.aboutVisibility}
       <div in:fade={{ duration: DURATION_FAST }}>
         <Button
           size="default"
@@ -45,20 +45,6 @@
           }}
         >
           {TECHSTACK_MESSAGES[0].content}
-        </Button>
-      </div>
-    {:else if homeState.experienceVisibility}
-      <div in:fade={{ duration: DURATION_FAST }}>
-        <Button
-          size="default"
-          variant="primary"
-          aria-label="ask question"
-          onclick={() => {
-            mainChatContext.isOpen = true
-            mainChatContext.askQuestion('experience')
-          }}
-        >
-          {EXPERIENCE_MESSAGES[0].content}
         </Button>
       </div>
     {/if}

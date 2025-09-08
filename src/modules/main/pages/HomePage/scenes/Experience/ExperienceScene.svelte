@@ -57,6 +57,10 @@
     scale.y={size * 1.2}
     scale.x={size * 1.2}
   >
+    <T.Mesh position.z={-100}>
+      <T.CircleGeometry args={[0.65]} />
+      <T.MeshBasicMaterial />
+    </T.Mesh>
     <Character
       opacity={opacityTween.current}
       position={[0, 0, 2]}

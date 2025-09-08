@@ -26,8 +26,8 @@ export type Pattern = (typeof PATTERNS)[number]
 export const COLORS = [
   _COLORS.primary,
   _COLORS.secondary,
-  _COLORS.tertiary,
-  _COLORS.quaternary.clone().addScalar(0.7).multiplyScalar(0.7),
+  // _COLORS.tertiary,
+  // _COLORS.quaternary.clone().addScalar(0.7).multiplyScalar(0.7),
 ] as const
 
 export type Indice = {

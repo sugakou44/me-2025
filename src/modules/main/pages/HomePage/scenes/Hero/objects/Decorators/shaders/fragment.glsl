@@ -12,6 +12,8 @@
 #include "@/shaders/patterns/stripe.glsl"
 #include "@/shaders/patterns/triangle.glsl"
 
+#include "@/modules/main/shaders/color.glsl"
+
 uniform float opacity;
 
 in vec2 vUv;
@@ -108,5 +110,5 @@ void main()
         }
     }
 
-    gl_FragColor = vec4(vColor.rgb, finalOpacity);
+    gl_FragColor = vec4(normalizeColor(vColor.rgb), finalOpacity);
 }

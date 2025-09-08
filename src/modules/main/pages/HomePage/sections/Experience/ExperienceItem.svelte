@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { roughBackground } from '@/lib/svelte/backgroundRough.svelte'
+  import { Tag } from '@/components/Tag'
   import { squircleBackground } from '@/lib/svelte/backgroundSquircle.svelte'
   import { Subtext } from '@/modules/main/components/Text'
 
@@ -14,7 +14,7 @@
     company,
     year,
     role,
-    paragraph,
+    description,
     index: _index,
     id: _id,
   }: Props = $props()
@@ -33,38 +33,30 @@
         <div
           class="flex flex-col items-center md:flex-row md:items-baseline md:gap-2"
         >
-          <h3 class="text-secondary-foreground">
+          <h3 class="text-primary-foreground">
             {company}
+            <Subtext class="block text-sm md:inline-block">{year}</Subtext>
           </h3>
-          <Subtext class="block text-sm text-secondary-foreground"
-            >{year}</Subtext
-          >
         </div>
         <h4>{role}</h4>
       </div>
-
-      <p>
-        {#if typeof paragraph === 'string'}
-          <!-- eslint-disable-next-line  svelte/no-at-html-tags -->
-          {@html paragraph}
-        {:else}
-          {@render paragraph()}
-        {/if}
-      </p>
+      {#if description}
+        <p>
+          {#if typeof description === 'string'}
+            <!-- eslint-disable-next-line  svelte/no-at-html-tags -->
+            {@html description}
+          {:else}
+            {@render description()}
+          {/if}
+        </p>
+      {/if}
     </div>
 
-    <div class="flex flex-wrap gap-2">
+    <div class="flex flex-wrap justify-center gap-2 md:justify-start">
       {#each techStack as tech, index (index)}
-        <div
-          {@attach roughBackground({
-            shouldAnimate: true,
-            fill: 'var(--secondary)',
-          })}
-        >
-          <p class="relative px-2 py-1 text-md shadow-sm">
-            {tech}
-          </p>
-        </div>
+        <Tag>
+          {tech}
+        </Tag>
       {/each}
     </div>
   </div>

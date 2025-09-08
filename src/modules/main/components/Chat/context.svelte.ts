@@ -1,11 +1,7 @@
 import { utils } from 'animejs'
 import { nanoid } from 'nanoid'
 
-import {
-  EXPERIENCE_MESSAGES,
-  HELLO_MESSAGES,
-  TECHSTACK_MESSAGES,
-} from './constants'
+import { HELLO_MESSAGES, TECHSTACK_MESSAGES } from './constants'
 
 import type { Message } from '@/components/Chat'
 
@@ -71,9 +67,6 @@ class MainChat {
         break
       case 'tech-stack':
         this.addMessageRecursive(TECHSTACK_MESSAGES)
-        break
-      case 'experience':
-        this.addMessageRecursive(EXPERIENCE_MESSAGES)
         break
     }
   }

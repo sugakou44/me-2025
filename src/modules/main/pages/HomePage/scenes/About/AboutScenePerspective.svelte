@@ -2,20 +2,12 @@
   import { T } from '@threlte/core'
   import { useSuspense, useTexture } from '@threlte/extras'
   import { asset } from '$app/paths'
-  import { eases } from 'animejs'
-  import { Tween } from 'svelte/motion'
+  import { utils } from 'animejs'
 
-  import {
-    DEFAULT_ALPHA_TEST,
-    DURATION_NORMAL,
-  } from '@/lib/animations/constants'
   import { appState } from '@/lib/contexts/AppState'
-  import { windowState } from '@/lib/contexts/Window'
-  import { prepareDataTextureArray } from '@/lib/three/textures'
   import { homeState } from '@/modules/main/contexts/HomeState'
 
-  import InnerCircle from './InnerCircle.svelte'
-  import ScatterStack from './ScatterStack.svelte'
+  import { Particles } from './objects/Particles'
 
   const suspend = useSuspense()
 
@@ -39,43 +31,30 @@
     ]),
   )
 
-  const opacityTween = new Tween(0, {
-    duration: DURATION_NORMAL,
-    easing: eases.inOutSine,
-  })
+  const inIn = $derived(
+    homeState.aboutVisibility &&
+      homeState.aboutScrollProgress > 0.75 &&
+      !appState.forceOpenHero,
+  )
 
-  const inIn = $derived(homeState.aboutScrollProgress2 < 1)
+  const frustumHeight = $derived.by(() => {
+    if (!homeState.perspectiveCamera) {
+      return 0
+    }
 
-  $effect.pre(() => {
-    opacityTween.set(inIn && !appState.forceOpenHero ? 1 : 0)
+    const fov = homeState.perspectiveCamera.fov
+    const distance = homeState.perspectiveCamera.position.z
+
+    return 2 * distance * Math.tan(utils.degToRad(fov * 0.5))
   })
 </script>
 
 {#await promiseAll then textures}
-  {@const dataTextureArray = prepareDataTextureArray(textures)}
-
   <T.Group
     dispose={false}
-    visible={opacityTween.current >= DEFAULT_ALPHA_TEST}
-    position.y={(windowState.scrollPosition - windowState.windowHeight * 1.65) *
-      0.01}
+    rotation.x={-Math.PI / 2}
+    position.y={-frustumHeight / 2}
   >
-    <T.Group position.y={(1 - opacityTween.current) * -4}>
-      <InnerCircle
-        opacity={opacityTween.current}
-        textures={dataTextureArray}
-        count={7}
-      />
-      <ScatterStack
-        opacity={opacityTween.current}
-        textures={dataTextureArray}
-        count={textures.length}
-      />
-      <!-- <Character
-        position.z={2}
-        position.y={-5 * (positionTween.current)}
-        scale={5}
-      /> -->
-    </T.Group>
+    <Particles isIn={inIn} {textures} />
   </T.Group>
 {/await}

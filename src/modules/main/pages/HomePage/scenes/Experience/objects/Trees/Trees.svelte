@@ -2,10 +2,6 @@
   import { T, useTask } from '@threlte/core'
   import { utils } from 'animejs'
 
-  import {
-    Instance,
-    InstancedMesh,
-  } from '@/components/GL/InstancedUniformsMesh'
   import { Tree } from '@/components/GL/Tree'
   import { getTick } from '@/lib/three/frame'
   import { COLORS } from '@/modules/main/constants/colors'

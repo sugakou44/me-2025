@@ -23,6 +23,7 @@ out float vSegmentHeight;
 out vec3 vCoord;
 out vec2 vUv;
 out vec3 vNormal;
+out vec3 vPosition;
 
 void main() {
     vec2 hashedInstanceID = hash21(float(gl_InstanceID)) * 2.0 - 1.0;
@@ -105,8 +106,8 @@ void main() {
     mvPosition.x += viewSpaceThickenFactor * (isOddVertID - 0.5) * width * 0.5 * -side;
 
     gl_Position = projectionMatrix * mvPosition;
-
     gl_Position.w = heightFactor < 0.25 ? 0.0 : gl_Position.w;
+
     vSegmentHeight = segmentHeight;
     vNormal = normalize((modelMatrix * vec4(localNormal, 0.0)).xyz);
     vCoord = (modelMatrix * vec4(localPosition, 1.0)).xyz;

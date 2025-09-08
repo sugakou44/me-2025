@@ -1,7 +1,7 @@
 <script lang="ts">
   import { Button } from '@/components/Buttons'
   import { CONTACT } from '@/lib/constants/contact'
-  import { STACK } from '@/lib/constants/content'
+  import { TECHSTACK_AS_ARRAY } from '@/lib/constants/content'
   import { annotate } from '@/lib/svelte/annotate.svelte'
 
   import Education from './Education.svelte'
@@ -42,9 +42,9 @@
     </div>
   </section>
   <section class="space-y-2">
-    <h3>Tech Stack</h3>
+    <h3>Programming languages and libraries</h3>
     <ul class="flex flex-wrap gap-1">
-      {#each STACK as { name, Icon, shouldHighlight }, index (name)}
+      {#each TECHSTACK_AS_ARRAY as { name, Icon, shouldHighlight }, index (name)}
         <li
           class="flex flex-row items-center gap-1 !pl-0 !text-sm"
           {@attach annotate({
@@ -57,7 +57,7 @@
           <Icon size={18} />
           <span
             >{name}
-            {#if index !== STACK.length - 1},{/if}
+            {#if index !== TECHSTACK_AS_ARRAY.length - 1},{/if}
           </span>
         </li>
       {/each}

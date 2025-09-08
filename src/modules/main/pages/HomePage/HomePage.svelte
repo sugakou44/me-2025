@@ -17,6 +17,8 @@
   import { Credit } from './sections/Credit'
   import { Experience } from './sections/Experience'
   import { Hero } from './sections/Hero'
+  import { Works } from './sections/Works'
+  import Spacer from './Spacer.svelte'
 
   let container = $state<HTMLDivElement>()
   let gameLoader = $state<Promise<any>>()
@@ -55,7 +57,6 @@
       class="flex h-[669px] w-[560px] flex-col items-stretch justify-center gap-2 rounded-4xl p-6 pt-4 pb-8 shadow-2xl"
       {@attach squircleBackground({
         cornerRadius: 16,
-        cornerSmoothing: 1,
         class: 'fill-white -z-10',
       })}
     >
@@ -100,6 +101,8 @@
   <div in:fade class="z-50 min-h-screen w-full">
     <div class="z-50 min-h-screen w-full"></div>
     <About />
+    <Works />
+    <Spacer />
     <Experience />
     <Credit />
   </div>

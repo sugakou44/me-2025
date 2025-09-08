@@ -21,6 +21,6 @@ export function matches(pattern: string | RegExp, importee: string) {
   if (importee === pattern) {
     return true
   }
-  // eslint-disable-next-line prefer-template
+
   return importee.startsWith(pattern + '/')
 }

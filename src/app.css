@@ -160,23 +160,23 @@
 }
 
 @utility cursor-default {
-  cursor: url(/svgs/pointer-fill.svg), default;
+  cursor: url(/images/svgs/pointer-fill.svg), default;
 }
 
 @utility cursor-pointer {
-  cursor: url(/svgs/click.svg), pointer !important;
+  cursor: url(/images/svgs/click.svg), pointer !important;
 }
 
 @utility cursor-not-allowed {
-  cursor: url(/svgs/pointer-off.svg), not-allowed !important;
+  cursor: url(/images/svgs/pointer-off.svg), not-allowed !important;
 }
 
 @utility cursor-O {
-  cursor: url(/svgs/pointer-off.svg), not-allowed !important;
+  cursor: url(/images/svgs/pointer-off.svg), not-allowed !important;
 }
 
 @utility cursor-X {
-  cursor: url(/svgs/pointer-off.svg), not-allowed !important;
+  cursor: url(/images/svgs/pointer-off.svg), not-allowed !important;
 }
 
 @layer base {
@@ -205,11 +205,11 @@
   }
 
   h4 {
-    @apply font-heading text-lg font-medium text-foreground sm:text-xl md:text-2xl lg:text-3xl;
+    @apply font-heading text-lg font-medium text-foreground sm:text-lg md:text-3xl lg:text-2xl;
   }
 
   p {
-    @apply font-body text-md text-foreground md:text-lg 2xl:text-2xl;
+    @apply font-body text-md text-foreground md:text-md 2xl:text-xl;
   }
 
   q {

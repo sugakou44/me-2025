@@ -78,7 +78,7 @@
   i3 = i * 3
   i2 = i * 2
 
-  color = COLORS[3]
+  color = COLORS[1]
   colors[i3 + 0] = color.r
   colors[i3 + 1] = color.g
   colors[i3 + 2] = color.b
@@ -99,7 +99,7 @@
   i3 = i * 3
   i2 = i * 2
 
-  color = COLORS[2]
+  color = COLORS[0]
   colors[i3 + 0] = color.r
   colors[i3 + 1] = color.g
   colors[i3 + 2] = color.b

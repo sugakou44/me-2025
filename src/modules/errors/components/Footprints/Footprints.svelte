@@ -7,8 +7,8 @@
 
   import type { Footprint } from './types'
 
-  const LeftPrint = asset('/svgs/shoe-prints-left.svg')
-  const RightPrint = asset('/svgs/shoe-prints-right.svg')
+  const LeftPrint = asset('/images/svgs/shoe-prints-left.svg')
+  const RightPrint = asset('/images/svgs/shoe-prints-right.svg')
   const STEP_LENGTH = 88
   const LEFT_RIGHT_OFFSET = 24
   const WALK_SPEED = 500

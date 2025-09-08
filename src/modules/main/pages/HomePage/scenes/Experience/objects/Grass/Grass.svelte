@@ -34,7 +34,7 @@
 
   const suspend = useSuspense()
   const grassBladeTexturePromise = suspend(
-    useTexture(asset('/textures/grass-blade.png')),
+    useTexture(asset('/images/textures/grass-blade.png')),
   )
 
   const geometry = new GrassGeometry({

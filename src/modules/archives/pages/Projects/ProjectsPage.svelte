@@ -3,9 +3,9 @@
 
   import BackButton from '@/components/Buttons/BackButton.svelte'
   import Link from '@/components/Links/Link.svelte'
+  import { Tag } from '@/components/Tag'
   import PageTitle from '@/components/Text/PageTitle.svelte'
   import { SORTED_PROJECTS } from '@/lib/constants/content'
-  import { roughBackground } from '@/lib/svelte/backgroundRough.svelte'
   import { useInView } from '@/lib/svelte/intersectionObserver.svelte'
   import { cn } from '@/lib/utils/className'
 
@@ -24,19 +24,6 @@
   </p>
 {/snippet}
 
-{#snippet tag(tag: string)}
-  <div
-    {@attach roughBackground({
-      shouldAnimate: true,
-      fill: 'var(--secondary)',
-    })}
-  >
-    <p class="relative px-2 py-1 text-sm shadow-sm">
-      {tag}
-    </p>
-  </div>
-{/snippet}
-
 {#snippet item(
   { title, techStacks, description, href, company, year }: Project,
   index: number,
@@ -44,14 +31,26 @@
   <p class="hidden text-sm md:block">{year}</p>
   <div class="hidden text-sm md:block">
     <p class="text-sm">{company}</p>
-    {#if description}
-      <p class="text-sm">{description}</p>
-    {/if}
   </div>
-  <p class="text-sm font-medium">{title}</p>
-  <div class="flex flex-wrap gap-2">
+  <p class="text-sm font-medium">
+    {title}
+    {#if description}
+      <br />
+      <span class="text-xs font-light opacity-80">
+        {#if typeof description === 'string'}
+          <!-- eslint-disable-next-line  svelte/no-at-html-tags -->
+          {@html description}
+        {:else}
+          {@render description()}
+        {/if}
+      </span>
+    {/if}
+  </p>
+  <div class="flex flex-wrap items-start gap-2">
     {#each techStacks as tagItem, index (index)}
-      {@render tag(tagItem)}
+      <Tag>
+        {tagItem}
+      </Tag>
     {/each}
   </div>
   <div class="justify-self-end">

@@ -1,38 +1,46 @@
+import { FEATURE_PROJECTS } from '@/lib/constants/content'
 import { windowState } from '@/lib/contexts/Window'
 import {
   checkScrollWithinSection,
   getSectionScrollProgress,
 } from '@/lib/utils/context'
 
-import type { CompanyKey } from '@/lib/constants/content'
-import type { Scene } from 'three'
+import type { OrthographicCamera, PerspectiveCamera, Scene } from 'three'
 
 class HomeState {
   perspectiveScene = $state<Scene | undefined>()
   orthographicScene = $state<Scene | undefined>()
+  perspectiveCamera = $state<PerspectiveCamera | undefined>()
+  orthographicCamera = $state<OrthographicCamera | undefined>()
 
-  aboutContainer1 = $state<HTMLElement>()
-  aboutScrollProgress1 = $derived.by(() => {
+  aboutContainer = $state<HTMLElement>()
+  aboutScrollProgress = $derived.by(() => {
     return getSectionScrollProgress(
       windowState.scrollPosition,
       windowState.windowHeight,
-      this.aboutContainer1,
+      this.aboutContainer,
     )
   })
-  aboutVisibility1 = $derived.by(() => {
-    return checkScrollWithinSection(this.aboutScrollProgress1)
+  aboutVisibility = $derived.by(() => {
+    return checkScrollWithinSection(this.aboutScrollProgress)
   })
 
-  aboutContainer2 = $state<HTMLElement>()
-  aboutScrollProgress2 = $derived.by(() => {
+  worksContainer = $state<HTMLElement>()
+  worksScrollProgress = $derived.by(() => {
     return getSectionScrollProgress(
       windowState.scrollPosition,
-      windowState.windowHeight,
-      this.aboutContainer2,
+      windowState.windowHeight * 0.6,
+      this.worksContainer,
     )
   })
-  aboutVisibility2 = $derived.by(() => {
-    return checkScrollWithinSection(this.aboutScrollProgress2)
+  worksVisibility = $derived.by(() => {
+    return checkScrollWithinSection(this.worksScrollProgress)
+  })
+  worksIndex = $derived.by(() => {
+    if (!this.worksVisibility) {
+      return -1
+    }
+    return Math.floor(this.worksScrollProgress * FEATURE_PROJECTS.length)
   })
 
   experienceContainer = $state<HTMLElement>()
@@ -48,8 +56,6 @@ class HomeState {
   })
 
   hasClickedAllProject = $state(false)
-  projectsKey = $state<CompanyKey | null>(null)
-  projectsIndex = $state(0)
 }
 
 export const homeState = new HomeState()

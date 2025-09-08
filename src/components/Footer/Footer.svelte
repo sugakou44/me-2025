@@ -50,7 +50,7 @@
   class={cn('relative z-40 flex overflow-hidden', className)}
   {@attach squircleBackground({
     cornerRadius:
-      eases.inSine(5 * appState.creditScrollProgress) *
+      eases.inSine(5 * (1 - appState.creditScrollProgress)) *
       Math.max(windowState.windowWidth / 12, 24),
     bottomLeftCornerRadius: 0,
     bottomRightCornerRadius: 0,
