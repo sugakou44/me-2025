@@ -53,9 +53,11 @@
         </Tag>
       {/each}
     </div>
-    <Button isExternal {href} class="mt-4 self-center" variant="ghost">
-      View Project
-      <IconExternalLink class="ml-2 h-4 w-4" />
-    </Button>
+    {#if href}
+      <Button isExternal {href} class="mt-4 self-center" variant="ghost">
+        View Project
+        <IconExternalLink class="ml-2 h-4 w-4" />
+      </Button>
+    {/if}
   </div>
 </div>

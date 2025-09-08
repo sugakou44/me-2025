@@ -11,8 +11,6 @@
 
   import { Image } from './objects/Image'
 
-  // import { Particles } from './objects/Particles'
-
   const positionXMultiplier = useBreakPointValue({
     base: 0,
     md: 1,
@@ -56,7 +54,6 @@
 </script>
 
 <T.Group visible={tween.current > 0}>
-  <!-- <Particles isIn /> -->
   {#each FEATURE_PROJECTS as { image }, index (index)}
     {@const scale =
       (0.88 *
