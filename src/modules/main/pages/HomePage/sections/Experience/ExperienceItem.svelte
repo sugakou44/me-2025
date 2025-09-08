@@ -22,7 +22,7 @@
 
 <div class="relative">
   <div
-    class="relative z-30 flex flex-col items-center gap-8 p-6 text-center md:items-start md:p-12 md:text-left"
+    class="relative z-30 flex flex-col items-center gap-8 rounded-full p-6 text-center shadow-xl md:items-start md:p-12 md:text-left"
     {@attach squircleBackground({
       cornerRadius: 64,
       class: 'fill-white',
