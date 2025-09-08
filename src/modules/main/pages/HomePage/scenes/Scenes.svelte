@@ -87,7 +87,6 @@
   <T.Group>
     <T.AmbientLight intensity={4.5} color={0xffffff} />
     <AboutScene />
-    <GalleryScene />
     <ExperienceScene />
   </T.Group>
 </T.Scene>
