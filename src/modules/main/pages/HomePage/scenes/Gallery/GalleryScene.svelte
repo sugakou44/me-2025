@@ -61,7 +61,7 @@
     {@const scale =
       (0.88 *
         Math.min(frustumWidth / (positionMultipler[0] + 1), frustumHeight)) /
-      Math.max(image!.width, image!.height)}
+      Math.max(image.width, image.height)}
     {@const opacity = utils.clamp(
       utils.mapRange(tween.current, index, index + 1, 0, 1),
       0,

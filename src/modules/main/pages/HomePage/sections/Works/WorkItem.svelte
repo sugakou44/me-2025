@@ -7,9 +7,9 @@
   import { cn } from '@/lib/utils/className'
   import Subtext from '@/modules/main/components/Text/Subtext.svelte'
 
-  import type { Project } from '@/lib/constants/content'
+  import type { FeaturedProject } from '@/lib/constants/content'
 
-  interface Props extends Project {
+  interface Props extends FeaturedProject {
     isFocusing?: boolean
   }
 

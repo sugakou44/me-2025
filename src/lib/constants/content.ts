@@ -148,15 +148,16 @@ export const TECHSTACK_AS_ARRAY: StackItem[] = Object.entries(TECHSTACK).map(
   },
 )
 
-export interface Project {
+export interface CommonProject {
   title: string
-  description?: string | Snippet<[boolean | undefined]>
   year: string
+  techStacks: string[]
+  description?: string | Snippet<[boolean | undefined]>
   companyKey?: CompanyKey
   company?: string
-  techStacks: string[]
   href?: string
   role?: string
+  isFeatured?: false
   image?: {
     width: number
     height: number
@@ -165,6 +166,13 @@ export interface Project {
     inverseColor?: boolean
   }
 }
+
+export interface FeaturedProject extends Omit<CommonProject, 'isFeatured'> {
+  isFeatured: true
+  image: Exclude<CommonProject['image'], undefined>
+}
+
+export type Project = FeaturedProject | CommonProject
 
 export const PROJECTS: Project[] = [
   // datawow
@@ -177,6 +185,7 @@ export const PROJECTS: Project[] = [
     href: WORK_ROUTES.pdpacore.pathname,
     role: 'Frontend developer',
     description: pdpacoreDescription,
+    isFeatured: true,
     image: {
       width: 1000,
       height: 525,
@@ -200,6 +209,7 @@ export const PROJECTS: Project[] = [
     href: WORK_ROUTES.pdpaPro.pathname,
     role: 'Frontend developer',
     description: pdpaproDescription,
+    isFeatured: true,
     image: {
       width: 1000,
       height: 525,
@@ -214,6 +224,7 @@ export const PROJECTS: Project[] = [
     href: WORK_ROUTES.pdpaProkit.pathname,
     description: pdpaprokitDescription,
     role: 'Frontend developer',
+    isFeatured: true,
     image: {
       width: 1000,
       height: 525,
@@ -237,6 +248,7 @@ export const PROJECTS: Project[] = [
     href: WORK_ROUTES.cookieWow.pathname,
     role: 'Frontend developer',
     description: cookiewowDescription,
+    isFeatured: true,
     image: {
       width: 1000,
       height: 525,
@@ -271,6 +283,7 @@ export const PROJECTS: Project[] = [
     href: WORK_ROUTES.captainTracking.pathname,
     role: 'Frontend developer',
     description: captainTrackingDescription,
+    isFeatured: true,
     image: {
       width: 479,
       height: 1000,
@@ -286,6 +299,7 @@ export const PROJECTS: Project[] = [
     href: WORK_ROUTES.captainKitchen.pathname,
     role: 'Frontend developer',
     description: captainKitchenDescription,
+    isFeatured: true,
     image: {
       width: 1000,
       height: 535,
@@ -302,6 +316,7 @@ export const PROJECTS: Project[] = [
     href: WORK_ROUTES.captainDispatch.pathname,
     role: 'Frontend developer',
     description: captainDispatchDescription,
+    isFeatured: true,
     image: {
       width: 1000,
       height: 758,
@@ -327,6 +342,7 @@ export const PROJECTS: Project[] = [
     href: WORK_ROUTES.captainSite.pathname,
     role: 'Frontend developer',
     description: captainSiteDescription,
+    isFeatured: true,
     image: {
       width: 1000,
       height: 541,
@@ -352,6 +368,7 @@ export const PROJECTS: Project[] = [
     techStacks: ['react.js', 'three.js', 'express.js', 'typescript'],
     role: 'Developer',
     description: worldRabiesDescription,
+    isFeatured: true,
     image: {
       width: 1000,
       height: 539,
@@ -386,6 +403,7 @@ export const PROJECTS: Project[] = [
     techStacks: ['react.js', 'three.js', 'typescript'],
     href: WORK_ROUTES['2020v2'].pathname,
     description: oldSiteDescription,
+    isFeatured: true,
     image: {
       width: 1000,
       height: 535,
@@ -401,7 +419,9 @@ export const SORTED_PROJECTS = PROJECTS.sort((a, b) =>
   .sort((a, b) => (a.company ?? '').localeCompare(b.company ?? ''))
   .sort((a, b) => b.year.localeCompare(a.year))
 
-export const FEATURE_PROJECTS = SORTED_PROJECTS.filter(({ image }) => !!image)
+export const FEATURE_PROJECTS = SORTED_PROJECTS.filter(
+  ({ isFeatured }) => !!isFeatured,
+) as FeaturedProject[]
 
 // export const CAPTAIN_PROJECTS = SORTED_PROJECTS.filter(
 //   (project) => project.companyKey === 'captain',
