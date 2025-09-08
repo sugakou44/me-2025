@@ -11,7 +11,7 @@
   style:--page-size="120vh"
   bind:this={homeState.experienceContainer}
 >
-  <SectionHeader>Experience</SectionHeader>
+  <SectionHeader>Jobs</SectionHeader>
   <div class="flex flex-col gap-80">
     {#each EXPERIENCE as item, index (item.company)}
       <ExperienceItem {...item} {index} />
