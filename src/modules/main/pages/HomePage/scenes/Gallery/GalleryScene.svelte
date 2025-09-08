@@ -55,7 +55,7 @@
   })
 </script>
 
-<T.Group>
+<T.Group visible={tween.current > 0}>
   <!-- <Particles isIn /> -->
   {#each FEATURE_PROJECTS as { image }, index (index)}
     {@const scale =

@@ -117,7 +117,12 @@
   )
 </script>
 
-<T.Points {geometry} frustumCulled={false} {...rest}>
+<T.Points
+  {geometry}
+  frustumCulled={false}
+  visible={opacityTween.current >= DEFAULT_ALPHA_TEST}
+  {...rest}
+>
   <T.ShaderMaterial
     {uniforms}
     uniforms.opacity.value={opacityTween.current}
