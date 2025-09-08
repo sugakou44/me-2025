@@ -76,12 +76,12 @@
     },
   })}
 />
-<!-- <T.Mesh>
-  <T.BoxGeometry
+<T.Mesh>
+  <T.PlaneGeometry
     args={[windowState.windowWidth, windowState.windowHeight, 1, 1]}
   />
   <T.MeshBasicMaterial color="white" opacity={opacityTween.current} />sc
-</T.Mesh> -->
+</T.Mesh>
 <T.Group
   position.y={-posY + size * 0.75}
   visible={opacityTween.current >= DEFAULT_ALPHA_TEST}
