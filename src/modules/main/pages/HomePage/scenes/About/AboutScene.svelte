@@ -76,20 +76,18 @@
     },
   })}
 />
-<T.Mesh>
-  <T.PlaneGeometry
-    args={[windowState.windowWidth, windowState.windowHeight, 1, 1]}
-  />
-  <T.MeshBasicMaterial color="white" opacity={opacityTween.current} />sc
-</T.Mesh>
-<T.Group
-  position.y={-posY + size * 0.75}
-  visible={opacityTween.current >= DEFAULT_ALPHA_TEST}
->
-  <T.Group scale.x={opacityTween.current}>
-    <WobblyPlane {size} {rotationRad} />
-  </T.Group>
-  <!-- <T.Group position.y={(1 - opacityTween.current) * -size * 0.25}>
+<T.Group scale.x={opacityTween.current}>
+  <T.Mesh>
+    <T.PlaneGeometry
+      args={[windowState.windowWidth, windowState.windowHeight, 1, 1]}
+    />
+    <T.MeshBasicMaterial color="white" opacity={opacityTween.current} />sc
+  </T.Mesh>
+  <T.Group
+    position.y={-posY + size * 0.75}
+    visible={opacityTween.current >= DEFAULT_ALPHA_TEST}
+  >
+    <!-- <T.Group position.y={(1 - opacityTween.current) * -size * 0.25}>
     <Character
       position.y={-size * 0.85}
       position.z={2}
@@ -99,4 +97,6 @@
       lookAt={lookAt.current}
     />
   </T.Group> -->
+  </T.Group>
+  <WobblyPlane {size} {rotationRad} />
 </T.Group>
