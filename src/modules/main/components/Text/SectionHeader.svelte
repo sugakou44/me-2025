@@ -13,7 +13,7 @@
 
 <h2
   class={`text-outline ${cn(
-    'self-center text-center font-bold text-primary-foreground',
+    'self-center text-center font-bold text-primary-foreground uppercase',
     className,
   )}`}
   style:--outline-width="0.1em"

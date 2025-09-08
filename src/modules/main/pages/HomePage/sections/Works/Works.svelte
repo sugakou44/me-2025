@@ -10,7 +10,7 @@
   import WorkItem from './WorkItem.svelte'
 </script>
 
-<SectionHeader>PROJECTS</SectionHeader>
+<SectionHeader class="mb-[25vh]">PROJECTS</SectionHeader>
 <section
   class="chapter section mr-auto flex flex-col md:mr-[5vw] md:max-w-[50vw] xl:mr-[20vw] xl:!max-w-[30vw]"
 >

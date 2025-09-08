@@ -7,7 +7,7 @@
 </script>
 
 <section
-  class="chapter section flex flex-col gap-[50vh]"
+  class="chapter section flex flex-col gap-[25vh]"
   style:--page-size="120vh"
   bind:this={homeState.experienceContainer}
 >
