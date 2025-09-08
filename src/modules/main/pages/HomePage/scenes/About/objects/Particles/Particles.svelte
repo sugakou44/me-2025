@@ -36,6 +36,7 @@
   const dataTextureArray = prepareDataTextureArray(textures)
   const geometry = new ParticleGeometry(COUNT, SIZE, textures.length)
   const opacityTween = new Tween(1, { duration: DURATION_FASTEST })
+  let hasRenderLastTick = true
 
   $effect(() => {
     opacityTween.set(isIn ? 1 : 0, {
@@ -90,6 +91,16 @@
 
   useTask(
     (dt) => {
+      if (opacityTween.current === 0) {
+        if (hasRenderLastTick) {
+          return
+        }
+
+        hasRenderLastTick = true
+      } else {
+        hasRenderLastTick = false
+      }
+
       const tick = getTick()
 
       positionMap.setUniform('dt', dt * 0.1)
