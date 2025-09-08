@@ -21,7 +21,7 @@
   <div
     class="p-8"
     {@attach squircleBackground({
-      cornerRadius: 32,
+      cornerRadius: 64,
       class: 'fill-white/80 z-0',
     })}
   >

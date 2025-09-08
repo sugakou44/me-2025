@@ -56,7 +56,7 @@
     <div
       class="flex h-[669px] w-[560px] flex-col items-stretch justify-center gap-2 rounded-4xl p-6 pt-4 pb-8 shadow-2xl"
       {@attach squircleBackground({
-        cornerRadius: 16,
+        cornerRadius: 64,
         class: 'fill-white -z-10',
       })}
     >

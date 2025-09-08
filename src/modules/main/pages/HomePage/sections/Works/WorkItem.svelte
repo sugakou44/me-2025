@@ -19,11 +19,11 @@
 
 <div
   style:transition-property="shadow background"
-  class={cn('relative rounded-4xl p-6 shadow-lg transition-opacity  md:p-8', {
+  class={cn('relative rounded-full p-6 shadow-lg transition-opacity md:p-12', {
     'opacity-20 shadow-none md:opacity-50': !isFocusing,
   })}
   {@attach squircleBackground({
-    cornerRadius: 32,
+    cornerRadius: 64,
     class: 'fill-white z-0',
   })}
 >
