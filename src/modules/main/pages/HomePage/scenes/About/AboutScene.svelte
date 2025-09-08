@@ -87,6 +87,7 @@
     position.y={-posY + size * 0.75}
     visible={opacityTween.current >= DEFAULT_ALPHA_TEST}
   >
+    <WobblyPlane {size} {rotationRad} />
     <!-- <T.Group position.y={(1 - opacityTween.current) * -size * 0.25}>
     <Character
       position.y={-size * 0.85}
@@ -98,5 +99,4 @@
     />
   </T.Group> -->
   </T.Group>
-  <WobblyPlane {size} {rotationRad} />
 </T.Group>
