@@ -17,6 +17,8 @@
   import '@/lib/svelte/lenis.svelte'
   import '../app.css'
 
+  import { windowState } from '@/lib/contexts/Window'
+
   let { children } = $props()
 
   const OG_IMAGE = `${ROUTES.home.href}/og.png`
@@ -26,14 +28,18 @@
   }
 </script>
 
-<SvelteSeo
-  title={DEFAULT_TITLE}
-  description={DEFAULT_DESCRIPTION}
-  canonical={ROUTES.home.href}
-/>
+{#if windowState.pathname === ROUTES.home.pathname}
+  <SvelteSeo
+    title={DEFAULT_TITLE}
+    description={DEFAULT_DESCRIPTION}
+    canonical={ROUTES.home.href}
+  />
+{/if}
 
 <SvelteSeo
   notranslate
+  title={DEFAULT_TITLE}
+  description={DEFAULT_DESCRIPTION}
   themeColor={THEME_COLOR}
   manifest={`${ROUTES.home.href}/manifest.json`}
   openGraph={{
