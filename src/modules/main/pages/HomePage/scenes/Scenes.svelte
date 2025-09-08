@@ -38,7 +38,7 @@
   })
 
   $effect.pre(() => {
-    renderer.setClearColor('white')
+    renderer.setClearColor(0xfdfdfd)
   })
 
   useTask(() => {
