@@ -52,9 +52,6 @@ class HomeState {
       { max: 2 },
     )
   })
-  experienceVisibility = $derived.by(() => {
-    return checkScrollWithinSection(this.experienceScrollProgress)
-  })
 
   epilogueContainer = $state<HTMLElement>()
   epilogueScrollProgress = $derived.by(() => {

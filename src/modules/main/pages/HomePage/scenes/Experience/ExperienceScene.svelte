@@ -39,7 +39,8 @@
 
   $effect.pre(() => {
     environmentOpacityTween.set(
-      homeState.experienceVisibility && homeState.experienceScrollProgress < 1
+      homeState.experienceScrollProgress > 0 &&
+        homeState.experienceScrollProgress < 1
         ? 1
         : 0,
     )
@@ -61,7 +62,7 @@
           ? 0
           : 1,
       {
-        duration: !homeState.experienceVisibility ? 0 : DURATION_NORMAL,
+        duration: homeState.experienceScrollProgress <= 0 ? 0 : DURATION_NORMAL,
       },
     )
   })

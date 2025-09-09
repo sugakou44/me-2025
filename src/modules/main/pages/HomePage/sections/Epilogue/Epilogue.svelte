@@ -8,7 +8,7 @@
 </script>
 
 <section
-  class="section chapter flex flex-col items-center justify-center !py-0"
+  class="section chapter flex flex-col items-center justify-center !py-0 pb-20"
   bind:this={homeState.epilogueContainer}
   style:--page-size="50vh"
 >
