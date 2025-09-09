@@ -5,7 +5,7 @@ export const DEFAULT_DESCRIPTION =
   'Front-end developer based in Bangkok, Thailand'
 
 export function getTitle(title: string) {
-  return `${title} | ${DEFAULT_NAME}`
+  return `${title} | ${DEFAULT_SITENAME}`
 }
 
 export const THEME_COLOR = '#fafafa'
