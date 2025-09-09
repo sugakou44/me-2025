@@ -5,13 +5,16 @@
   import { cn } from '@/lib/utils/className'
   import Paragraph from '@/modules/main/components/Text/Paragraph.svelte'
   import { homeState } from '@/modules/main/contexts/HomeState'
+
+  import Spacer from '../../Spacer.svelte'
 </script>
 
 <section
-  class="section chapter flex flex-col items-center justify-center !py-0 pb-20"
+  class="section chapter mb-20 flex flex-col items-center justify-center !py-0 md:mb-40"
   bind:this={homeState.epilogueContainer}
   style:--page-size="50vh"
 >
+  <Spacer />
   <Paragraph
     class="text-center font-handwritting-body"
     backgroundClass="fill-white/70 z-0"

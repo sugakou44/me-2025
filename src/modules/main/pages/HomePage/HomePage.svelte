@@ -101,7 +101,6 @@
     <Works />
     <Spacer />
     <Experience />
-    <Spacer />
     <Epilogue />
     <Credit />
   </div>
