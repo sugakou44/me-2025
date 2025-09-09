@@ -1,13 +1,13 @@
 <script lang="ts">
   import { T } from '@threlte/core'
-  import { useSuspense, useTexture } from '@threlte/extras'
-  import { asset } from '$app/paths'
   import { eases, utils } from 'animejs'
+  import { untrack } from 'svelte'
   import { Tween } from 'svelte/motion'
 
   import {
     DEFAULT_ALPHA_TEST,
     DURATION_NORMAL,
+    DURATION_SLOWER,
   } from '@/lib/animations/constants'
   import { appState } from '@/lib/contexts/AppState'
   import { windowState } from '@/lib/contexts/Window'
@@ -15,15 +15,11 @@
 
   import { Character } from './objects/Character'
   import { Grass } from './objects/Grass'
+  import { Sky } from './objects/Sky'
   import { Trees } from './objects/Trees'
 
-  const suspend = useSuspense()
-  const texturePromise = suspend(
-    useTexture(asset('/images/textures/sky-2.jpg')),
-  )
-
   const opacityTween = new Tween(0, {
-    duration: DURATION_NORMAL,
+    duration: DURATION_SLOWER,
     easing: eases.outSine,
   })
 
@@ -47,9 +43,15 @@
   })
 
   $effect.pre(() => {
-    opacityTween.set(
-      utils.clamp(Math.ceil(homeState.experienceScrollProgress), 0, 2),
+    const target = utils.clamp(
+      Math.ceil(homeState.experienceScrollProgress),
+      0,
+      2,
     )
+    const current = untrack(() => opacityTween.current)
+    opacityTween.set(target, {
+      duration: target > 1 || current > 1 ? DURATION_NORMAL : DURATION_SLOWER,
+    })
   })
 
   $effect.pre(() => {
@@ -87,22 +89,12 @@
   position.y={-windowState.windowHeight * 0.5 - windowState.scrollPosition}
   dispose={false}
 >
-  <!-- eslint-disable-next-line svelte/require-store-reactive-access  -->
-  {#await texturePromise then skytexxture}
-    <T.Mesh
-      position.z={-101}
-      scale={2 *
-        Math.max(windowState.windowHeight / 1.3, windowState.windowWidth / 2)}
-    >
-      <T.PlaneGeometry args={[2, 1.3, 1, 1]} />
-      <T.MeshBasicMaterial
-        transparent
-        opacity={environmentOpacityTween.current}
-        color="white"
-        map={skytexxture}
-      />
-    </T.Mesh>
-  {/await}
+  <Sky
+    position.z={-101}
+    opacity={eases.inSine(opacityTween.current)}
+    scale={2 *
+      Math.max(windowState.windowHeight / 1.3, windowState.windowWidth / 2)}
+  />
 
   <T.Group
     position.x={-homeState.experienceScrollProgress * windowState.windowWidth}
