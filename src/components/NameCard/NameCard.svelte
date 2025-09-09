@@ -77,7 +77,7 @@
       easing: backOut,
     }}
     class={cn(
-      'pointer-events-none fixed inset-4 z-50 will-change-transform lg:inset-6 print:hidden',
+      'noscript-hidden pointer-events-none fixed inset-4 z-50 will-change-transform lg:inset-6 print:hidden',
     )}
   >
     {#if appState.forceOpenHero}
@@ -91,7 +91,7 @@
     {/if}
     <div
       style:transform={contentTransform}
-      class="pointer-events-auto absolute top-[45%] left-[50%] container mx-auto aspect-[1/1.65] w-full transition-none will-change-transform transform-3d lg:aspect-[1.65] lg:max-h-none xl:max-w-5xl"
+      class="!max-w-unset pointer-events-auto absolute top-[45%] left-[50%] container mx-auto aspect-[1/1.65] w-full transition-none will-change-transform transform-3d lg:aspect-[1.65] lg:max-h-none xl:max-w-5xl"
     >
       <Content
         bind:isOpen={appState.isOpenNameCard}

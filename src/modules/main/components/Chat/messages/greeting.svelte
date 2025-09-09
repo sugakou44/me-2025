@@ -12,7 +12,7 @@
 </script>
 
 {#snippet handwaving()}
-  <span class="hand-waving inline-block origin-bottom-right"> 👋 </span>
+  <span class="hand-waving inline-block"> 👋 </span>
 {/snippet}
 
 {#snippet hello()}
@@ -39,15 +39,3 @@
     ar... Can you open this with your desktop?
   </span>
 {/snippet}
-
-<style>
-  :global(.hand-waving) {
-    will-change: transform, transform-origin;
-    animation-duration: var(--tw-duration, 1s);
-    animation-iteration-count: infinite;
-    animation-fill-mode: forwards;
-    animation-direction: alternate;
-    animation-timing-function: ease-in-out;
-    animation-name: handwaving;
-  }
-</style>

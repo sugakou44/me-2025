@@ -36,7 +36,7 @@
     </h3>
 
     {#if description}
-      <p class="leading-normal">
+      <p class="text-center leading-normal md:text-left">
         {#if typeof description === 'string'}
           <!-- eslint-disable-next-line  svelte/no-at-html-tags -->
           {@html description}

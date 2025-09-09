@@ -343,6 +343,17 @@
     --outline-color: white;
     -webkit-text-stroke: var(--outline-width) var(--outline-color);
   }
+
+  .hand-waving {
+    will-change: transform, transform-origin;
+    animation-duration: var(--tw-duration, 1s);
+    animation-iteration-count: infinite;
+    animation-fill-mode: forwards;
+    animation-direction: alternate;
+    animation-timing-function: ease-in-out;
+    animation-name: handwaving;
+    transform-origin: bottom right;
+  }
 }
 
 #three-perf-ui {
