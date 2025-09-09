@@ -2,6 +2,7 @@
   import { TECHSTACK_AS_ARRAY } from '@/lib/constants/content'
   import { squircleBackground } from '@/lib/svelte/backgroundSquircle.svelte'
   import { useInView } from '@/lib/svelte/intersectionObserver.svelte'
+  import { cn } from '@/lib/utils/className'
   import HighlightText from '@/modules/main/components/Text/HighlightText.svelte'
   import { homeState } from '@/modules/main/contexts/HomeState'
 
@@ -12,11 +13,11 @@
 
 <section class="section min-h-screen" bind:this={homeState.aboutContainer}>
   <div
-    class="p-8"
+    class="relative p-8"
     bind:this={containerRef.current}
     {@attach squircleBackground({
       cornerRadius: 64,
-      class: 'fill-white/80 z-0',
+      class: 'fill-white/90 z-0',
     })}
   >
     <p class="relative p-8 text-center text-primary-foreground">

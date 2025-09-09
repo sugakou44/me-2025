@@ -46,7 +46,7 @@
       </p>
     {/if}
 
-    <div class="flex flex-wrap justify-center gap-2 md:justify-start">
+    <div class="flex flex-wrap justify-center gap-2 self-center">
       {#each techStacks as tag, index (index)}
         <Tag>
           {tag}
@@ -54,7 +54,7 @@
       {/each}
     </div>
     {#if href}
-      <Button isExternal {href} class="mt-4 self-center" variant="ghost">
+      <Button isExternal {href} class="mt-2 self-center" variant="ghost">
         View Project
         <IconExternalLink class="ml-2 h-4 w-4" />
       </Button>
