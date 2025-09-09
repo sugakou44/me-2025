@@ -10,7 +10,7 @@
 </script>
 
 <section
-  class="section chapter mb-20 flex flex-col items-center justify-center !py-0 md:mb-40"
+  class="section chapter mb-20 flex flex-col items-center justify-center !py-0 md:mb-[20vh]"
   bind:this={homeState.epilogueContainer}
   style:--page-size="50vh"
 >
@@ -23,8 +23,8 @@
       class="relative text-[1.5em]"
       percent={utils.mapRange(
         homeState.epilogueScrollProgress,
-        0.75,
-        0.95,
+        0.8,
+        0.98,
         0,
         1,
       )}
