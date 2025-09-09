@@ -47,7 +47,7 @@
 
 <footer
   bind:this={ref.current}
-  class={cn('relative z-40 flex overflow-hidden', className)}
+  class={cn('relative z-40 flex', className)}
   {@attach squircleBackground({
     cornerRadius:
       eases.inSine(5 * (1 - appState.creditScrollProgress)) *
@@ -114,7 +114,7 @@
   </section>
   {#if isInView() && haveGhost && ghostLoader}
     {#await ghostLoader then { CursorTheif }}
-      <figure class="absolute right-1/5 bottom-2/5 hidden md:block">
+      <figure class="absolute right-1/5 bottom-2/5 z-50 hidden md:block">
         <CursorTheif />
       </figure>
     {/await}
