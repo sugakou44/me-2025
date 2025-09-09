@@ -15,31 +15,34 @@
   interface Props {
     textures?: DataArrayTexture
     count?: number
+    offset?: number
     opacity?: number
   }
 
-  let { textures, count = 0, opacity = 1 }: Props = $props()
+  let { textures, offset = 0, count = 0, opacity = 1 }: Props = $props()
 
-  const colors = new Float32Array(count * 3)
-  const positions = new Float32Array(count * 3)
-  const angle = new Float32Array(count)
-  const sizes = new Float32Array(count)
+  let _count = count * 3
 
-  for (let i = 0; i < count; i++) {
-    const ratio = i / count
+  const colors = new Float32Array(_count * 3)
+  const positions = new Float32Array(_count * 3)
+  const angle = new Float32Array(_count)
+  const sizes = new Float32Array(_count)
+  for (let i = 0; i < _count; i++) {
     const i3 = i * 3
 
-    const color = COLORS_AS_ARRAY[i % 2]
+    const color = COLORS_AS_ARRAY[utils.random(0, 1)]
     colors[i3 + 0] = color.r
     colors[i3 + 1] = color.g
     colors[i3 + 2] = color.b
 
-    positions[i3 + 0] = Math.cos(ratio * Math.PI * 2) * 1.3
-    positions[i3 + 1] = Math.sin(ratio * Math.PI * 2) * 1.3
-    positions[i3 + 2] = 0
+    const rad = utils.degToRad(utils.random(0, 180, 4))
+    const radius = utils.random(1, 5, 4)
+    positions[i3 + 0] = Math.cos(rad) * radius
+    positions[i3 + 1] = Math.sin(rad) * radius
+    positions[i3 + 2] = utils.random(-3, -1, 4)
 
     angle[i] = Math.random() * Math.PI * 2
-    sizes[i] = utils.mapRange(Math.random(), 0, 1, 0.7, 0.9)
+    sizes[i] = utils.mapRange(Math.random(), 0, 1, 0.3, 0.5)
   }
 
   const uniforms = {
@@ -49,11 +52,14 @@
     opacity: {
       value: opacity,
     },
+    map: {
+      value: null,
+    },
     textures: {
       value: textures,
     },
     textureOffset: {
-      value: 0,
+      value: offset,
     },
     textureCount: {
       value: count,
@@ -65,29 +71,29 @@
   })
 </script>
 
-<InstancedMesh {count} limit={count} frustumCulled={false}>
+<InstancedMesh count={_count} limit={_count} frustumCulled={false}>
   <T.PlaneGeometry args={[1, 1, 1, 1]}>
     <T.InstancedBufferAttribute
       attach="attributes.instanceColor"
-      {count}
+      {_count}
       array={colors}
       itemSize={3}
     />
     <T.InstancedBufferAttribute
       attach="attributes.instanceOrigin"
-      {count}
+      {_count}
       array={positions}
       itemSize={3}
     />
     <T.InstancedBufferAttribute
       attach="attributes.instanceAngle"
-      {count}
+      {_count}
       array={angle}
       itemSize={1}
     />
     <T.InstancedBufferAttribute
       attach="attributes.instanceSize"
-      {count}
+      {_count}
       array={sizes}
       itemSize={1}
     />
@@ -98,10 +104,10 @@
     fragmentShader={FragmentShader}
     transparent
     {uniforms}
-    uniforms.opacity.value={opacity}
+    uniforms.opacity.value={opacity * 0.8}
     alphaTest={DEFAULT_ALPHA_TEST}
   />
-  {#each { length: count } as _, index (index)}
-    <Instance />
+  {#each { length: _count } as _, index (index)}
+    <Instance position={[0, 1, 0]} />
   {/each}
 </InstancedMesh>

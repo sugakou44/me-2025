@@ -2,12 +2,22 @@
   import { T } from '@threlte/core'
   import { useSuspense, useTexture } from '@threlte/extras'
   import { asset } from '$app/paths'
-  import { utils } from 'animejs'
+  import { eases, utils } from 'animejs'
+  import { Spring, Tween } from 'svelte/motion'
 
-  import { appState } from '@/lib/contexts/AppState'
+  import {
+    DEFAULT_ALPHA_TEST,
+    DURATION_NORMAL,
+    FAST_SPRING_CONFIG,
+  } from '@/lib/animations/constants'
+  import { gestures } from '@/lib/svelte/gestures.svelte'
+  import { prepareDataTextureArray } from '@/lib/three/textures'
   import { homeState } from '@/modules/main/contexts/HomeState'
 
-  import { Particles } from './objects/Particles'
+  import { Character } from './objects/Character'
+  // import { Particles } from './objects/Particles'
+  import InnerCircle from './objects/Particles/InnerCircle.svelte'
+  import OuterCircle from './objects/Particles/OuterCircle.svelte'
 
   const suspend = useSuspense()
 
@@ -31,11 +41,20 @@
     ]),
   )
 
-  const inIn = $derived(
-    homeState.aboutVisibility &&
-      homeState.aboutScrollProgress > 0.75 &&
-      !appState.forceOpenHero,
+  const lookAt = new Spring(0, FAST_SPRING_CONFIG)
+
+  const opacityTween = new Tween(0, {
+    duration: DURATION_NORMAL,
+    easing: eases.inOutSine,
+  })
+
+  const isVisible = $derived(
+    homeState.aboutVisibility && homeState.aboutScrollProgress > 0.5,
   )
+
+  $effect.pre(() => {
+    opacityTween.set(isVisible ? 1 : 0)
+  })
 
   const frustumHeight = $derived.by(() => {
     if (!homeState.perspectiveCamera) {
@@ -49,12 +68,45 @@
   })
 </script>
 
-{#await promiseAll then textures}
-  <T.Group
-    dispose={false}
-    rotation.x={-Math.PI / 2}
-    position.y={-frustumHeight / 2}
-  >
-    <Particles isIn={inIn} {textures} />
-  </T.Group>
-{/await}
+<svelte:window
+  {@attach gestures({
+    onMove: ({ percentage: [x] }) => {
+      lookAt.set(x * 2.0 - 1.0)
+    },
+  })}
+/>
+<T.Group visible={opacityTween.current >= DEFAULT_ALPHA_TEST}>
+  {#await promiseAll then textures}
+    {@const dataTextureArray = prepareDataTextureArray(textures)}
+    <T.Group dispose={false} position.y={-frustumHeight / 2}>
+      <T.Group
+        position.y={-(1 - homeState.aboutScrollProgress) * frustumHeight +
+          frustumHeight / 1.5}
+      >
+        <InnerCircle
+          opacity={opacityTween.current}
+          textures={dataTextureArray}
+          count={7}
+        />
+      </T.Group>
+      <T.Group
+        position.y={-(1 - homeState.aboutScrollProgress) * frustumHeight +
+          frustumHeight / 2}
+      >
+        <OuterCircle
+          opacity={opacityTween.current}
+          textures={dataTextureArray}
+          count={textures.length}
+        />
+      </T.Group>
+    </T.Group>
+  {/await}
+
+  <Character
+    opacity={opacityTween.current}
+    lookAt={lookAt.current}
+    scale={frustumHeight}
+    position.y={-frustumHeight * 2.1 + opacityTween.current * frustumHeight}
+    rotation.x={utils.degToRad(-30)}
+  />
+</T.Group>

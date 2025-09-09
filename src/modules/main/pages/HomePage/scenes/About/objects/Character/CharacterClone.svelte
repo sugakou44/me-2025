@@ -1,6 +1,6 @@
 <script lang="ts">
   import { T } from '@threlte/core'
-  import { Outlines } from '@threlte/extras'
+  // import { Outlines } from '@threlte/extras'
   import { SkeletonUtils } from 'three/examples/jsm/Addons.js'
 
   import type { Bone, MeshStandardMaterial, SkinnedMesh } from 'three'
@@ -42,6 +42,6 @@
       roughness={0}
       metalness={0}
     />
-    <Outlines color="white" thickness={22} {opacity} transparent />
+    <!-- <Outlines color="white" thickness={22} {opacity} transparent /> -->
   </T>
 {/if}
