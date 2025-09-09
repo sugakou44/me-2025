@@ -91,7 +91,7 @@
 >
   <Sky
     position.z={-101}
-    opacity={eases.inSine(opacityTween.current)}
+    opacity={utils.mapRange(opacityTween.current, 0, 1, 0.9, 1)}
     scale={2 *
       Math.max(windowState.windowHeight / 1.3, windowState.windowWidth / 2)}
   />
