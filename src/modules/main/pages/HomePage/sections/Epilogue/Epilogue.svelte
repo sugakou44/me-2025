@@ -21,7 +21,13 @@
   >
     <RevealingText
       class="relative text-[1.5em]"
-      percent={utils.mapRange(homeState.epilogueScrollProgress, 0.4, 0.9, 0, 1)}
+      percent={utils.mapRange(
+        homeState.epilogueScrollProgress,
+        0.75,
+        0.95,
+        0,
+        1,
+      )}
     >
       I didn’t follow some big career blueprint.
       <br />
@@ -36,7 +42,7 @@
       class={cn(
         'relative inline-block text-[1.25em] text-primary opacity-100 transition-opacity duration-200',
         {
-          'opacity-0': homeState.epilogueScrollProgress < 0.95,
+          'opacity-0': homeState.epilogueScrollProgress < 0.99,
         },
       )}
     >
