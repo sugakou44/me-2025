@@ -2,7 +2,6 @@
   import { TECHSTACK_AS_ARRAY } from '@/lib/constants/content'
   import { squircleBackground } from '@/lib/svelte/backgroundSquircle.svelte'
   import { useInView } from '@/lib/svelte/intersectionObserver.svelte'
-  import { cn } from '@/lib/utils/className'
   import HighlightText from '@/modules/main/components/Text/HighlightText.svelte'
   import { homeState } from '@/modules/main/contexts/HomeState'
 

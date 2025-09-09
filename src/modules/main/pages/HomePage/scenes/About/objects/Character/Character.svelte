@@ -103,7 +103,7 @@ Title: Box Man
     if (joint && originalRotation) {
       joint.rotation.copy(originalRotation)
       joint.rotation.x -= 0.75
-      joint.rotation.y += lookAt * 0.5
+      joint.rotation.y += lookAt * 0.5 + 0.1
     }
   })
 </script>
