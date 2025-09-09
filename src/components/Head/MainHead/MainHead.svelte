@@ -8,6 +8,12 @@
 
 <svelte:head>
   <meta charset="utf-8" />
+  <meta name="apple-mobile-web-app-title" content={DEFAULT_SITENAME} />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, viewport-fit=cover"
+  />
+
   <!-- preload font -->
   <link
     rel="preload"
@@ -33,20 +39,8 @@
     sizes="96x96"
   />
   <link rel="shortcut icon" href={asset('/favicon.ico')} />
-  <meta name="apple-mobile-web-app-title" content={DEFAULT_SITENAME} />
-
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1, viewport-fit=cover"
-  />
 
   <!-- apple touch icon -->
-  <link
-    rel="apple-touch-icon"
-    sizes="512x512"
-    href={asset('/icons/favicon_512x512.png')}
-    type="image/png"
-  />
   <link
     rel="apple-touch-icon"
     sizes="60x60"
@@ -81,6 +75,12 @@
     rel="apple-touch-icon"
     sizes="180x180"
     href={asset('/icons/favicon_180x180.png')}
+    type="image/png"
+  />
+  <link
+    rel="apple-touch-icon"
+    sizes="512x512"
+    href={asset('/icons/favicon_512x512.png')}
     type="image/png"
   />
 </svelte:head>
