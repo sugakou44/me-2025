@@ -24,9 +24,6 @@
       isExternal
       class="mx-auto border-4 uppercase"
       href={ROUTES.projectArchives.pathname}
-      onclick={() => {
-        homeState.hasClickedAllProject = true
-      }}
     >
       and more <IconExternalLink class="ml-2 h-6 w-6" />
     </Button>

@@ -49,13 +49,24 @@ class HomeState {
       windowState.scrollPosition,
       windowState.windowHeight,
       this.experienceContainer,
+      { max: 2 },
     )
   })
   experienceVisibility = $derived.by(() => {
-    return checkScrollWithinSection(this.experienceScrollProgress, 2)
+    return checkScrollWithinSection(this.experienceScrollProgress)
   })
 
-  hasClickedAllProject = $state(false)
+  epilogueContainer = $state<HTMLElement>()
+  epilogueScrollProgress = $derived.by(() => {
+    return getSectionScrollProgress(
+      windowState.scrollPosition,
+      windowState.windowHeight,
+      this.epilogueContainer,
+    )
+  })
+  epilogueVisibility = $derived.by(() => {
+    return checkScrollWithinSection(this.epilogueScrollProgress)
+  })
 }
 
 export const homeState = new HomeState()

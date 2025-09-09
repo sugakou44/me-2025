@@ -15,6 +15,7 @@
   import { Scenes } from './scenes'
   import { About } from './sections/About'
   import { Credit } from './sections/Credit'
+  import { Epilogue } from './sections/Epilogue'
   import { Experience } from './sections/Experience'
   import { Hero } from './sections/Hero'
   import { Works } from './sections/Works'
@@ -100,6 +101,8 @@
     <Works />
     <Spacer />
     <Experience />
+    <Spacer />
+    <Epilogue />
     <Credit />
   </div>
 </div>

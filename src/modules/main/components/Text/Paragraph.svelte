@@ -22,7 +22,7 @@
 </script>
 
 <p
-  class={`${cn('relative p-4 text-center md:p-6', className)} ${classNoMerge}`}
+  class={`${cn('relative p-6 text-center md:p-12', className)} ${classNoMerge}`}
   style:--outline-color="#ffffff"
   {@attach squircleBackground({
     cornerRadius: 64,
