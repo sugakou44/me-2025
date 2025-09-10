@@ -46,9 +46,9 @@
   scale.x={opacityTween.current}
   visible={opacityTween.current >= DEFAULT_ALPHA_TEST}
 >
-  <T.Mesh>
+  <T.Mesh position.y={windowState.windowHeight / 8}>
     <T.PlaneGeometry
-      args={[windowState.windowWidth, windowState.windowHeight, 1, 1]}
+      args={[windowState.windowWidth, windowState.windowHeight * 1.25, 1, 1]}
     />
     <T.MeshBasicMaterial color="white" opacity={opacityTween.current} />sc
   </T.Mesh>
