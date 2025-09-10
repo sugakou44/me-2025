@@ -109,32 +109,39 @@ Title: Box Man
     }
   })
 
+  let previouseScrollVerosity = 0
+
   useTask((dt) => {
-    if (mixer && idleAnimationClip && walkingAnimationClip) {
-      const speed = windowState.scrollVelocity
-      const acceleration = windowState.scrollAcceleration
-
-      const speedFactor = (acceleration <= 0 ? 0.1 : 8) * speed * dt + 0.01
-
-      if (acceleration <= 0) {
-        const weight = utils.clamp(
-          walkingAnimationClip.getEffectiveWeight() - speedFactor,
-          0,
-          1,
-        )
-        walkingAnimationClip.setEffectiveWeight(weight)
-        idleAnimationClip.setEffectiveWeight(1 - weight)
-      } else {
-        const weight = utils.clamp(
-          walkingAnimationClip.getEffectiveWeight() + speedFactor,
-          0,
-          1,
-        )
-        walkingAnimationClip.setEffectiveWeight(weight)
-        idleAnimationClip.setEffectiveWeight(1 - weight)
-      }
-      mixer.update(speed * 0.1 * dt)
+    if (!mixer || !idleAnimationClip || !walkingAnimationClip) {
+      return
     }
+
+    const speed = windowState.scrollVelocity
+    const acceleration = (speed - previouseScrollVerosity) / dt
+
+    const speedFactor = (acceleration <= 0 ? 0.1 : 8) * speed * dt + 0.005
+
+    if (acceleration <= 0) {
+      const weight = utils.clamp(
+        walkingAnimationClip.getEffectiveWeight() - speedFactor,
+        0,
+        1,
+      )
+      walkingAnimationClip.setEffectiveWeight(weight)
+      idleAnimationClip.setEffectiveWeight(1 - weight)
+    } else {
+      const weight = utils.clamp(
+        walkingAnimationClip.getEffectiveWeight() + speedFactor,
+        0,
+        1,
+      )
+      walkingAnimationClip.setEffectiveWeight(weight)
+      idleAnimationClip.setEffectiveWeight(1 - weight)
+    }
+
+    mixer.update(speed * 0.1 * dt)
+
+    previouseScrollVerosity = speed
   })
 </script>
 

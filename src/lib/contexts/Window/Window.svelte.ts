@@ -89,33 +89,33 @@ class WindowState {
 
     velocity = velocity < 0.001 ? 0 : velocity
 
-    while (this.previousScrollVelocities.length > 1) {
-      this.previousScrollVelocities.shift()
-    }
-    this.previousScrollVelocities.push({
-      value: velocity,
-      timestamp: Date.now(),
-    })
+    // while (this.previousScrollVelocities.length > 1) {
+    //   this.previousScrollVelocities.shift()
+    // }
+    // this.previousScrollVelocities.push({
+    //   value: velocity,
+    //   timestamp: Date.now(),
+    // })
 
     return velocity
   }
 
-  previousScrollVelocities: { value: number; timestamp: number }[] = []
-  get previousScrollVelocity() {
-    return this.previousScrollVelocities[0]
-  }
+  // previousScrollVelocities: { value: number; timestamp: number }[] = []
+  // get previousScrollVelocity() {
+  //   return this.previousScrollVelocities[0]
+  // }
 
-  get scrollAcceleration() {
-    const previousValue = this.previousScrollVelocity
-    const dt = Math.max(Date.now() - previousValue.timestamp, 1)
-    const diff = this.scrollVelocity - previousValue.value
+  // get scrollAcceleration() {
+  //   const previousValue = this.previousScrollVelocity
+  //   const dt = Math.max(Date.now() - previousValue.timestamp, 1)
+  //   const diff = this.scrollVelocity - previousValue.value
 
-    const acceleration = diff / dt
+  //   const acceleration = diff / dt
 
-    // acceleration = Math.abs(acceleration) < 0.001 ? 0 : acceleration
+  //   // acceleration = Math.abs(acceleration) < 0.001 ? 0 : acceleration
 
-    return acceleration
-  }
+  //   return acceleration
+  // }
 
   scrollHeight = $derived.by(() => {
     let scrollHeight = Infinity
