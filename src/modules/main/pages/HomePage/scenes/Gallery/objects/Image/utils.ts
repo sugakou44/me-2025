@@ -40,7 +40,7 @@ export function createCanvasTexture(
     fill: 'transparent',
     strokeWidth: 1,
     fillStyle: 'hachure',
-    hachureGap: 20,
+    hachureGap: 4,
     ...restOptions,
   }
 
