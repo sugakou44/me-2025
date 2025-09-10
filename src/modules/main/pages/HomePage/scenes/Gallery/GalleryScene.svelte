@@ -48,11 +48,11 @@
       }
 
       tween.set(target, {
-        duration: targetTween < index ? DURATION_SLOW : DURATION_FAST,
-        easing: targetTween < index ? eases.outExpo : eases.linear(),
+        duration: targetTween < target ? DURATION_SLOW : DURATION_FAST,
+        easing: targetTween < target ? eases.outExpo : eases.linear(),
       })
 
-      targetTween = index
+      targetTween = target
     }
   })
 
