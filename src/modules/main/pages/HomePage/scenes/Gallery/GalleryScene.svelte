@@ -23,12 +23,13 @@
   })
 
   let targetTween = 0
+  let previousIndex = 0
   let enterDirection = $state(true)
 
   $effect.pre(() => {
     const index = homeState.worksIndex + 1
 
-    if (targetTween !== index) {
+    if (previousIndex !== index) {
       if (targetTween === 0) {
         if (index > FEATURE_PROJECTS.length / 2) {
           enterDirection = false
@@ -53,6 +54,7 @@
       })
 
       targetTween = target
+      previousIndex = index
     }
   })
 
