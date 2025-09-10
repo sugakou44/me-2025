@@ -43,7 +43,7 @@
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
-  --screen-height: min(100vh, 100dvh);
+  --screen-height: 100svh;
 }
 
 .dark {
@@ -240,7 +240,7 @@
 
   .chapter {
     --page-count: 1;
-    --page-size: 100vh;
+    --page-size: 100svh;
     min-height: calc(var(--page-size) * var(--page-count));
   }
 

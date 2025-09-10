@@ -7,8 +7,8 @@
 </script>
 
 <section
-  class="chapter section flex flex-col gap-[25vh]"
-  style:--page-size="120vh"
+  class="chapter section flex flex-col gap-[25svh]"
+  style:--page-size="120svh"
   bind:this={homeState.experienceContainer}
 >
   <SectionHeader>Jobs</SectionHeader>

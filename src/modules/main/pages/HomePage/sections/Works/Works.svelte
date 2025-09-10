@@ -10,11 +10,11 @@
   import WorkItem from './WorkItem.svelte'
 </script>
 
-<SectionHeader class="mb-[15vh]">PROJECTS</SectionHeader>
+<SectionHeader class="mb-[15svh]">PROJECTS</SectionHeader>
 <section
   class="chapter section mr-auto flex flex-col md:mr-[5vw] md:max-w-[50vw] 2xl:mr-[20vw] 2xl:!max-w-[30vw]"
 >
-  <div class="flex flex-col gap-[33vh]" bind:this={homeState.worksContainer}>
+  <div class="flex flex-col gap-[33svh]" bind:this={homeState.worksContainer}>
     {#each FEATURE_PROJECTS as project, index (index)}
       <WorkItem {...project} isFocusing={index === homeState.worksIndex} />
     {/each}

@@ -4,6 +4,8 @@ import { innerHeight, innerWidth, scrollY } from 'svelte/reactivity/window'
 const END_THRESHOLD = 88
 
 class WindowState {
+  windowMeasurement = $state<HTMLDivElement>()
+
   previousPathnames: string[] = []
   pathname = $derived.by(() => {
     const url = page.url
@@ -25,6 +27,30 @@ class WindowState {
 
   windowWidth = $derived(innerWidth.current ?? 0)
   windowHeight = $derived(innerHeight.current ?? 0)
+
+  windowLVW = $derived.by(() => {
+    const defaultValue = this.windowWidth
+
+    if (!this.windowMeasurement) {
+      return defaultValue
+    }
+
+    const rect = this.windowMeasurement.getBoundingClientRect()
+
+    return rect.width
+  })
+  windowLVH = $derived.by(() => {
+    const defaultValue = this.windowHeight
+
+    if (!this.windowMeasurement) {
+      return defaultValue
+    }
+
+    const rect = this.windowMeasurement.getBoundingClientRect()
+
+    return rect.height
+  })
+
   aspectRatio = $derived.by(() => {
     if (!this.windowWidth || !this.windowHeight) {
       return 0

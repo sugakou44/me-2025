@@ -10,9 +10,9 @@
 </script>
 
 <section
-  class="section chapter mb-20 flex flex-col items-center justify-center !py-0 md:mb-[20vh]"
+  class="section chapter mb-20 flex flex-col items-center justify-center !py-0 md:mb-[20svh]"
   bind:this={homeState.epilogueContainer}
-  style:--page-size="50vh"
+  style:--page-size="50svh"
 >
   <Spacer />
   <Paragraph

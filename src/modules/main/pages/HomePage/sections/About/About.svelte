@@ -10,7 +10,7 @@
   let [containerRef, isInView] = useInView({ once: true })
 </script>
 
-<section class="section min-h-screen" bind:this={homeState.aboutContainer}>
+<section class="section min-h-svh" bind:this={homeState.aboutContainer}>
   <div
     class="relative p-8"
     bind:this={containerRef.current}

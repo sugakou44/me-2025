@@ -24,8 +24,8 @@
   useStage('gpgpu', { before: effectStage })
 
   $effect.pre(() => {
-    const width = windowState.windowWidth
-    const height = windowState.windowHeight
+    const width = windowState.windowLVW
+    const height = windowState.windowLVH
 
     renderer.setSize(width, height)
 

@@ -29,4 +29,4 @@
     </Interactivity>
   </Canvas>
 </div>
-<div class="min-h-[400vh]" bind:this={storyState.chapter2Container}></div>
+<div class="min-h-[400svh]" bind:this={storyState.chapter2Container}></div>

@@ -62,6 +62,11 @@
 
 <MainHead />
 
+<div
+  class="pointer-none fixed right-0 left-0 -z-50 max-h-lvh min-h-lvh select-none"
+  bind:this={windowState.windowMeasurement}
+></div>
+
 <main>
   <svelte:boundary>
     <NameCard />

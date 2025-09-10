@@ -42,7 +42,7 @@
   <SuspenseFallback />
 {/snippet}
 
-<div bind:this={container} class="fixed inset-0 w-full">
+<div bind:this={container} class="fixed inset-0 h-lvh w-full">
   <Canvas {loadingFallback}>
     <Scenes {container} />
   </Canvas>
@@ -90,13 +90,13 @@
 
 <div
   class={cn('contents', {
-    'fixed inset-0 -z-50 block': !appState.isReady,
+    'fixed inset-0 -z-50 flex flex-col': !appState.isReady,
   })}
 >
   <Hero />
 
-  <div in:fade class="z-50 min-h-screen w-full">
-    <div class="z-50 min-h-screen w-full"></div>
+  <div in:fade class="z-50 min-h-dvh w-full">
+    <div class="z-50 min-h-svh w-full"></div>
     <About />
     <Works />
     <Spacer />

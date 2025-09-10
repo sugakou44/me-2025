@@ -110,7 +110,7 @@
 <div
   bind:clientWidth={width}
   bind:clientHeight={height}
-  class="absolute bottom-0 h-[200vh] w-full origin-bottom rotate-x-60 perspective-distant"
+  class="absolute bottom-0 h-[200svh] w-full origin-bottom rotate-x-60 perspective-distant"
 >
   {#each footprints as print (print.timestamp)}
     {@const angleOffset = print.isLeftSide ? -8 : 8}
