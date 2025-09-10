@@ -224,7 +224,6 @@ export const PROJECTS: Project[] = [
     href: WORK_ROUTES.pdpaProkit.pathname,
     description: pdpaprokitDescription,
     role: 'Frontend developer',
-    isFeatured: true,
     image: {
       width: 1000,
       height: 525,
