@@ -1,6 +1,7 @@
 <script lang="ts">
   import { T } from '@threlte/core'
   import { eases, utils } from 'animejs'
+  import { untrack } from 'svelte'
   import { Tween } from 'svelte/motion'
 
   import { DURATION_FAST, DURATION_SLOW } from '@/lib/animations/constants'
@@ -20,16 +21,36 @@
     duration: DURATION_SLOW,
     easing: eases.outBounce,
   })
+
   let targetTween = 0
+  let enterDirection = $state(true)
 
   $effect.pre(() => {
     const index = homeState.worksIndex + 1
 
     if (targetTween !== index) {
-      tween.set(index, {
-        duration: targetTween < index ? DURATION_SLOW : DURATION_FAST,
-        easing: targetTween < index ? eases.outExpo : eases.linear(),
-      })
+      if (targetTween === 0) {
+        if (index > FEATURE_PROJECTS.length / 2) {
+          enterDirection = false
+        } else {
+          enterDirection = true
+        }
+      }
+
+      if (index === 0) {
+        enterDirection = true
+      }
+
+      const untrackedDirection = untrack(() => enterDirection)
+
+      tween.set(
+        untrackedDirection ? index : FEATURE_PROJECTS.length + 1 - index,
+        {
+          duration: targetTween < index ? DURATION_SLOW : DURATION_FAST,
+          easing: targetTween < index ? eases.outExpo : eases.linear(),
+        },
+      )
+
       targetTween = index
     }
   })
@@ -54,7 +75,10 @@
 </script>
 
 <T.Group visible={tween.current > 0}>
-  {#each FEATURE_PROJECTS as { image }, index (index)}
+  {#each FEATURE_PROJECTS as { image, title }, _index (title)}
+    {@const index = enterDirection
+      ? _index
+      : FEATURE_PROJECTS.length - _index - 1}
     {@const scale =
       (0.88 *
         Math.min(frustumWidth / (positionMultipler[0] + 1), frustumHeight)) /
