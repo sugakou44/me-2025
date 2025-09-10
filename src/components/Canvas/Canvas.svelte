@@ -3,7 +3,7 @@
   import { Suspense } from '@threlte/extras'
   import { NoToneMapping, SRGBColorSpace } from 'three'
 
-  import { PerfMonitor } from '@/components/GL/PerfMonitor'
+  import { IS_DEV } from '@/lib/constants'
 
   import type { Snippet } from 'svelte'
 
@@ -14,6 +14,14 @@
   }
 
   const { children, renderMode = 'manual', loadingFallback }: Props = $props()
+
+  let perfMonitorLoader = $state<Promise<any>>()
+
+  $effect.pre(() => {
+    if (IS_DEV) {
+      perfMonitorLoader = import('@/components/GL/PerfMonitor')
+    }
+  })
 </script>
 
 <ThreeCanvas
@@ -21,7 +29,11 @@
   toneMapping={NoToneMapping}
   {renderMode}
 >
-  <PerfMonitor />
+  {#if perfMonitorLoader}
+    {#await perfMonitorLoader then { PerfMonitor }}
+      <PerfMonitor />
+    {/await}
+  {/if}
   <Suspense>
     {#snippet fallback()}
       {@render loadingFallback?.()}
