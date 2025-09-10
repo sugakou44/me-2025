@@ -1,7 +1,11 @@
 import { utils } from 'animejs'
 import { nanoid } from 'nanoid'
 
-import { HELLO_MESSAGES, TECHSTACK_MESSAGES } from './constants'
+import {
+  CONTACT_MESSAGES,
+  HELLO_MESSAGES,
+  TECHSTACK_MESSAGES,
+} from './constants'
 
 import type { Message } from '@/components/Chat'
 
@@ -57,7 +61,12 @@ class MainChat {
   }
 
   askQuestion(
-    questionKey: 'hello' | 'tech-stack' | 'experience' | 'testimonial',
+    questionKey:
+      | 'hello'
+      | 'tech-stack'
+      | 'experience'
+      | 'testimonial'
+      | 'contact',
   ) {
     this.clearTimer()
 
@@ -67,6 +76,9 @@ class MainChat {
         break
       case 'tech-stack':
         this.addMessageRecursive(TECHSTACK_MESSAGES)
+        break
+      case 'contact':
+        this.addMessageRecursive(CONTACT_MESSAGES)
         break
     }
   }

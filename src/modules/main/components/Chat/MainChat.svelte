@@ -9,7 +9,7 @@
   import { appState } from '@/lib/contexts/AppState'
 
   import { homeState } from '../../contexts/HomeState'
-  import { TECHSTACK_MESSAGES } from './constants'
+  import { CONTACT_MESSAGES, TECHSTACK_MESSAGES } from './constants'
   import { mainChatContext } from './context.svelte'
   import { messages as greeting } from './messages/greeting.svelte'
 </script>
@@ -45,6 +45,20 @@
           }}
         >
           {TECHSTACK_MESSAGES[0].content}
+        </Button>
+      </div>
+    {:else if homeState.epilogueScrollProgress > 0}
+      <div in:fade={{ duration: DURATION_FAST }}>
+        <Button
+          size="default"
+          variant="primary"
+          aria-label="ask question"
+          onclick={() => {
+            mainChatContext.isOpen = true
+            mainChatContext.askQuestion('contact')
+          }}
+        >
+          {CONTACT_MESSAGES[0].content}
         </Button>
       </div>
     {/if}

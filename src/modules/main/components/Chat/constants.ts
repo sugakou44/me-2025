@@ -1,3 +1,4 @@
+import { messages as contact } from './messages/contact.svelte'
 import { messages as greeting } from './messages/greeting.svelte'
 import { messages as techStack } from './messages/techStack.svelte'
 
@@ -32,7 +33,7 @@ export const TECHSTACK_MESSAGES: MessageWithoutID[] = [
     byUser: true,
   },
   {
-    content: 'Sure!',
+    content: 'Absolutely!',
   },
   {
     content: 'I am actively using',
@@ -45,5 +46,21 @@ export const TECHSTACK_MESSAGES: MessageWithoutID[] = [
   },
   {
     content: techStack.pastStack,
+  },
+]
+
+export const CONTACT_MESSAGES: MessageWithoutID[] = [
+  {
+    content: "Let's chat",
+    byUser: true,
+  },
+  {
+    content: 'Sure!',
+  },
+  {
+    content: contact.sendMeAnEmail,
+  },
+  {
+    content: 'And I will get back to you as soon as I can. 🤗',
   },
 ]
