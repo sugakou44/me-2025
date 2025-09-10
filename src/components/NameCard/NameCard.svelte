@@ -1,6 +1,6 @@
 <script lang="ts">
   import { page } from '$app/state'
-  import { untrack } from 'svelte'
+  import { tick, untrack } from 'svelte'
   import { backOut, cubicOut } from 'svelte/easing'
   import { Tween } from 'svelte/motion'
   import { fade, fly, scale } from 'svelte/transition'
@@ -122,21 +122,23 @@
         </div>
       {/if}
     </div>
-    {#if appState.forceOpenHero}
-      <div
-        in:fade|global={{
-          duration: DURATION_SLOWEST * 1.5,
-          delay: DURATION_SLOWEST * 4,
-          easing: backOut,
-        }}
-        out:fade={{
-          duration: DURATION_SLOW,
-          easing: cubicOut,
-        }}
-        class="absolute bottom-0 left-8 z-50 -translate-x-1/2 -translate-y-full print:hidden"
-      >
-        <ScrollIndicator />
-      </div>
-    {/if}
+    {#await tick() then}
+      {#if appState.forceOpenHero}
+        <div
+          in:fade|global={{
+            duration: DURATION_SLOWEST * 1.5,
+            delay: DURATION_SLOWEST * 4,
+            easing: backOut,
+          }}
+          out:fade={{
+            duration: DURATION_SLOW,
+            easing: cubicOut,
+          }}
+          class="absolute bottom-0 left-8 z-50 -translate-x-1/2 -translate-y-full print:hidden"
+        >
+          <ScrollIndicator />
+        </div>
+      {/if}
+    {/await}
   </div>
 {/if}
