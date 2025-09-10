@@ -37,21 +37,28 @@
         }
       }
 
-      if (index === 0) {
-        enterDirection = true
-      }
-
       const untrackedDirection = untrack(() => enterDirection)
 
-      tween.set(
-        untrackedDirection ? index : FEATURE_PROJECTS.length + 1 - index,
-        {
-          duration: targetTween < index ? DURATION_SLOW : DURATION_FAST,
-          easing: targetTween < index ? eases.outExpo : eases.linear(),
-        },
-      )
+      let target = untrackedDirection
+        ? index
+        : FEATURE_PROJECTS.length + 1 - index
+
+      if (target > FEATURE_PROJECTS.length) {
+        target = 0
+      }
+
+      tween.set(target, {
+        duration: targetTween < index ? DURATION_SLOW : DURATION_FAST,
+        easing: targetTween < index ? eases.outExpo : eases.linear(),
+      })
 
       targetTween = index
+    }
+  })
+
+  $effect.pre(() => {
+    if (tween.current <= 0.00001) {
+      enterDirection = true
     }
   })
 
