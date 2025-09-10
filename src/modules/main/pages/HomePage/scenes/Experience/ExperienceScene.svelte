@@ -18,7 +18,7 @@
   import { Sky } from './objects/Sky'
   import { Trees } from './objects/Trees'
 
-  const opacityTween = new Tween(0, {
+  const opacityTween = new Tween(2, {
     duration: DURATION_SLOWER,
     easing: eases.outSine,
   })
@@ -42,7 +42,7 @@
     )
   })
 
-  $effect.pre(() => {
+  $effect(() => {
     const target = utils.clamp(
       Math.ceil(homeState.experienceScrollProgress),
       0,

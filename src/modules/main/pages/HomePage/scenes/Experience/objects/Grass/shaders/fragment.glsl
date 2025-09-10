@@ -14,10 +14,11 @@ void main()
     vec4 grassTexel = texture(grassBladeTexture, vUv);
     float finalOpacity = grassTexel.a * opacity;
 
-    vec3 diffuseColor = mix(baseColor, tipColor, vSegmentHeight);
     if (finalOpacity <= 0.001) {
         discard;
     }
+
+    vec3 diffuseColor = mix(baseColor, tipColor, vSegmentHeight);
 
     grassTexel.xyz += 0.1;
 

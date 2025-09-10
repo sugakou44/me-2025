@@ -18,7 +18,7 @@
     opacity?: number
   }
 
-  let { textures, count = 0, opacity = 1 }: Props = $props()
+  let { textures, count = 0, opacity = 0 }: Props = $props()
 
   const colors = new Float32Array(count * 3)
   const positions = new Float32Array(count * 3)

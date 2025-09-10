@@ -23,7 +23,7 @@
     opacity?: number
   }
 
-  let { opacity, ...rest }: Props = $props()
+  let { opacity = 0, ...rest }: Props = $props()
 
   const uniforms = {
     skyTexture: {

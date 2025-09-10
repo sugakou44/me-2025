@@ -32,9 +32,8 @@ class AppState {
   })
   forceOpenHero = $derived.by(() => {
     const isInHero = this.isInHero
-    const maximizeAtTop = this.maximizeAtTop
 
-    return isInHero && maximizeAtTop
+    return isInHero
   })
 
   creditContainer = $state<HTMLElement>()

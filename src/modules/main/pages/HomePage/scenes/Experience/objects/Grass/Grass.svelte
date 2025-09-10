@@ -71,7 +71,7 @@
     swayFactor: {
       value: STIFFNESS,
     },
-    opacity: { value: opacity },
+    opacity: { value: 0 },
     center: {
       value: position,
     },

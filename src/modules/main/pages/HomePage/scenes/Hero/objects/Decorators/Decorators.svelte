@@ -27,9 +27,9 @@
 
   let { ref = $bindable(), isIn, ...props }: Props = $props()
 
-  const animationState = new Tween(1)
+  const animationState = new Tween(-1)
 
-  $effect.pre(() => {
+  $effect(() => {
     if (isIn) {
       animationState.set(1, {
         duration: DURATION_SLOWEST,

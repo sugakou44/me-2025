@@ -19,7 +19,7 @@
     opacity?: number
   }
 
-  let { textures, offset = 0, count = 0, opacity = 1 }: Props = $props()
+  let { textures, offset = 0, count = 0, opacity = 0 }: Props = $props()
 
   let _count = count * 3
 

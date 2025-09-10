@@ -11,7 +11,7 @@
     opacity?: number
   }
 
-  let { gltf, ref = $bindable<SkinnedMesh>(), opacity }: Props = $props()
+  let { gltf, ref = $bindable<SkinnedMesh>(), opacity = 0 }: Props = $props()
 
   let skinnedMesh: SkinnedMesh | undefined
   let rootJoint: Bone | undefined

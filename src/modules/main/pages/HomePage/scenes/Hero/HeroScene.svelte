@@ -4,4 +4,4 @@
   import { Decorators } from './objects/Decorators'
 </script>
 
-<Decorators isIn={appState.forceOpenHero} position={[0, 0, 0]} />
+<Decorators isIn={appState.forceOpenHero} />

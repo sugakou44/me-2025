@@ -31,7 +31,7 @@
     color = COLOR_VALUES.primary,
     inverseColor,
     canvasTexture = null,
-    opacity,
+    opacity = 0,
     ...restProps
   }: Props = $props()
 
