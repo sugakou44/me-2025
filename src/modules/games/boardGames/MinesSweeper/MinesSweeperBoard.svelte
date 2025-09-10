@@ -69,7 +69,7 @@
     // scale: isOpen ? 2 : 1,
   }}
 />
-<div class="z-50 grid grid-cols-3 items-center gap-4">
+<div class="relative z-50 grid grid-cols-3 items-center gap-4">
   <div class="flex items-center justify-start gap-2 py-2">
     <svg class="h-6 w-6" viewBox="0 0 24 24" {@attach drawBomb}> </svg>
     <p class="font-handwritting-heading">
@@ -113,7 +113,7 @@
   </div>
 </div>
 <svg
-  class="aspect-square w-full transform-fill"
+  class="relative aspect-square w-full transform-fill"
   {@attach (svg: SVGSVGElement) => {
     game.init(svg)
 
