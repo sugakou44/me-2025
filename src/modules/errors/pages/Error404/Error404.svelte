@@ -10,7 +10,7 @@
 
 <PageContainer>
   <Footprints />
-  <figure class="relative flex items-center gap-8 md:gap-[100px]">
+  <figure class="relative flex items-center gap-2 md:gap-[100px]">
     <Charactor4 />
     <CursorTheif />
     <Charactor4 />
