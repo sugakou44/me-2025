@@ -35,7 +35,7 @@
             href={CONTACT.website.href}
             class="text-sm text-primary-foreground"
           >
-            {CONTACT.website.label}
+            {CONTACT.website.href}
           </Button>
         </p>
       </div>
