@@ -4,7 +4,6 @@ import type { LenisOptions } from 'lenis'
 
 export const LENIS_OPTIONS: LenisOptions = {
   autoRaf: true,
-  duration: 0.2,
   overscroll: false,
 }
 
