@@ -5,7 +5,7 @@
   <p
     class="text-xs font-light text-foreground/40 transition-colors hover:text-foreground/70"
   >
-    Designed &amp; Developed by「PAAN」&copy;&nbsp;
+    Design &amp; Develop by「PAAN」&copy;&nbsp;
     {new Date().getFullYear()}
   </p>
 </div>
