@@ -97,12 +97,12 @@
 
   <div in:fade class="z-50 min-h-dvh w-full">
     <div class="z-50 min-h-svh w-full"></div>
-    <!-- <About />
+    <About />
     <Works />
     <Spacer />
     <Experience />
     <Epilogue />
-    <Credit /> -->
+    <Credit />
   </div>
 </div>
 
