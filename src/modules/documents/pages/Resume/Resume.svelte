@@ -46,7 +46,7 @@
     <ul class="flex flex-wrap gap-1">
       {#each TECHSTACK_AS_ARRAY as { name, Icon, shouldHighlight }, index (name)}
         <li
-          class="flex flex-row items-center gap-1 !pl-0 !text-sm"
+          class="!ml-0 flex flex-row items-center gap-1 !pl-0 !text-sm"
           {@attach annotate({
             visible: !!shouldHighlight,
             color: 'var(--secondary)',
