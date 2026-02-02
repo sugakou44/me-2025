@@ -46,8 +46,8 @@
   }
   :global(.document-container li) {
     list-style-type: disc;
-    list-style-position: inside;
+    list-style-position: outside;
     font-size: var(--text-sm);
-    padding-left: calc(2 * var(--spacing));
+    margin-left: 1.5em;
   }
 </style>

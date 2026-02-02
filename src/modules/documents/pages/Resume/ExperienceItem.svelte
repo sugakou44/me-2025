@@ -13,7 +13,7 @@
         {year}
       </span>
     </p>
-    <div class="md:text- text-sm font-extralight">
+    <div class="text-sm font-extralight">
       {#if id === 'ascend'}
         <ul>
           <li>
