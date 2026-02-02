@@ -14,7 +14,19 @@
       </span>
     </p>
     <div class="md:text- text-sm font-extralight">
-      {#if id === 'captain'}
+      {#if id === 'ascend'}
+        <ul>
+          <li>
+            Built and maintained a React Native mobile application used by
+            in-store staff to pick orders and hand them over to riders/drivers
+            for deliveries.
+          </li>
+          <li>
+            Collaborated closely with backend, product, and operations teams to
+            align the app with real in-store processes.
+          </li>
+        </ul>
+      {:else if id === 'captain'}
         <ul>
           <li>
             Built and maintained multiple React/Next.js/React Native

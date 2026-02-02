@@ -11,6 +11,7 @@ import { asset } from '$app/paths'
 import { WORK_ROUTES } from '@/lib/constants/routes'
 
 import {
+  ascendDescription,
   captainDescription,
   datawowDescription,
   magicBoxDescription,
@@ -33,7 +34,7 @@ import {
 import type { IconsProps } from '@tabler/icons-svelte/icons/icons'
 import type { Component, Snippet } from 'svelte'
 
-export type CompanyKey = 'captain' | 'datawow' | 'magicbox' | 'other'
+export type CompanyKey = 'captain' | 'datawow' | 'magicbox' | 'other' | 'ascend'
 
 export interface ExperienceItem {
   id: CompanyKey
@@ -45,6 +46,14 @@ export interface ExperienceItem {
 }
 
 export const EXPERIENCE: ExperienceItem[] = [
+  {
+    id: 'ascend',
+    company: 'Ascend Group Co., Ltd.',
+    year: '2025 - 2026',
+    role: 'Senoir front-end developer',
+    description: ascendDescription,
+    techStack: ['react-native', 'expo'],
+  },
   {
     id: 'captain',
     company: 'Captain AI Technologies., Ltd.',

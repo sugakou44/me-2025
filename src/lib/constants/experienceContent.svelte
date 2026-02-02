@@ -1,5 +1,6 @@
 <script lang="ts" module>
   export {
+    ascendDescription,
     captainDescription,
     datawowDescription,
     magicBoxDescription,
@@ -7,12 +8,21 @@
   }
 </script>
 
+{#snippet ascendDescription()}
+  I worked on a React Native mobile application used daily by store staff to
+  pick online orders and hand them over smoothly to riders and delivery drivers.
+  The goal was simple but critical: help busy store teams move fast, make fewer
+  mistakes, and keep deliveries flowing during peak hours.
+{/snippet}
+
 {#snippet captainDescription()}
   I spent most of my time here building apps with React Native and Next.js,
   making sure they looked good.
   <br />
+  <br />
   Kicked off project for a graphical interface builder for a delivery-tracking app.
   aside from our own backend,
+  <br />
   <br />
   I also integrated a headless CMS (Directus) via GraphQL; connected third-party
   services such as Pusher, Firebase, GraphHopper and MapBox.
