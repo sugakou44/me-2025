@@ -38,6 +38,20 @@
   })
 
   $effect.pre(() => {
+    if (
+      !homeState.perspectiveScene ||
+      !homeState.perspectiveCamera ||
+      !homeState.orthographicScene ||
+      !homeState.orthographicCamera
+    ) {
+      return
+    }
+
+    renderer.compile(homeState.orthographicScene, homeState.orthographicCamera)
+    renderer.compile(homeState.perspectiveScene, homeState.perspectiveCamera)
+  })
+
+  $effect.pre(() => {
     renderer.setClearColor(0xfdfdfd)
     renderer.setClearAlpha(0)
   })
